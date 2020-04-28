@@ -7,6 +7,7 @@ class Player :
 {
 private:
 	//Variables
+	bool attacking;
 
 	//Initializer functions
 	void initVariables();

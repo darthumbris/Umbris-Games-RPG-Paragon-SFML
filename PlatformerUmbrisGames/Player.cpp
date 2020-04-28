@@ -3,7 +3,7 @@
 //Initializer functions
 void Player::initVariables()
 {
-
+	this->attacking = false;
 }
 
 void Player::initComponents()
@@ -19,7 +19,7 @@ Player::Player(float x, float y, sf::Texture& texture_sheet)
 
 	this->setPosition(x, y);
 
-	this->createMovementComponent(300.f, 15.f, 0.f);
+	this->createMovementComponent(350.f, 15.f, 6.f);
 	this->createAnimationComponent(texture_sheet);
 	this->createHitboxComponent(this->sprite, 32.f, 10.f, 35.f, 90.f);
 
@@ -42,6 +42,19 @@ Player::~Player()
 void Player::update(const float& deltaTime)
 {
 	this->movementComponent->update(deltaTime);
+
+	//Dit is voor als ik een attack animation heb en geeft die priority
+	
+	/*if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+	{
+		this->attacking = true;
+	}
+	
+	if (this->attacking)
+	{
+		if (this->animationComponent->play("ATTACK", deltaTime, true))
+			this->attacking = false;
+	}*/
 
 	if (this->movementComponent->getState(IDLE))
 	{
