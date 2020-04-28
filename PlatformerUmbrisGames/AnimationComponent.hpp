@@ -65,9 +65,36 @@ private:
 			}
 		}
 
+		//Play function that can speed up animation
+		void play(const float& deltaTime, float mod_percent)
+		{
+			//Update timer
+			if (mod_percent < 0.5f)
+				mod_percent = 0.6f;
+			
+			this->timer += mod_percent * 100.f * deltaTime;
+			if (this->timer >= animationTimer)
+			{
+				//Reset timer
+				this->timer = 0.f;
+
+				//Animate
+				if (this->currentRect != this->endRect)
+				{
+					this->currentRect.left += this->width;
+				}
+				else //Reset animation
+				{
+					this->currentRect.left = this->startRect.left;
+				}
+
+				this->sprite.setTextureRect(this->currentRect);
+			}
+		}
+
 		void reset()
 		{
-			this->timer = 0.f;
+			this->timer = this->animationTimer;
 			this->currentRect = this->startRect;
 		}
 	};
@@ -88,6 +115,8 @@ public:
 		float animation_timer,
 		int start_frame_x, int start_frame_y, int frames_x, int frames_y, int width, int height);
 	void play(const std::string key, const float& deltaTime);
+	void play(const std::string key, const float& deltaTime, 
+		const float& modifier, const float& modifier_max);
 
 };
 
