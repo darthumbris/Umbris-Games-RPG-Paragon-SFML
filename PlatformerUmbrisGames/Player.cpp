@@ -21,6 +21,7 @@ Player::Player(float x, float y, sf::Texture& texture_sheet)
 
 	this->createMovementComponent(300.f, 15.f, 8.f);
 	this->createAnimationComponent(texture_sheet);
+	this->createHitboxComponent(this->sprite, 32.f, 10.f, 35.f, 90.f);
 
 	this->animationComponent->addAnimation("IDLE_DOWN", 10.f, 0, 0, 0, 0, 100, 100);
 	this->animationComponent->addAnimation("IDLE_LEFT", 10.f, 0, 3, 0, 3, 100, 100);
@@ -57,5 +58,7 @@ void Player::update(const float& deltaTime)
 		else if (this->movementComponent->getState(MOVING_UP))
 			this->animationComponent->play("RUN_UP", deltaTime);
 	}
+
+	this->hitboxComponent->update();
 }
 

@@ -66,6 +66,9 @@
     <ClCompile Include="EditorState.cpp">
       <Filter>States</Filter>
     </ClCompile>
+    <ClCompile Include="HitboxComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FileManager.hpp">
@@ -106,6 +109,9 @@
     </ClInclude>
     <ClInclude Include="EditorState.hpp">
       <Filter>States</Filter>
+    </ClInclude>
+    <ClInclude Include="HitboxComponent.hpp">
+      <Filter>Components</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

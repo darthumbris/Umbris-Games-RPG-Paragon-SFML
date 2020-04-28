@@ -134,7 +134,7 @@ void MainMenuState::update(const float& deltaTime)
 	this->updateButtons();
 }
 
-void MainMenuState::renderButtons(sf::RenderTarget* target)
+void MainMenuState::renderButtons(sf::RenderTarget& target)
 {
 	for (auto& it : this->buttons)
 	{
@@ -149,7 +149,7 @@ void MainMenuState::render(sf::RenderTarget* target)
 
 	target->draw(this->background);
 
-	this->renderButtons(target);
+	this->renderButtons(*target);
 
 	//Remove later for seeing where the mouse is
 	/*sf::Text mouseText;
