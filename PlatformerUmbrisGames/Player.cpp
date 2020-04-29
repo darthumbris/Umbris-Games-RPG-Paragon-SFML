@@ -31,6 +31,8 @@ Player::Player(float x, float y, sf::Texture& texture_sheet)
 	this->animationComponent->addAnimation("RUN_LEFT", 8.f, 0, 3, 6, 3, 100, 100);
 	this->animationComponent->addAnimation("RUN_UP", 8.f, 0, 1, 6, 1, 100, 100);
 	this->animationComponent->addAnimation("RUN_RIGHT", 8.f, 0, 2, 6, 2, 100, 100);
+	//Voor nu is de attack animatie de run_right animatie, puur voor testen
+	this->animationComponent->addAnimation("ATTACK", 8.f, 0, 2, 6, 2, 100, 100);
 }
 
 Player::~Player()
@@ -39,28 +41,51 @@ Player::~Player()
 }
 
 //Functions
-void Player::update(const float& deltaTime)
+void Player::updateAttack()
 {
-	this->movementComponent->update(deltaTime);
-
-	//Dit is voor als ik een attack animation heb en geeft die priority
-	
-	/*if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 	{
 		this->attacking = true;
 	}
 	
+}
+
+void Player::updateAnimation(const float& deltaTime)
+{
 	if (this->attacking)
 	{
+		//Voor Attack
+		//Set origin depending on direction
+		if (this->sprite.getScale().x > 0.f) // Facing left
+		{
+			this->sprite.setOrigin(0.f, 0.f);
+		}
+		else // Facing right
+		{
+			this->sprite.setOrigin(0.f, 0.f);
+		}
+		
+		//Animate and check for animation end
 		if (this->animationComponent->play("ATTACK", deltaTime, true))
+		{
 			this->attacking = false;
-	}*/
+
+			if (this->sprite.getScale().x > 0.f) // Facing left
+			{
+				this->sprite.setOrigin(0.f, 0.f);
+			}
+			else // Facing right
+			{
+				this->sprite.setOrigin(0.f, 0.f);
+			}
+		}
+	}
 
 	if (this->movementComponent->getState(IDLE))
 	{
 		this->animationComponent->play("IDLE_DOWN", deltaTime);
 	}
-	else if(this->movementComponent->getState(MOVING))
+	else if (this->movementComponent->getState(MOVING))
 	{
 		if (this->movementComponent->getState(MOVING_LEFT))
 		{
@@ -91,9 +116,39 @@ void Player::update(const float& deltaTime)
 	but it flips it around the origin, thus it probably needs to be moved
 	for moving do this first:
 	this->sprite.setOrigin(number.f, 0.f) for when flipping horizontal
-	then 
+	then
 	this->sprite.setOrigin(0.f, 0.f) for setting it to normal
+
+	en kan misschien beter ook eerst nog een check inzetten zodat
+	niet hele tijd wordt aangepast en alleen als nodig is.:
+	
+	//Voor links
+	if(this->sprite.getScale().x < 0.f)
+	{
+		this->sprite.setOrigin(0.f, 0.f);
+		this->sprite.setScale(1.f, 1.f);
+	}
+
+	//Voor rechts
+	if(this->sprite.getScale().x > 0.f)
+	{
+		this->sprite.setOrigin(number.f, 0.f);
+		this->sprite.setScale(-1.f, 1.f);
+	}
+	etc.
 	*/
+
+	
+
+}
+
+void Player::update(const float& deltaTime)
+{
+	this->movementComponent->update(deltaTime);
+
+	this->updateAttack();
+
+	this->updateAnimation(deltaTime);	
 
 	this->hitboxComponent->update();
 }

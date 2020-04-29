@@ -22,6 +22,9 @@
     <Filter Include="Components">
       <UniqueIdentifier>{34b4efb8-7486-4c93-8eae-5b796ee2d89a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Tile">
+      <UniqueIdentifier>{604c5d1b-1036-4801-b3bf-89cc4a552954}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -69,6 +72,9 @@
     <ClCompile Include="HitboxComponent.cpp">
       <Filter>Components</Filter>
     </ClCompile>
+    <ClCompile Include="Tile.cpp">
+      <Filter>Tile</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FileManager.hpp">
@@ -112,6 +118,9 @@
     </ClInclude>
     <ClInclude Include="HitboxComponent.hpp">
       <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Tile.hpp">
+      <Filter>Tile</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
