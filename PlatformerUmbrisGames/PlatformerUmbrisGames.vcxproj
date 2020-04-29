@@ -149,17 +149,15 @@
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="EditorState.cpp" />
     <ClCompile Include="Entity.cpp" />
-    <ClCompile Include="FileManager.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="HitboxComponent.cpp" />
-    <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainMenuState.cpp" />
     <ClCompile Include="MovementComponent.cpp" />
+    <ClCompile Include="PauseMenu.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="State.cpp" />
-    <ClCompile Include="StateMachine.cpp" />
     <ClCompile Include="Tile.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -167,16 +165,14 @@
     <ClInclude Include="Button.hpp" />
     <ClInclude Include="EditorState.hpp" />
     <ClInclude Include="Entity.hpp" />
-    <ClInclude Include="FileManager.hpp" />
     <ClInclude Include="Game.hpp" />
     <ClInclude Include="GameState.hpp" />
     <ClInclude Include="HitboxComponent.hpp" />
-    <ClInclude Include="InputManager.hpp" />
     <ClInclude Include="MainMenuState.hpp" />
     <ClInclude Include="MovementComponent.hpp" />
+    <ClInclude Include="PauseMenu.hpp" />
     <ClInclude Include="Player.hpp" />
     <ClInclude Include="State.hpp" />
-    <ClInclude Include="StateMachine.hpp" />
     <ClInclude Include="Tile.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

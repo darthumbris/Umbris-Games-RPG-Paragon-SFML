@@ -25,18 +25,12 @@
     <Filter Include="Tile">
       <UniqueIdentifier>{604c5d1b-1036-4801-b3bf-89cc4a552954}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GUI">
+      <UniqueIdentifier>{00a36331-db12-4992-84e5-d438f1052be9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="FileManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="InputManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="StateMachine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Game.cpp">
@@ -75,17 +69,11 @@
     <ClCompile Include="Tile.cpp">
       <Filter>Tile</Filter>
     </ClCompile>
+    <ClCompile Include="PauseMenu.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="FileManager.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="InputManager.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="StateMachine.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Game.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -121,6 +109,9 @@
     </ClInclude>
     <ClInclude Include="Tile.hpp">
       <Filter>Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="PauseMenu.hpp">
+      <Filter>GUI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,17 +1,22 @@
 #pragma once
 
 #include "State.hpp"
-#include "Button.hpp"
+#include "PauseMenu.hpp"
 
 class GameState :
 	public State
 {
 private:
+	PauseMenu* pmenu;
+	sf::Font font;
+	
 	Player* player;
 
 	//Initializer Functions
 	void initKeybinds();
+	void initFonts();
 	void initTextures();
+	void initPauseMenu();
 	void initPlayers();
 
 public:
@@ -22,6 +27,7 @@ public:
 
 	//functions
 	void updateInput(const float& deltaTime);
+	void updatePlayerInput(const float& deltaTime);
 	void update(const float& deltaTime);
 	void render(sf::RenderTarget* target = nullptr);
 };
