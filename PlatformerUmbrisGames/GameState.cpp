@@ -72,7 +72,7 @@ GameState::~GameState()
 //Functions
 void GameState::updateInput(const float& deltaTime)
 {
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->keybinds.at("CLOSE"))))
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->keybinds.at("CLOSE"))) && this->getInputTime())
 	{
 		if (!this->paused)
 			this->pauseState();
@@ -97,7 +97,7 @@ void GameState::updatePlayerInput(const float& deltaTime)
 
 void GameState::updatePauseMenuButtons()
 {
-	if (this->pmenu->isButtonPressed("EXIT_STATE"))
+	if (this->pmenu->isButtonPressed("EXIT_STATE") && this->getInputTime())
 		this->endState();
 }
 
@@ -105,6 +105,8 @@ void GameState::update(const float& deltaTime)
 {
 	this->updateMousePositions(); //Needs to work in paused
 	this->updateInput(deltaTime);
+	this->updateInputTime(deltaTime);
+
 
 	if (!this->paused) //Unpaused Update
 	{

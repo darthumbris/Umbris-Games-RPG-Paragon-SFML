@@ -15,6 +15,8 @@ protected:
 	std::map<std::string, int> keybinds;
 	bool quit;
 	bool paused;
+	float inputTime;
+	float inputTimeMax;
 
 	sf::Vector2i mousePosScreen;
 	sf::Vector2i mousePosWindow;
@@ -32,16 +34,17 @@ public:
 		std::stack<State*>* states);
 	virtual ~State();
 
+	//Accessor
 	const bool& getQuit() const;
+	const bool getInputTime();
 
 	//Functions
-
 	void endState();
 	void pauseState();
 	void unpauseState();
+
 	virtual void updateMousePositions();
-
-
+	virtual void updateInputTime(const float& deltaTime);
 	virtual void updateInput(const float& deltaTime) = 0;
 	//pure virtual (door de = 0) daarom moet elke class die inherit hiervan een update en render etc hebben
 	virtual void update(const float& deltaTime) = 0; 
