@@ -1,4 +1,5 @@
 #include "MainMenuState.hpp"
+using namespace gui;
 
 //Initializers
 void MainMenuState::initVariables()
@@ -12,7 +13,7 @@ void MainMenuState::initBackground()
 		static_cast<float>(this->window->getSize().x), 
 		static_cast<float>(this->window->getSize().y)));
 
-	if (!this->backgroundTexture.loadFromFile("Resources/Images/Backgrounds/bg1.png"))
+	if (!this->backgroundTexture.loadFromFile("Resources/Images/Backgrounds/bg2.png"))
 	{
 		throw"ERROR::MAINMENUSTATE::FAILED_TO_LOAD_BACKGROUND_TEXTURE";
 	}

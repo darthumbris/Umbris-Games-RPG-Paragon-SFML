@@ -48,9 +48,6 @@
     <ClCompile Include="MainMenuState.cpp">
       <Filter>States</Filter>
     </ClCompile>
-    <ClCompile Include="Button.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>Entities</Filter>
     </ClCompile>
@@ -75,6 +72,9 @@
     <ClCompile Include="SettingsState.cpp">
       <Filter>States</Filter>
     </ClCompile>
+    <ClCompile Include="Gui.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.hpp">
@@ -91,9 +91,6 @@
     </ClInclude>
     <ClInclude Include="MainMenuState.hpp">
       <Filter>States</Filter>
-    </ClInclude>
-    <ClInclude Include="Button.hpp">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Player.hpp">
       <Filter>Entities</Filter>
@@ -118,6 +115,9 @@
     </ClInclude>
     <ClInclude Include="SettingsState.hpp">
       <Filter>States</Filter>
+    </ClInclude>
+    <ClInclude Include="Gui.hpp">
+      <Filter>GUI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

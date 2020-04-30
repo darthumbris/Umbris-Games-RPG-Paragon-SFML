@@ -1,4 +1,5 @@
-#include "Button.hpp"
+#include "Gui.hpp"
+using namespace gui;
 
 Button::Button(float x, float y, float width, float height, 
 	sf::Font* font,	std::string text, unsigned character_size,

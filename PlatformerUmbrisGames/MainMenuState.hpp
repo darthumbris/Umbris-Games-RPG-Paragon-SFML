@@ -2,7 +2,7 @@
 
 
 #include "GameState.hpp"
-#include "Button.hpp"
+#include "Gui.hpp"
 #include "EditorState.hpp"
 #include "SettingsState.hpp"
 
@@ -15,7 +15,7 @@ private:
 	sf::Font mainMenuFont;
 	sf::RectangleShape background;
 
-	std::map<std::string, Button*> buttons;
+	std::map<std::string, gui::Button*> buttons;
 	
 	//Functions
 	void initVariables();

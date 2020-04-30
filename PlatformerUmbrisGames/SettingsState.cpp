@@ -1,4 +1,5 @@
 #include "SettingsState.hpp"
+using namespace gui;
 
 //Initializers
 void SettingsState::initVariables()
@@ -12,7 +13,7 @@ void SettingsState::initBackground()
 		static_cast<float>(this->window->getSize().x),
 		static_cast<float>(this->window->getSize().y)));
 
-	if (!this->backgroundTexture.loadFromFile("Resources/Images/Backgrounds/bg1.png"))
+	if (!this->backgroundTexture.loadFromFile("Resources/Images/Backgrounds/bg2.png"))
 	{
 		throw"ERROR::MAINMENUSTATE::FAILED_TO_LOAD_BACKGROUND_TEXTURE";
 	}
@@ -52,10 +53,10 @@ void SettingsState::initButtons()
 {
 	float x = this->background.getPosition().x + this->background.getSize().x / 2.f - 150 / 2.f;
 	this->buttons["EXIT_STATE_SETTINGS"] = new Button(
-		x, 600.f, 150.f, 50.f,
-		&this->font, "Exit Game", 40,
-		sf::Color(170, 170, 170, 200), sf::Color(250, 250, 250, 250), sf::Color(120, 120, 120, 50),
-		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0));
+		x, 600.f, 250.f, 50.f,
+		&this->font, "Return to Title", 40,
+		sf::Color(200, 200, 200, 200), sf::Color(250, 250, 250, 250), sf::Color(120, 120, 120, 50),
+		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 170), sf::Color(20, 20, 20, 0));
 }
 
 //Constructor/ Destructor
