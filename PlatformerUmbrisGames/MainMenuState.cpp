@@ -56,7 +56,7 @@ void MainMenuState::initButtons()
 		sf::Color(170, 170, 170, 200), sf::Color(250, 250, 250, 250), sf::Color(120, 120, 120, 50),
 		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0));
 
-	this->buttons["SETTINGS"] = new Button(
+	this->buttons["SETTINGS_STATE"] = new Button(
 		100.f, 200.f, 150.f, 50.f, 
 		&this->mainMenuFont, "Settings", 40,
 		sf::Color(170, 170, 170, 200), sf::Color(250, 250, 250, 250), sf::Color(120, 120, 120, 50),
@@ -118,6 +118,10 @@ void MainMenuState::updateButtons()
 	}
 
 	//Settings
+	if (this->buttons["SETTINGS_STATE"]->isPressed())
+	{
+		this->states->push(new SettingsState(this->window, this->supportedKeys, this->states));
+	}
 
 	//Editor
 	if (this->buttons["EDITOR_STATE"]->isPressed())

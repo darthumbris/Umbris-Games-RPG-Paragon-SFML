@@ -1,36 +1,36 @@
 #pragma once
 
-
-#include "GameState.hpp"
+#include "State.hpp"
 #include "Button.hpp"
-#include "EditorState.hpp"
-#include "SettingsState.hpp"
 
-class MainMenuState :
+class SettingsState :
 	public State
 {
 private:
 	//Variables
 	sf::Texture backgroundTexture;
-	sf::Font mainMenuFont;
+	sf::Font font;
 	sf::RectangleShape background;
 
 	std::map<std::string, Button*> buttons;
-	
-	//Functions
+
+	//Initializers
 	void initVariables();
 	void initBackground();
 	void initFonts();
 	void initKeybinds();
 	void initButtons();
 
-public:
-	//Constructor/Destructor
-	MainMenuState(sf::RenderWindow* window, std::map<std::string, int>* supportedKeys, 
-		std::stack<State*>* states);
-	virtual ~MainMenuState();
 
-	//functions
+public:
+	//Constructor/ Destructor
+	SettingsState(sf::RenderWindow* window, std::map<std::string, int>* supportedKeys,
+		std::stack<State*>* states);
+	virtual ~SettingsState();
+
+	//Accessors
+	
+	//Functions
 	void updateInput(const float& deltaTime);
 	void updateButtons();
 	void update(const float& deltaTime);
