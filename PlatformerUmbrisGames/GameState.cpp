@@ -40,6 +40,8 @@ void GameState::initTextures()
 void GameState::initPauseMenu()
 {
 	this->pmenu = new PauseMenu(*this->window, this->font);
+
+	this->pmenu->addButton("EXIT_STATE", 600.f, "Quit" );
 }
 
 void GameState::initPlayers()
@@ -93,6 +95,12 @@ void GameState::updatePlayerInput(const float& deltaTime)
 		this->player->move(0.f, 1.f, deltaTime);	
 }
 
+void GameState::updatePauseMenuButtons()
+{
+	if (this->pmenu->isButtonPressed("EXIT_STATE"))
+		this->endState();
+}
+
 void GameState::update(const float& deltaTime)
 {
 	this->updateMousePositions(); //Needs to work in paused
@@ -105,7 +113,8 @@ void GameState::update(const float& deltaTime)
 	}
 	else //Paused Update
 	{
-		this->pmenu->update();
+		this->pmenu->update(this->mousePosView);
+		this->updatePauseMenuButtons();
 	}
 }
 

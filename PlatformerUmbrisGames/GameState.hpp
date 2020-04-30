@@ -28,6 +28,7 @@ public:
 	//functions
 	void updateInput(const float& deltaTime);
 	void updatePlayerInput(const float& deltaTime);
+	void updatePauseMenuButtons();
 	void update(const float& deltaTime);
 	void render(sf::RenderTarget* target = nullptr);
 };
