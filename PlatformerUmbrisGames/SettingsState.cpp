@@ -89,9 +89,9 @@ void SettingsState::initText()
 }
 
 //Constructor/ Destructor
-SettingsState::SettingsState(sf::RenderWindow* window, std::map<std::string, int>* supportedKeys,
+SettingsState::SettingsState(sf::RenderWindow* window, GraphicsSettings& gfxSettings, std::map<std::string, int>* supportedKeys,
 	std::stack<State*>* states)
-	: State(window, supportedKeys, states)
+	: State(window, supportedKeys, states), gfxSettings(gfxSettings)
 {
 	this->initVariables();
 	this->initBackground();
@@ -147,7 +147,10 @@ void SettingsState::updateGui(const float& deltaTime)
 		
 		std::cout << "Applied Settings" << "\n";
 		//Test remove later
-		this->window->create(this->modes[this->dropDownLists["RESOLUTION"]->getActiveElementId()], "Test", sf::Style::Default);
+		this->gfxSettings.resolution = this->modes[this->dropDownLists["RESOLUTION"]->getActiveElementId()];
+
+
+		this->window->create(this->gfxSettings.resolution, this->gfxSettings.title, sf::Style::Default);
 	}
 
 	//Dropdownlists======

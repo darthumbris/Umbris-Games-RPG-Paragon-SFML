@@ -55,6 +55,3 @@ void TileMap::render(sf::RenderTarget& target)
 		}
 	}
 }
-
-
-

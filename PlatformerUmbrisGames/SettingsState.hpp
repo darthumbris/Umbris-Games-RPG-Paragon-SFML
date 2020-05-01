@@ -8,6 +8,7 @@ class SettingsState :
 {
 private:
 	//Variables
+	GraphicsSettings& gfxSettings;
 	sf::Texture backgroundTexture;
 	sf::Font font;
 	sf::RectangleShape background;
@@ -29,7 +30,7 @@ private:
 
 public:
 	//Constructor/ Destructor
-	SettingsState(sf::RenderWindow* window, std::map<std::string, int>* supportedKeys,
+	SettingsState(sf::RenderWindow* window, GraphicsSettings& gfxSettings, std::map<std::string, int>* supportedKeys,
 		std::stack<State*>* states);
 	virtual ~SettingsState();
 

@@ -20,7 +20,6 @@ void Game::initWindow()
 {
     /*Create a SFML window*/
    
-
     if(this->gfxSettings.fullscreen)
         this->window = new sf::RenderWindow(
             this->gfxSettings.resolution, 
@@ -35,7 +34,6 @@ void Game::initWindow()
 
     this->window->setFramerateLimit(this->gfxSettings.framerateLimit);
     this->window->setVerticalSyncEnabled(this->gfxSettings.verticalSync);
-    
 }
 
 void Game::initKeys()
@@ -65,7 +63,7 @@ void Game::initKeys()
 
 void Game::initStates()
 {
-    this->states.push(new MainMenuState(this->window, &this->supportedKeys, &this->states));
+    this->states.push(new MainMenuState(this->window, this->gfxSettings, &this->supportedKeys, &this->states));
 }
 
 //Constructors/Destructors

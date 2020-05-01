@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Player.hpp"
+#include "GraphicsSettings.hpp"
 
 class State
 {
