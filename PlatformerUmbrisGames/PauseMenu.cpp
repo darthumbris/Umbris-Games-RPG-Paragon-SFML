@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "PauseMenu.hpp"
 using namespace gui;
 

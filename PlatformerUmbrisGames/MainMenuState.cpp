@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "MainMenuState.hpp"
 using namespace gui;
 

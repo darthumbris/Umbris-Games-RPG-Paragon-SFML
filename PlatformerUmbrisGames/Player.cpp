@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "Player.hpp"
 
 //Initializer functions

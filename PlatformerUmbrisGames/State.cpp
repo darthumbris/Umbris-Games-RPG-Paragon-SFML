@@ -1,6 +1,5 @@
+#include "stdafx.h"
 #include "State.hpp"
-
-
 
 //Constructors/Destructors
 State::State(sf::RenderWindow* window, std::map<std::string, int>* supportedKeys, 

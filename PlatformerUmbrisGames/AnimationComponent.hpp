@@ -1,14 +1,5 @@
 #pragma once
 
-#include <map>
-#include <iostream>
-#include <string>
-
-#include <SFML/Graphics.hpp>
-#include <SFML/System.hpp>
-#include <SFML/Window.hpp>
-#include <SFML/Audio.hpp>
-
 class AnimationComponent
 {
 private:

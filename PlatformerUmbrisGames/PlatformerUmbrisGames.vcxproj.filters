@@ -28,6 +28,9 @@
     <Filter Include="GUI">
       <UniqueIdentifier>{00a36331-db12-4992-84e5-d438f1052be9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Map">
+      <UniqueIdentifier>{532200c9-3496-41b8-a5f4-6dc86665fab7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -75,6 +78,12 @@
     <ClCompile Include="Gui.cpp">
       <Filter>GUI</Filter>
     </ClCompile>
+    <ClCompile Include="TileMap.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.hpp">
@@ -118,6 +127,12 @@
     </ClInclude>
     <ClInclude Include="Gui.hpp">
       <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="TileMap.hpp">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
