@@ -126,6 +126,8 @@ void GameState::render(sf::RenderTarget* target)
 	if (!target)
 		target = this->window;
 
+	this->map.render(*target);
+
 	this->player->render(*target);
 	
 	if (this->paused) // Pause Menu render

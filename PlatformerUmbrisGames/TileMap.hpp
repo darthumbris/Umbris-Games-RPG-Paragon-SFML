@@ -6,6 +6,7 @@ class TileMap
 {
 private:
 	//Variables
+	float gridSizeF;
 	sf::Vector2u mapMaxSize;
 	unsigned gridSizeU;
 	unsigned layers;
@@ -18,5 +19,7 @@ public:
 	virtual ~TileMap();
 
 	//Functions
+	void update();
+	void render(sf::RenderTarget& target);
 };
 

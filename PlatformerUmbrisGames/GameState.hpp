@@ -2,6 +2,7 @@
 
 #include "State.hpp"
 #include "PauseMenu.hpp"
+#include "TileMap.hpp"
 
 class GameState :
 	public State
@@ -11,6 +12,8 @@ private:
 	sf::Font font;
 	
 	Player* player;
+
+	TileMap map;
 
 	//Initializer Functions
 	void initKeybinds();

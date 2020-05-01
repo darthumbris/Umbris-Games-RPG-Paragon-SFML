@@ -157,6 +157,7 @@ DropDownList::DropDownList(float x, float y, float width, float height,
 
 	for (size_t i = 0; i < nrOfElements; i++)
 	{
+		short unsigned id_temp = static_cast<short unsigned>(i);
 		this->list.push_back(
 			new Button(
 				x, y + ((i+1) * height), width, height,
@@ -164,7 +165,7 @@ DropDownList::DropDownList(float x, float y, float width, float height,
 				sf::Color(255, 255, 255, 150), sf::Color(255, 255, 255, 255), sf::Color(120, 120, 120, 50),
 				sf::Color(70, 70, 70, 200), sf::Color(150, 150, 150, 200), sf::Color(20, 20, 20, 200),
 				sf::Color(20, 20, 20, 0), sf::Color(100, 100, 100, 200), sf::Color(120, 120, 120, 0),
-				i
+				id_temp
 			)
 		);
 	}
