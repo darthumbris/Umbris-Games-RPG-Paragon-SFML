@@ -13,16 +13,19 @@ private:
 	sf::RectangleShape background;
 
 	std::map<std::string, gui::Button*> buttons;
+	std::map<std::string, gui::DropDownList*> dropDownLists;
 
-	gui::DropDownList* ddl;
+	sf::Text settingsText;
+
+	std::vector<sf::VideoMode> modes;
 
 	//Initializers
 	void initVariables();
 	void initBackground();
 	void initFonts();
 	void initKeybinds();
-	void initButtons();
-
+	void initGui();
+	void initText();
 
 public:
 	//Constructor/ Destructor
@@ -34,9 +37,9 @@ public:
 	
 	//Functions
 	void updateInput(const float& deltaTime);
-	void updateButtons();
+	void updateGui(const float& deltaTime);
 	void update(const float& deltaTime);
-	void renderButtons(sf::RenderTarget& target);
+	void renderGui(sf::RenderTarget& target);
 	void render(sf::RenderTarget* target = nullptr);
 };
 
