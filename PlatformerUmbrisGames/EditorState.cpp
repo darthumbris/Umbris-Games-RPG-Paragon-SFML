@@ -14,7 +14,7 @@ void EditorState::initBackground()
 
 void EditorState::initFonts()
 {
-	if (!this->mainMenuFont.loadFromFile("Fonts/Dosis-Light.ttf"))
+	if (!this->font.loadFromFile("Fonts/Dosis-Light.ttf"))
 	{
 		throw("Error::EDITORSTATE::Could not load font");
 	}
@@ -45,15 +45,22 @@ void EditorState::initButtons()
 
 }
 
+void EditorState::initPauseMenu()
+{
+	this->pmenu = new PauseMenu(*this->window, this->font);
+
+	this->pmenu->addButton("EXIT_STATE", 600.f, "Quit");
+}
+
 //Constructor/destructors
-EditorState::EditorState(sf::RenderWindow* window, std::map<std::string, int>* supportedKeys,
-	std::stack<State*>* states)
-	: State(window, supportedKeys, states)
+EditorState::EditorState(StateData* state_data)
+	: State(state_data)
 {
 	this->initVariables();
 	this->initBackground();
 	this->initFonts();
 	this->initKeybinds();
+	this->initPauseMenu();
 	this->initButtons();
 }
 
@@ -64,13 +71,19 @@ EditorState::~EditorState()
 	{
 		delete it->second;
 	}
+	delete this->pmenu;
 }
 
 //Functions
 void EditorState::updateInput(const float& deltaTime)
 {
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->keybinds.at("CLOSE"))))
-		this->endState();
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->keybinds.at("CLOSE"))) && this->getInputTime())
+	{
+		if (!this->paused)
+			this->pauseState();
+		else
+			this->unpauseState();
+	}
 }
 
 void EditorState::updateButtons()
@@ -82,12 +95,27 @@ void EditorState::updateButtons()
 	}
 }
 
+void EditorState::updatePauseMenuButtons()
+{
+	if (this->pmenu->isButtonPressed("EXIT_STATE") && this->getInputTime())
+		this->endState();
+}
+
 void EditorState::update(const float& deltaTime)
 {
 	this->updateMousePositions();
 	this->updateInput(deltaTime);
+	this->updateInputTime(deltaTime);
 
-	this->updateButtons();
+	if (!this->paused) //Unpaused
+	{
+		this->updateButtons();
+	}
+	else //Paused
+	{
+		this->pmenu->update(this->mousePosView);
+		this->updatePauseMenuButtons();
+	}
 }
 
 void EditorState::renderButtons(sf::RenderTarget& target)
@@ -102,17 +130,27 @@ void EditorState::render(sf::RenderTarget* target)
 {
 	if (!target)
 		target = this->window;
-	this->renderButtons(*target);
+	
+	this->map.render(*target);
+
+	if (this->paused) // Pause Menu render
+	{
+		this->pmenu->render(*target);
+	}
+	else
+	{
+		this->renderButtons(*target);
+	}
 
 	//Remove later for seeing where the mouse is
-	/*sf::Text mouseText;
+	sf::Text mouseText;
 	mouseText.setPosition(this->mousePosView.x, this->mousePosView.y - 25);
-	mouseText.setFont(this->mainMenuFont);
+	mouseText.setFont(this->font);
 	mouseText.setCharacterSize(12);
 
 	std::stringstream ss;
 	ss << this->mousePosView.x << " " << this->mousePosView.y;
 	mouseText.setString(ss.str());
 
-	target->draw(mouseText);*/
+	target->draw(mouseText);
 }

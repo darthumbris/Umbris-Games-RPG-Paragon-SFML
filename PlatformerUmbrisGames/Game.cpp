@@ -8,13 +8,13 @@ void Game::initVariables()
 {
     this->window = nullptr;
     this->deltaTime = 0.f;
+    this->gridSize = 50.f;
 }
 
 void Game::initGraphicsSettings()
 {
     this->gfxSettings.loadFromFile("Config/graphics.ini");
 }
-
 
 void Game::initWindow()
 {
@@ -61,9 +61,19 @@ void Game::initKeys()
     }
 }
 
+void Game::initStataData()
+{
+    this->stateData.window = this->window;
+    this->stateData.gfxSettings = &this->gfxSettings;
+    this->stateData.supportedKeys = &this->supportedKeys;
+    this->stateData.states = &this->states;
+    this->stateData.gridSize = this->gridSize;
+}
+
+
 void Game::initStates()
 {
-    this->states.push(new MainMenuState(this->window, this->gfxSettings, &this->supportedKeys, &this->states));
+    this->states.push(new MainMenuState(&this->stateData));
 }
 
 //Constructors/Destructors
@@ -73,6 +83,7 @@ Game::Game()
     this->initGraphicsSettings();
     this->initWindow();
     this->initKeys();
+    this->initStataData();
     this->initStates();
     
 }

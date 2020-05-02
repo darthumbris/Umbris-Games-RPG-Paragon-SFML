@@ -2,16 +2,17 @@
 #include "State.hpp"
 
 //Constructors/Destructors
-State::State(sf::RenderWindow* window, std::map<std::string, int>* supportedKeys, 
-	std::stack<State*>* states)
+State::State(StateData* state_data)
 {
-	this->window = window;
-	this->supportedKeys = supportedKeys;
-	this->states = states;
+	this->stateData = state_data;
+	this->window = state_data->window;
+	this->supportedKeys = state_data->supportedKeys;
+	this->states = state_data->states;
 	this->quit = false;
 	this->paused = false;
 	this->inputTime = 0.f;
 	this->inputTimeMax = 10.f;
+	this->gridSize = state_data->gridSize;
 }
 
 State::~State()

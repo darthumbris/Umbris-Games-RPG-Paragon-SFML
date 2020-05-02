@@ -52,9 +52,8 @@ void GameState::initPlayers()
 
 
 //Constructors/destructors
-GameState::GameState(sf::RenderWindow* window, std::map<std::string, int>* supportedKeys,
-	std::stack<State*>* states)
-	: State(window, supportedKeys, states)
+GameState::GameState(StateData* state_data)
+	: State(state_data)
 {
 	this->initKeybinds();
 	this->initFonts();
@@ -126,7 +125,9 @@ void GameState::render(sf::RenderTarget* target)
 	if (!target)
 		target = this->window;
 
-	this->map.render(*target);
+	//Map rendering (needs to be optimized so that it only renders the viewscreen and
+	// not the whole map
+	//this->map.render(*target);
 
 	this->player->render(*target);
 	

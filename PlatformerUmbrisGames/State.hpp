@@ -3,6 +3,23 @@
 #include "Player.hpp"
 #include "GraphicsSettings.hpp"
 
+class Player;
+class GraphicsSettings;
+class State;
+
+class StateData 
+{
+public:
+	StateData() {};
+
+	//Variables
+	float gridSize;
+	sf::RenderWindow* window;
+	GraphicsSettings* gfxSettings;
+	std::map < std::string,	int > * supportedKeys;
+	std::stack<State*>* states;
+};
+
 class State
 {
 private:
@@ -10,6 +27,7 @@ private:
 
 protected:
 	//Variables
+	StateData* stateData;
 	std::stack<State*>* states;//A pointer to a stack of State pointers
 	sf::RenderWindow* window; //Waarin er iets wordt gerendered
 	std::map<std::string, int>* supportedKeys;
@@ -18,6 +36,7 @@ protected:
 	bool paused;
 	float inputTime;
 	float inputTimeMax;
+	float gridSize;
 
 	sf::Vector2i mousePosScreen;
 	sf::Vector2i mousePosWindow;
@@ -31,8 +50,7 @@ protected:
 
 public:
 	//Constructors/Destructors
-	State(sf::RenderWindow* window, std::map<std::string, int>* supportedKeys, 
-		std::stack<State*>* states);
+	State(StateData* state_data);
 	virtual ~State();
 
 	//Accessor
