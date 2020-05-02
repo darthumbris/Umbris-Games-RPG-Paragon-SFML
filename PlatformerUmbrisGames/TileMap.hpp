@@ -11,7 +11,7 @@ private:
 	unsigned gridSizeU;
 	unsigned layers;
 	std::vector<std::vector<std::vector<Tile*>>> map; // x, y and z (z voor layer)
-	
+	sf::Texture tileTextureSheet;
 
 public:
 	//Constructor/Destructor
