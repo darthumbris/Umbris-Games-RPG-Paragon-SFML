@@ -40,6 +40,7 @@ public:
 
 	//functions
 	void updateInput(const float& deltaTime);
+	void updateEditorInput(const float& deltaTime);
 	void updateButtons();
 	void updateGui();
 	void updatePauseMenuButtons();

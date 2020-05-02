@@ -10,20 +10,16 @@ TileMap::TileMap(float gridSize, unsigned width, unsigned height)
 	this->mapMaxSize.y = height;
 	this->layers = 1;
 
-	this->map.resize(this->mapMaxSize.x);
+	//Reserve instead of resize?
+	this->map.resize(this->mapMaxSize.x, std::vector<std::vector<Tile*>>());
 	for (size_t x = 0; x < this->mapMaxSize.x; x++)
 	{
-		this->map.push_back(std::vector<std::vector<Tile*>>());
-
 		for (size_t y = 0; y < this->mapMaxSize.y; y++)
 		{
-			this->map[x].resize(this->mapMaxSize.y);
-			this->map[x].push_back(std::vector<Tile*>());
-
+			this->map[x].resize(this->mapMaxSize.y, std::vector<Tile*>());
 			for (size_t z = 0; z < this->layers; z++)
 			{
-				this->map[x][y].resize(this->layers);
-				this->map[x][y].push_back(nullptr);
+				this->map[x][y].resize(this->layers, nullptr);
 			}
 		}
 	}
@@ -44,14 +40,43 @@ TileMap::~TileMap()
 }
 
 //Functions
-void TileMap::addTile()
+void TileMap::addTile(const unsigned x, const unsigned y, const unsigned z)
 {
+	/*Take two indices from the mouse position (and the layer position) in the grid and add a
+	tile to that position if the internal tilemap array allows it*/
 
+	//in the bounds
+	if (x < this->mapMaxSize.x && x >= 0 &&
+		y < this->mapMaxSize.y && y >= 0 &&
+		z <= this->layers && z >= 0)
+	{
+		if (this->map[x][y][z] == nullptr) 
+		{
+			// Ok to add a tile
+			this->map[x][y][z] = new Tile(x * this->gridSizeF, y * this->gridSizeF, this->gridSizeF);
+			std::cout << "debug: Added a Tile" << "\n";
+		}
+	}
 }
 
-void TileMap::removeTile()
+void TileMap::removeTile(const unsigned x, const unsigned y, const unsigned z)
 {
+	/*Take two indices from the mouse position (and the layer position) in the grid and remove a
+	tile in that position if the internal tilemap array allows it*/
 
+	//in the bounds
+	if (x < this->mapMaxSize.x && x >= 0 &&
+		y < this->mapMaxSize.y && y >= 0 &&
+		z <= this->layers && z >= 0)
+	{
+		if (this->map[x][y][z] != nullptr)
+		{
+			// Ok to remove a tile
+			delete this->map[x][y][z];
+			this->map[x][y][z] = nullptr;
+			std::cout << "debug: Removed a Tile" << "\n";
+		}
+	}
 }
 
 

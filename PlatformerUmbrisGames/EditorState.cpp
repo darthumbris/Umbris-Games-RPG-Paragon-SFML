@@ -63,7 +63,7 @@ void EditorState::initPauseMenu()
 
 void EditorState::initTileMap()
 {
-	this->tileMap = new TileMap(this->stateData->gridSize, 10, 10);
+	this->tileMap = new TileMap(this->stateData->gridSize, 26, 15);
 }
 
 //Constructor/destructors
@@ -95,12 +95,28 @@ EditorState::~EditorState()
 //Functions
 void EditorState::updateInput(const float& deltaTime)
 {
+	//when pressing the "close" button it either opens or closes the pause menu
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->keybinds.at("CLOSE"))) && this->getInputTime())
 	{
 		if (!this->paused)
 			this->pauseState();
 		else
 			this->unpauseState();
+	}
+}
+
+void EditorState::updateEditorInput(const float& deltaTime)
+{
+	//Add a Tile to the Tilemap
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && this->getInputTime())
+	{
+		this->tileMap->addTile(this->mousePosGrid.x, this->mousePosGrid.y, 0);
+	}
+
+	//Remove a tile from the tilemap
+	else if (sf::Mouse::isButtonPressed(sf::Mouse::Right) && this->getInputTime())
+	{
+		this->tileMap->removeTile(this->mousePosGrid.x, this->mousePosGrid.y, 0);
 	}
 }
 
@@ -135,6 +151,7 @@ void EditorState::update(const float& deltaTime)
 	{
 		this->updateButtons();
 		this->updateGui();
+		this->updateEditorInput(deltaTime);
 	}
 	else //Paused
 	{
