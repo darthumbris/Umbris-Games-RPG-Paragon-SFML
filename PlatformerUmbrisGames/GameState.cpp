@@ -50,6 +50,11 @@ void GameState::initPlayers()
 	this->player = new Player(0, 0, this->textures["PLAYER_SHEET"]);
 }
 
+void GameState::initTileMap()
+{
+	this->tileMap = new TileMap(this->stateData->gridSize, 10, 10);
+}
+
 
 //Constructors/destructors
 GameState::GameState(StateData* state_data)
@@ -60,12 +65,14 @@ GameState::GameState(StateData* state_data)
 	this->initTextures();
 	this->initPauseMenu();
 	this->initPlayers();
+	this->initTileMap();
 }
 
 GameState::~GameState()
 {
 	delete this->pmenu;
 	delete this->player;
+	delete this->tileMap;
 }
 
 
@@ -127,7 +134,7 @@ void GameState::render(sf::RenderTarget* target)
 
 	//Map rendering (needs to be optimized so that it only renders the viewscreen and
 	// not the whole map
-	//this->map.render(*target);
+	//this->tileMap->render(*target);
 
 	this->player->render(*target);
 	

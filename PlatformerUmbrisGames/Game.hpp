@@ -2,6 +2,9 @@
 
 #include "MainMenuState.hpp"
 
+class GraphicsSettings;
+class StateData;
+
 class Game
 {
 private:

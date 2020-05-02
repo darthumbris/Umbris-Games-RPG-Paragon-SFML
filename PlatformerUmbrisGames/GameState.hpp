@@ -13,7 +13,7 @@ private:
 	
 	Player* player;
 
-	TileMap map;
+	TileMap* tileMap;
 
 	//Initializer Functions
 	void initKeybinds();
@@ -21,6 +21,7 @@ private:
 	void initTextures();
 	void initPauseMenu();
 	void initPlayers();
+	void initTileMap();
 
 public:
 	//Constructor/destructor

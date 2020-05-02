@@ -45,11 +45,25 @@ void EditorState::initButtons()
 
 }
 
+void EditorState::initGui()
+{
+	this->selectorRect.setSize(sf::Vector2f(this->stateData->gridSize, this->stateData->gridSize));
+
+	this->selectorRect.setFillColor(sf::Color::Transparent);
+	this->selectorRect.setOutlineThickness(1.f);
+	this->selectorRect.setOutlineColor(sf::Color::Red);
+}
+
 void EditorState::initPauseMenu()
 {
 	this->pmenu = new PauseMenu(*this->window, this->font);
 
 	this->pmenu->addButton("EXIT_STATE", 600.f, "Quit");
+}
+
+void EditorState::initTileMap()
+{
+	this->tileMap = new TileMap(this->stateData->gridSize, 10, 10);
 }
 
 //Constructor/destructors
@@ -62,6 +76,8 @@ EditorState::EditorState(StateData* state_data)
 	this->initKeybinds();
 	this->initPauseMenu();
 	this->initButtons();
+	this->initGui();
+	this->initTileMap();
 }
 
 EditorState::~EditorState()
@@ -72,6 +88,8 @@ EditorState::~EditorState()
 		delete it->second;
 	}
 	delete this->pmenu;
+
+	delete this->tileMap;
 }
 
 //Functions
@@ -95,6 +113,12 @@ void EditorState::updateButtons()
 	}
 }
 
+void EditorState::updateGui()
+{
+	this->selectorRect.setPosition(this->mousePosGrid.x * this->stateData->gridSize , 
+		this->mousePosGrid.y * this->stateData->gridSize);
+}
+
 void EditorState::updatePauseMenuButtons()
 {
 	if (this->pmenu->isButtonPressed("EXIT_STATE") && this->getInputTime())
@@ -110,6 +134,7 @@ void EditorState::update(const float& deltaTime)
 	if (!this->paused) //Unpaused
 	{
 		this->updateButtons();
+		this->updateGui();
 	}
 	else //Paused
 	{
@@ -126,12 +151,17 @@ void EditorState::renderButtons(sf::RenderTarget& target)
 	}
 }
 
+void EditorState::renderGui(sf::RenderTarget& target)
+{
+	target.draw(this->selectorRect);
+}
+
 void EditorState::render(sf::RenderTarget* target)
 {
 	if (!target)
 		target = this->window;
 	
-	this->map.render(*target);
+	this->tileMap->render(*target);
 
 	if (this->paused) // Pause Menu render
 	{
@@ -139,6 +169,7 @@ void EditorState::render(sf::RenderTarget* target)
 	}
 	else
 	{
+		this->renderGui(*target);
 		this->renderButtons(*target);
 	}
 
