@@ -72,6 +72,14 @@ void EditorState::initTileMap()
 
 void EditorState::initGui()
 {
+	this->sideBar.setSize(sf::Vector2f(
+		40.f,
+		static_cast<float>(this->stateData->gfxSettings->resolution.height)
+		));
+	this->sideBar.setFillColor(sf::Color(50,50,50,100));
+	this->sideBar.setOutlineColor(sf::Color(200, 200, 200, 150));
+	this->sideBar.setOutlineThickness(1.f);
+	
 	this->selectorRect.setSize(sf::Vector2f(this->stateData->gridSize, this->stateData->gridSize));
 
 	this->selectorRect.setFillColor(sf::Color(255,255,255,150));
@@ -130,26 +138,29 @@ void EditorState::updateInput(const float& deltaTime)
 
 void EditorState::updateEditorInput(const float& deltaTime)
 {
-	//Add a Tile to the Tilemap
-	if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && this->getInputTime())
+	if (!this->sideBar.getGlobalBounds().contains(sf::Vector2f(this->mousePosWindow)))
 	{
-		if (!this->textureSelector->getActive()) // if not in the selection for textures add a tile
+		//Add a Tile to the Tilemap
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && this->getInputTime())
 		{
-			this->tileMap->addTile(this->mousePosGrid.x, this->mousePosGrid.y, 0, this->textureRect);
+			if (!this->textureSelector->getActive()) // if not in the selection for textures add a tile
+			{
+				this->tileMap->addTile(this->mousePosGrid.x, this->mousePosGrid.y, 0, this->textureRect);
+			}
+			else // else select the texture selected
+			{
+				this->textureRect = this->textureSelector->getTextureRect();
+			}
 		}
-		else // else select the texture selected
-		{
-			this->textureRect = this->textureSelector->getTextureRect();
-		}
-	}
 
-	//Remove a tile from the tilemap
-	else if (sf::Mouse::isButtonPressed(sf::Mouse::Right) && this->getInputTime())
-	{
-		if (!this->textureSelector->getActive())
+		//Remove a tile from the tilemap
+		else if (sf::Mouse::isButtonPressed(sf::Mouse::Right) && this->getInputTime())
 		{
-			this->tileMap->removeTile(this->mousePosGrid.x, this->mousePosGrid.y, 0);
-		}		
+			if (!this->textureSelector->getActive())
+			{
+				this->tileMap->removeTile(this->mousePosGrid.x, this->mousePosGrid.y, 0);
+			}
+		}
 	}
 }
 
@@ -162,9 +173,9 @@ void EditorState::updateButtons()
 	}
 }
 
-void EditorState::updateGui()
+void EditorState::updateGui(const float& deltaTime)
 {
-	this->textureSelector->update(this->mousePosWindow);
+	this->textureSelector->update(this->mousePosWindow, deltaTime);
 	
 	if (!this->textureSelector->getActive())
 	{
@@ -196,7 +207,7 @@ void EditorState::update(const float& deltaTime)
 	if (!this->paused) //Unpaused
 	{
 		this->updateButtons();
-		this->updateGui();
+		this->updateGui(deltaTime);
 		this->updateEditorInput(deltaTime);
 	}
 	else //Paused
@@ -222,6 +233,7 @@ void EditorState::renderGui(sf::RenderTarget& target)
 	this->textureSelector->render(target);
 
 	target.draw(this->cursorText);
+	target.draw(this->sideBar);
 }
 
 void EditorState::render(sf::RenderTarget* target)

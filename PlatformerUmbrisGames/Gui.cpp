@@ -251,8 +251,11 @@ void DropDownList::render(sf::RenderTarget& target)
 
 //Texture Selector===============================================================================
 
+
+//Constructor/Destructor
 TextureSelector::TextureSelector(float x, float y, float width, float height, float gridSize, 
 	const sf::Texture* texture_sheet, sf::Font& font, std::string text)
+	: inputTimeMax(2.f), inputTime(0.f)
 {
 	this->active = false;
 	this->gridSize = gridSize;
@@ -290,10 +293,10 @@ TextureSelector::TextureSelector(float x, float y, float width, float height, fl
 	this->textureRect.height = static_cast<int>(gridSize);
 
 	this->hide_btn = new gui::Button(
-		x, y, 50.f, 50.f,
+		0, y, 40.f, 50.f,
 		&font, text, 20,
 		sf::Color(170, 170, 170, 200), sf::Color(250, 250, 250, 250), sf::Color(120, 120, 120, 50),
-		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0));
+		sf::Color(170, 170, 170, 50), sf::Color(250, 250, 250, 100), sf::Color(20, 20, 20, 0));
 }
 
 TextureSelector::~TextureSelector()
@@ -312,11 +315,30 @@ const sf::IntRect& gui::TextureSelector::getTextureRect() const
 	return this->textureRect;
 }
 
-void gui::TextureSelector::update(const sf::Vector2i& mousePosWindow)
+const bool gui::TextureSelector::getInputTime()
 {
+	if (this->inputTime >= this->inputTimeMax)
+	{
+		this->inputTime = 0.f;
+		return true;
+	}
+	return false;
+}
+
+
+//Functions
+void gui::TextureSelector::updateInputTime(const float& deltaTime)
+{
+	if (this->inputTime < this->inputTimeMax)
+		this->inputTime += 10.f * deltaTime;
+}
+
+void gui::TextureSelector::update(const sf::Vector2i& mousePosWindow, const float& deltaTime)
+{
+	updateInputTime(deltaTime);
 	this->hide_btn->update(static_cast<sf::Vector2f>(mousePosWindow));
 
-	if (this->hide_btn->isPressed())
+	if (this->hide_btn->isPressed() && this->getInputTime())
 	{
 		if (this->hidden)
 			this->hidden = false;

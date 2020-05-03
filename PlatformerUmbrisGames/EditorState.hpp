@@ -17,16 +17,18 @@ private:
 	//Variables
 	sf::Font font;
 	sf::Text cursorText;
-	PauseMenu* pmenu;
+	PauseMenu* pmenu; // The pausemenu to quit the selector (and load and save later)
 
 	std::map<std::string, gui::Button*> buttons;
 
-	TileMap* tileMap;
+	TileMap* tileMap; //The grid of tiles where tiles can be added and removed
+
+	sf::RectangleShape sideBar; // The bar on the left side of the screen where buttons get put in.
 
 	sf::IntRect textureRect; //Determines which part of the tilesheet gets selected.
-	sf::RectangleShape selectorRect; 
+	sf::RectangleShape selectorRect; //The selection box according to a grid of where to place or remove a tile
 
-	gui::TextureSelector* textureSelector;
+	gui::TextureSelector* textureSelector; //The gui element to display and handle the selection of textures
 
 	//Functions
 	void initVariables();
@@ -47,7 +49,7 @@ public:
 	void updateInput(const float& deltaTime);
 	void updateEditorInput(const float& deltaTime);
 	void updateButtons();
-	void updateGui();
+	void updateGui(const float& deltaTime);
 	void updatePauseMenuButtons();
 	void update(const float& deltaTime);
 	void renderButtons(sf::RenderTarget& target);

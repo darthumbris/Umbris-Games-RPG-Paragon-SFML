@@ -80,17 +80,19 @@ namespace gui
 	{
 	private:
 		//Variables
+		float inputTime;
+		const float inputTimeMax;
 		float gridSize;
 
 		bool active; // used to see if the mouse is within the selector bounds
 		bool hidden;
 		Button* hide_btn;
 
-		sf::RectangleShape bounds;
-		sf::Sprite sheet;
-		sf::RectangleShape selector;
-		sf::Vector2u mousePosGrid;
-		sf::IntRect textureRect;
+		sf::RectangleShape bounds; //Box where the texturesheet is showed in
+		sf::Sprite sheet; //The tilesheet
+		sf::RectangleShape selector; //displays what tile is selected within bounds
+		sf::Vector2u mousePosGrid; //position of the mouse according to the grid
+		sf::IntRect textureRect; // For determining what part of the texture gets selected
 
 	public:
 		TextureSelector(float x, float y, float width, float height, float gridSize, 
@@ -100,9 +102,11 @@ namespace gui
 		//Accessors
 		const bool& getActive() const;
 		const sf::IntRect& getTextureRect() const;
+		const bool getInputTime();
 
 		//Functions
-		void update(const sf::Vector2i& mousePosWindow);
+		void updateInputTime(const float& deltaTime);
+		void update(const sf::Vector2i& mousePosWindow, const float& deltaTime);
 		void render(sf::RenderTarget &target);
 	};
 }
