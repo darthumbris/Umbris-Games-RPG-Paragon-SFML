@@ -26,6 +26,8 @@ private:
 	sf::IntRect textureRect; //Determines which part of the tilesheet gets selected.
 	sf::RectangleShape selectorRect; 
 
+	gui::TextureSelector* textureSelector;
+
 	//Functions
 	void initVariables();
 	void initBackground();
