@@ -16,6 +16,7 @@ class EditorState :
 private:
 	//Variables
 	sf::Font font;
+	sf::Text cursorText;
 	PauseMenu* pmenu;
 
 	std::map<std::string, gui::Button*> buttons;
@@ -29,6 +30,7 @@ private:
 	void initVariables();
 	void initBackground();
 	void initFonts();
+	void initText();
 	void initKeybinds();
 	void initPauseMenu();
 	void initButtons();
