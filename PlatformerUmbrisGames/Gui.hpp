@@ -80,15 +80,29 @@ namespace gui
 	{
 	private:
 		//Variables
+		float gridSize;
+
+		bool active; // used to see if the mouse is within the selector bounds
+		bool hidden;
+		Button* hide_btn;
+
 		sf::RectangleShape bounds;
 		sf::Sprite sheet;
+		sf::RectangleShape selector;
+		sf::Vector2u mousePosGrid;
+		sf::IntRect textureRect;
 
 	public:
-		TextureSelector(float x, float y, float width, float height, const sf::Texture* texture_sheet);
+		TextureSelector(float x, float y, float width, float height, float gridSize, 
+			const sf::Texture* texture_sheet, sf::Font& font, std::string text);
 		~TextureSelector();
 
+		//Accessors
+		const bool& getActive() const;
+		const sf::IntRect& getTextureRect() const;
+
 		//Functions
-		void update();
+		void update(const sf::Vector2i& mousePosWindow);
 		void render(sf::RenderTarget &target);
 	};
 }

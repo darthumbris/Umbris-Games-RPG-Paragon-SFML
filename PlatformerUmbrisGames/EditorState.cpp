@@ -81,7 +81,9 @@ void EditorState::initGui()
 	this->selectorRect.setTexture(this->tileMap->getTileSheet());
 	this->selectorRect.setTextureRect(this->textureRect);
 
-	this->textureSelector = new gui::TextureSelector(20.f, 20.f, 500.f, 500.f, this->tileMap->getTileSheet());
+	this->textureSelector = new gui::TextureSelector(
+		20.f, 20.f, 200.f, 150.f, this->stateData->gridSize, 
+		this->tileMap->getTileSheet(), this->font, "TS");
 }
 
 //Constructor/destructors
@@ -131,47 +133,23 @@ void EditorState::updateEditorInput(const float& deltaTime)
 	//Add a Tile to the Tilemap
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && this->getInputTime())
 	{
-		this->tileMap->addTile(this->mousePosGrid.x, this->mousePosGrid.y, 0, this->textureRect);
+		if (!this->textureSelector->getActive()) // if not in the selection for textures add a tile
+		{
+			this->tileMap->addTile(this->mousePosGrid.x, this->mousePosGrid.y, 0, this->textureRect);
+		}
+		else // else select the texture selected
+		{
+			this->textureRect = this->textureSelector->getTextureRect();
+		}
 	}
 
 	//Remove a tile from the tilemap
 	else if (sf::Mouse::isButtonPressed(sf::Mouse::Right) && this->getInputTime())
 	{
-		this->tileMap->removeTile(this->mousePosGrid.x, this->mousePosGrid.y, 0);
-	}
-
-	//Change texture selected on the tilesheet
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && this->getInputTime())
-	{
-		if (this->textureRect.left <= 50)
+		if (!this->textureSelector->getActive())
 		{
-			this->textureRect.left += 50;
-		}
-
-	}
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && this->getInputTime())
-	{
-		if (this->textureRect.left >= 50)
-		{
-			this->textureRect.left -= 50;
-		}
-
-	}
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && this->getInputTime())
-	{
-		if (this->textureRect.top <= 50)
-		{
-			this->textureRect.top += 50;
-		}
-
-	}
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && this->getInputTime())
-	{
-		if (this->textureRect.top >= 50)
-		{
-			this->textureRect.top -= 50;
-		}
-
+			this->tileMap->removeTile(this->mousePosGrid.x, this->mousePosGrid.y, 0);
+		}		
 	}
 }
 
@@ -186,20 +164,21 @@ void EditorState::updateButtons()
 
 void EditorState::updateGui()
 {
-	this->selectorRect.setTexture(this->tileMap->getTileSheet());
-	this->selectorRect.setTextureRect(this->textureRect);
-	this->selectorRect.setPosition(this->mousePosGrid.x * this->stateData->gridSize , 
-		this->mousePosGrid.y * this->stateData->gridSize);
-
+	this->textureSelector->update(this->mousePosWindow);
 	
+	if (!this->textureSelector->getActive())
+	{
+		this->selectorRect.setTextureRect(this->textureRect);
+		this->selectorRect.setPosition(this->mousePosGrid.x * this->stateData->gridSize,
+			this->mousePosGrid.y * this->stateData->gridSize);
+	}
+
 	this->cursorText.setPosition(this->mousePosView.x, this->mousePosView.y - 50.f);
 	std::stringstream ss;
 	ss << " mouseposview:  " <<this->mousePosView.x << "  ,  " << this->mousePosView.y << "\n" <<
 		" mouseposgrid:  " << this->mousePosGrid.x << "  ,  " << this->mousePosGrid.y << "\n" <<
 		" Texture sheet loc:  " << this->textureRect.left << "  ,  " << this->textureRect.top << "\n";
 	this->cursorText.setString(ss.str());
-
-	this->textureSelector->update();
 }
 
 void EditorState::updatePauseMenuButtons()
@@ -237,9 +216,11 @@ void EditorState::renderButtons(sf::RenderTarget& target)
 
 void EditorState::renderGui(sf::RenderTarget& target)
 {
+	if(!this->textureSelector->getActive())
+		target.draw(this->selectorRect);
+
 	this->textureSelector->render(target);
 
-	target.draw(this->selectorRect);
 	target.draw(this->cursorText);
 }
 
@@ -259,6 +240,4 @@ void EditorState::render(sf::RenderTarget* target)
 		this->renderGui(*target);
 		this->renderButtons(*target);
 	}
-
-	
 }
