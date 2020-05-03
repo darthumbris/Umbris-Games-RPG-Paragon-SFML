@@ -25,8 +25,8 @@ Button::Button(float x, float y, float width, float height,
 	this->text.setCharacterSize(character_size);
 	//int (x) en int(y) voorkomt blurry text
 	this->text.setPosition(
-		int(this->shape.getPosition().x + (this->shape.getGlobalBounds().width / 2.f) - this->text.getGlobalBounds().width / 2.f),
-		int(this->shape.getPosition().y + (this->shape.getGlobalBounds().height / 2.f) - this->text.getGlobalBounds().height / 2.f)
+		static_cast<int>(this->shape.getPosition().x + (this->shape.getGlobalBounds().width / 2.f) - this->text.getGlobalBounds().width / 2.f),
+		static_cast<int>(this->shape.getPosition().y )
 	);
 
 	this->textIdleColor = text_idle_color;
@@ -149,7 +149,7 @@ DropDownList::DropDownList(float x, float y, float width, float height,
 	//Unsigned nrOfElements = sizeof(list) / sizeof(std::string);
 
 	this->activeElement = new Button(x, y, width, height,
-		&this->font, list[default_index], 14,
+		&this->font, list[default_index], 24,
 		sf::Color(255, 255, 255, 200), sf::Color(255, 255, 255, 255), sf::Color(120, 120, 120, 50),
 		sf::Color(70, 70, 70, 200), sf::Color(150, 150, 150, 200), sf::Color(20, 20, 20, 200),
 		sf::Color(20, 20, 20, 200), sf::Color(100, 100, 100, 200), sf::Color(120, 120, 120, 200)
@@ -161,7 +161,7 @@ DropDownList::DropDownList(float x, float y, float width, float height,
 		this->list.push_back(
 			new Button(
 				x, y + ((i+1) * height), width, height,
-				&this->font, list[i], 14,
+				&this->font, list[i], 24,
 				sf::Color(255, 255, 255, 150), sf::Color(255, 255, 255, 255), sf::Color(120, 120, 120, 50),
 				sf::Color(70, 70, 70, 200), sf::Color(150, 150, 150, 200), sf::Color(20, 20, 20, 200),
 				sf::Color(20, 20, 20, 0), sf::Color(100, 100, 100, 200), sf::Color(120, 120, 120, 0),
@@ -260,7 +260,7 @@ TextureSelector::TextureSelector(float x, float y, float width, float height, fl
 	this->active = false;
 	this->gridSize = gridSize;
 	this->hidden = false;
-	float offset = 50.f;
+	float offset = 80.f;
 	
 	this->bounds.setSize(sf::Vector2f(width, height));
 	this->bounds.setPosition(x + offset, y);
@@ -293,10 +293,11 @@ TextureSelector::TextureSelector(float x, float y, float width, float height, fl
 	this->textureRect.height = static_cast<int>(gridSize);
 
 	this->hide_btn = new gui::Button(
-		0, y, 40.f, 50.f,
-		&font, text, 20,
-		sf::Color(170, 170, 170, 200), sf::Color(250, 250, 250, 250), sf::Color(120, 120, 120, 50),
-		sf::Color(170, 170, 170, 50), sf::Color(250, 250, 250, 100), sf::Color(20, 20, 20, 0));
+		10.f, y, 40.f, 40.f,
+		&font, text, 30,
+		sf::Color(255, 255, 255, 200), sf::Color(255, 255, 255, 255), sf::Color(120, 120, 120, 50),
+		sf::Color(70, 70, 70, 200), sf::Color(250, 250, 250, 200), sf::Color(20, 20, 20, 50),
+		sf::Color(170, 170, 170, 200), sf::Color(200, 200, 200, 200), sf::Color(20, 20, 20, 50));
 }
 
 TextureSelector::~TextureSelector()

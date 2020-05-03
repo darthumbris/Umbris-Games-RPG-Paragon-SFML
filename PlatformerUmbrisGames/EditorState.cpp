@@ -58,6 +58,7 @@ void EditorState::initPauseMenu()
 	this->pmenu = new PauseMenu(*this->window, this->font);
 
 	this->pmenu->addButton("EXIT_STATE", 600.f, "Quit");
+	this->pmenu->addButton("SAVE", 300.f, "Save map");
 }
 
 void EditorState::initButtons()
@@ -67,13 +68,13 @@ void EditorState::initButtons()
 
 void EditorState::initTileMap()
 {
-	this->tileMap = new TileMap(this->stateData->gridSize, 26, 15);
+	this->tileMap = new TileMap(this->stateData->gridSize, 26, 15, "Resources/Images/Tiles/tilesheet1.png");
 }
 
 void EditorState::initGui()
 {
 	this->sideBar.setSize(sf::Vector2f(
-		40.f,
+		50.f,
 		static_cast<float>(this->stateData->gfxSettings->resolution.height)
 		));
 	this->sideBar.setFillColor(sf::Color(50,50,50,100));
@@ -196,6 +197,9 @@ void EditorState::updatePauseMenuButtons()
 {
 	if (this->pmenu->isButtonPressed("EXIT_STATE") && this->getInputTime())
 		this->endState();
+
+	if (this->pmenu->isButtonPressed("SAVE") && this->getInputTime())
+		this->tileMap->saveToFile("Map_Saves/map_data.map");
 }
 
 void EditorState::update(const float& deltaTime)

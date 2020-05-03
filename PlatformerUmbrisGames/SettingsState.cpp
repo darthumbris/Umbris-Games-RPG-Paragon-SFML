@@ -55,13 +55,13 @@ void SettingsState::initGui()
 	float x_button = this->background.getSize().x / 2.f - 250 / 2.f;
 	float x_dropdown = this->background.getSize().x / 2.f - 200 / 2.f;
 	this->buttons["EXIT_STATE_SETTINGS"] = new Button(
-		x_button - 250, 600.f, 250.f, 50.f,
+		x_button - 250, 600.f, 250.f, 45.f,
 		&this->font, "Return to Title", 40,
 		sf::Color(200, 200, 200, 200), sf::Color(250, 250, 250, 250), sf::Color(120, 120, 120, 50),
 		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 170), sf::Color(20, 20, 20, 0));
 
 	this->buttons["APPLY"] = new Button(
-		x_button + 250, 600.f, 250.f, 50.f,
+		x_button + 250, 600.f, 250.f, 45.f,
 		&this->font, "Apply settings", 40,
 		sf::Color(200, 200, 200, 200), sf::Color(250, 250, 250, 250), sf::Color(120, 120, 120, 50),
 		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 170), sf::Color(20, 20, 20, 0));

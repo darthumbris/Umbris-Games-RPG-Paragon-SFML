@@ -2,13 +2,14 @@
 #include "TileMap.hpp"
 
 //Constructor/Destructor
-TileMap::TileMap(float gridSize, unsigned width, unsigned height)
+TileMap::TileMap(float gridSize, unsigned width, unsigned height, std::string texture_file)
 {
 	this->gridSizeF = gridSize;
 	this->gridSizeU = static_cast<unsigned>(this->gridSizeF);
 	this->mapMaxSize.x = width;
 	this->mapMaxSize.y = height;
 	this->layers = 1;
+	this->textureFile = texture_file;
 
 	//Reserve instead of resize?
 	this->map.resize(this->mapMaxSize.x, std::vector<std::vector<Tile*>>());
@@ -24,8 +25,10 @@ TileMap::TileMap(float gridSize, unsigned width, unsigned height)
 		}
 	}
 
-	if(!this->tileSheet.loadFromFile("Resources/Images/Tiles/tilesheet1.png"))
-		std::cout << "ERROR::TILEMAP::FAILED TO LOAD TILE TEXTURE SHEET" << "\n";
+	if(!this->tileSheet.loadFromFile(texture_file))
+		std::cout << "ERROR::TILEMAP::FAILED TO LOAD TILE TEXTURESHEET FILENAME: " << texture_file << "\n";
+
+
 }
 
 TileMap::~TileMap()
@@ -91,6 +94,56 @@ void TileMap::removeTile(const unsigned x, const unsigned y, const unsigned z)
 }
 
 
+void TileMap::saveToFile(const std::string file_name)
+{
+	/*Saves the entire tilemap to a text file
+	Format: 
+	Basic:
+	Size x y
+	gridSize
+	layers (amount of)
+	texture tilesheet file
+
+	All tiles:
+	gridPos x y Texture rect x y(specific texture in the tilesheet) collision type 
+	*/
+
+	std::ofstream out_file;
+
+	out_file.open(file_name);
+
+	if (out_file.is_open())
+	{
+		out_file << this->mapMaxSize.x << " " << this->mapMaxSize.y << "\n"
+		<< this->gridSizeU << "\n"
+		<< this->layers << "\n"
+		<< this->textureFile << "\n";
+
+		for (size_t x = 0; x < this->mapMaxSize.x; x++)
+		{
+			for (size_t y = 0; y < this->mapMaxSize.y; y++)
+			{
+				for (size_t z = 0; z < this->layers; z++)
+				{
+					if(this->map[x][y][z])
+						out_file << this->map[x][y][z]->getAsString() << " "; // Make sure this last space is not saved
+				}
+			}
+		}
+	}
+	else
+	{
+		std::cout << "ERROR::TILEMAP::COULD NOT SAVE TO FILE::FILENAME: " << file_name << "\n";
+	}
+
+	out_file.close();
+}
+
+void TileMap::loadFromFile(const std::string file_name)
+{
+
+}
+
 void TileMap::update()
 {
 
@@ -102,13 +155,12 @@ void TileMap::render(sf::RenderTarget& target)
 	{
 		for (auto& y : x)
 		{
-			for (auto  *z : y)
+			for (auto* z : y)
 			{
-				if(z != nullptr)
-				z->render(target);
+				if (z != nullptr)
+					z->render(target);
 			}
 		}
 	}
 }
-
 
