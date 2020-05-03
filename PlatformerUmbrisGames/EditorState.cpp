@@ -4,7 +4,10 @@
 //Initializers
 void EditorState::initVariables()
 {
-
+	this->textureRect = sf::IntRect(
+		0, 0, 
+		static_cast<int>(this->stateData->gridSize),
+		static_cast<int>(this->stateData->gridSize));
 }
 
 void EditorState::initBackground()
@@ -110,13 +113,47 @@ void EditorState::updateEditorInput(const float& deltaTime)
 	//Add a Tile to the Tilemap
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && this->getInputTime())
 	{
-		this->tileMap->addTile(this->mousePosGrid.x, this->mousePosGrid.y, 0);
+		this->tileMap->addTile(this->mousePosGrid.x, this->mousePosGrid.y, 0, this->textureRect);
 	}
 
 	//Remove a tile from the tilemap
 	else if (sf::Mouse::isButtonPressed(sf::Mouse::Right) && this->getInputTime())
 	{
 		this->tileMap->removeTile(this->mousePosGrid.x, this->mousePosGrid.y, 0);
+	}
+
+	//Change texture selected on the tilesheet
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && this->getInputTime())
+	{
+		if (this->textureRect.left <= 50)
+		{
+			this->textureRect.left += 50;
+		}
+
+	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && this->getInputTime())
+	{
+		if (this->textureRect.left >= 50)
+		{
+			this->textureRect.left -= 50;
+		}
+
+	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && this->getInputTime())
+	{
+		if (this->textureRect.top <= 50)
+		{
+			this->textureRect.top += 50;
+		}
+
+	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && this->getInputTime())
+	{
+		if (this->textureRect.top >= 50)
+		{
+			this->textureRect.top -= 50;
+		}
+
 	}
 }
 
@@ -197,7 +234,8 @@ void EditorState::render(sf::RenderTarget* target)
 	mouseText.setCharacterSize(12);
 
 	std::stringstream ss;
-	ss << this->mousePosView.x << " " << this->mousePosView.y;
+	ss << this->mousePosView.x << " " << this->mousePosView.y << "\n" << 
+		this->textureRect.left << " " << this->textureRect.top << "\n";
 	mouseText.setString(ss.str());
 
 	target->draw(mouseText);

@@ -24,7 +24,7 @@ TileMap::TileMap(float gridSize, unsigned width, unsigned height)
 		}
 	}
 
-	if(!this->tileTextureSheet.loadFromFile("Resources/Images/Tiles/temp_grass.png"))
+	if(!this->tileTextureSheet.loadFromFile("Resources/Images/Tiles/tilesheet1.png"))
 		std::cout << "ERROR::TILEMAP::FAILED TO LOAD TILE TEXTURE SHEET" << "\n";
 }
 
@@ -43,7 +43,7 @@ TileMap::~TileMap()
 }
 
 //Functions
-void TileMap::addTile(const unsigned x, const unsigned y, const unsigned z)
+void TileMap::addTile(const unsigned x, const unsigned y, const unsigned z, const sf::IntRect& texture_rect)
 {
 	/*Take two indices from the mouse position (and the layer position) in the grid and add a
 	tile to that position if the internal tilemap array allows it*/
@@ -56,7 +56,9 @@ void TileMap::addTile(const unsigned x, const unsigned y, const unsigned z)
 		if (this->map[x][y][z] == nullptr) 
 		{
 			// Ok to add a tile
-			this->map[x][y][z] = new Tile(x * this->gridSizeF, y * this->gridSizeF, this->gridSizeF, this->tileTextureSheet);
+			this->map[x][y][z] = new Tile(
+				x * this->gridSizeF, y * this->gridSizeF, 
+				this->gridSizeF, this->tileTextureSheet, texture_rect);
 			std::cout << "debug: Added a Tile" << "\n";
 		}
 	}

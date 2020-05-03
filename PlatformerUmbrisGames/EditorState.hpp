@@ -22,7 +22,8 @@ private:
 
 	TileMap* tileMap;
 
-	sf::RectangleShape selectorRect;
+	sf::IntRect textureRect; //Determines which part of the tilesheet gets selected.
+	sf::RectangleShape selectorRect; 
 
 	//Functions
 	void initVariables();
