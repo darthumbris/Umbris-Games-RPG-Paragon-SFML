@@ -59,6 +59,7 @@ void EditorState::initPauseMenu()
 
 	this->pmenu->addButton("EXIT_STATE", 600.f, "Quit");
 	this->pmenu->addButton("SAVE", 300.f, "Save map");
+	this->pmenu->addButton("LOAD", 400.f, "Load map");
 }
 
 void EditorState::initButtons()
@@ -200,6 +201,9 @@ void EditorState::updatePauseMenuButtons()
 
 	if (this->pmenu->isButtonPressed("SAVE") && this->getInputTime())
 		this->tileMap->saveToFile("Map_Saves/map_data.map");
+
+	if (this->pmenu->isButtonPressed("LOAD"))
+		this->tileMap->loadFromFile("Map_Saves/map_data.map");
 }
 
 void EditorState::update(const float& deltaTime)
