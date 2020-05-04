@@ -131,7 +131,7 @@ void SettingsState::updateGui(const float& deltaTime)
 	//Buttons
 	for (auto& it : this->buttons)
 	{
-		it.second->update(this->mousePosView);
+		it.second->update(this->mousePosWindow);
 	}
 	//Buttons functionality========
 	//quit the game
@@ -155,7 +155,7 @@ void SettingsState::updateGui(const float& deltaTime)
 	//Dropdownlists======
 	for (auto& it2 : this->dropDownLists)
 	{
-		it2.second->update(this->mousePosView, deltaTime);
+		it2.second->update(this->mousePosWindow, deltaTime);
 	}
 
 

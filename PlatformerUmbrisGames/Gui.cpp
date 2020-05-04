@@ -82,7 +82,7 @@ void gui::Button::setId(const short unsigned id)
 }
 
 //Functions
-void Button::update(const sf::Vector2f& mousePos)
+void Button::update(const sf::Vector2i& mousePosWindow)
 {
 	/*update the booleans for hover and pressed/active */
 	
@@ -90,7 +90,7 @@ void Button::update(const sf::Vector2f& mousePos)
 	this->buttonState = BTN_IDLE;
 
 	//Hover
-	if (this->shape.getGlobalBounds().contains(mousePos))
+	if (this->shape.getGlobalBounds().contains(static_cast<sf::Vector2f>(mousePosWindow)))
 	{
 		this->buttonState = BTN_HOVER;
 
@@ -205,11 +205,11 @@ void gui::DropDownList::updateInputTime(const float& deltaTime)
 		this->inputTime += 10.f * deltaTime;
 }
 
-void DropDownList::update(const sf::Vector2f& mousePos, const float& deltaTime)
+void DropDownList::update(const sf::Vector2i& mousePosWindow, const float& deltaTime)
 {
 	this->updateInputTime(deltaTime);
 
-	this->activeElement->update(mousePos);
+	this->activeElement->update(mousePosWindow);
 
 	//Show and Hide the list
 	if (this->activeElement->isPressed() && this->getInputTime())
@@ -224,7 +224,7 @@ void DropDownList::update(const sf::Vector2f& mousePos, const float& deltaTime)
 	{
 		for (auto& i : this->list)
 		{
-			i->update(mousePos);
+			i->update(mousePosWindow);
 
 			if (i->isPressed() && this->getInputTime())
 			{
@@ -337,7 +337,7 @@ void gui::TextureSelector::updateInputTime(const float& deltaTime)
 void gui::TextureSelector::update(const sf::Vector2i& mousePosWindow, const float& deltaTime)
 {
 	updateInputTime(deltaTime);
-	this->hide_btn->update(static_cast<sf::Vector2f>(mousePosWindow));
+	this->hide_btn->update(mousePosWindow);
 
 	if (this->hide_btn->isPressed() && this->getInputTime())
 	{

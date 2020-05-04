@@ -11,6 +11,19 @@ void EditorState::initVariables()
 
 	this->collision = false;
 	this->type = TileTypes::DEFAULT;
+
+	this->cameraSpeed = 100.f;
+}
+
+void EditorState::intitView()
+{
+	this->view.setSize(sf::Vector2f(
+		this->stateData->gfxSettings->resolution.width, 
+		this->stateData->gfxSettings->resolution.height));
+
+	this->view.setCenter(
+		this->stateData->gfxSettings->resolution.width / 2.f , 
+		this->stateData->gfxSettings->resolution.height / 2.f);
 }
 
 void EditorState::initBackground()
@@ -104,6 +117,7 @@ EditorState::EditorState(StateData* state_data)
 	: State(state_data)
 {
 	this->initVariables();
+	this->intitView();
 	this->initBackground();
 	this->initFonts();
 	this->initText();
@@ -143,6 +157,25 @@ void EditorState::updateInput(const float& deltaTime)
 
 void EditorState::updateEditorInput(const float& deltaTime)
 {
+	//Move view
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->keybinds.at("MOVE_CAMERA_LEFT"))))
+	{
+		this->view.move(this->cameraSpeed * deltaTime, 0.f);
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->keybinds.at("MOVE_CAMERA_RIGHT"))))
+	{
+		this->view.move(-this->cameraSpeed * deltaTime, 0.f);
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->keybinds.at("MOVE_CAMERA_DOWN"))))
+	{
+		this->view.move(0.f, -this->cameraSpeed * deltaTime);
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->keybinds.at("MOVE_CAMERA_UP"))))
+	{
+		this->view.move(0.f, this->cameraSpeed * deltaTime);
+	}
+	
+	//Adding and removing tiles
 	if (!this->sideBar.getGlobalBounds().contains(sf::Vector2f(this->mousePosWindow)))
 	{
 		//Add a Tile to the Tilemap
@@ -194,7 +227,7 @@ void EditorState::updateButtons()
 	//Updates all the buttons in the state and handles the functionality
 	for (auto& it : this->buttons)
 	{
-		it.second->update(this->mousePosView);
+		it.second->update(this->mousePosWindow);
 	}
 }
 
@@ -234,7 +267,7 @@ void EditorState::updatePauseMenuButtons()
 
 void EditorState::update(const float& deltaTime)
 {
-	this->updateMousePositions();
+	this->updateMousePositions(&this->view);
 	this->updateInput(deltaTime);
 	this->updateInputTime(deltaTime);
 
@@ -246,7 +279,7 @@ void EditorState::update(const float& deltaTime)
 	}
 	else //Paused
 	{
-		this->pmenu->update(this->mousePosView);
+		this->pmenu->update(this->mousePosWindow);
 		this->updatePauseMenuButtons();
 	}
 }
@@ -261,13 +294,21 @@ void EditorState::renderButtons(sf::RenderTarget& target)
 
 void EditorState::renderGui(sf::RenderTarget& target)
 {
-	if(!this->textureSelector->getActive())
+	if (!this->textureSelector->getActive())
+	{
+		target.setView(this->view);
 		target.draw(this->selectorRect);
+	}
 
+	target.setView(this->window->getDefaultView());
 	this->textureSelector->render(target);
-
-	target.draw(this->cursorText);
 	target.draw(this->sideBar);
+
+	target.setView(this->view);
+	target.draw(this->cursorText);
+
+	//target.setView(this->window->getDefaultView());
+	
 }
 
 void EditorState::render(sf::RenderTarget* target)
@@ -275,7 +316,10 @@ void EditorState::render(sf::RenderTarget* target)
 	if (!target)
 		target = this->window;
 	
+	target->setView(this->view);
 	this->tileMap->render(*target);
+
+	target->setView(this->window->getDefaultView());
 
 	if (this->paused) // Pause Menu render
 	{

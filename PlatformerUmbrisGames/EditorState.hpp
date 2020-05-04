@@ -15,6 +15,8 @@ class EditorState :
 {
 private:
 	//Variables
+	sf::View view;
+
 	sf::Font font;
 	sf::Text cursorText;
 	PauseMenu* pmenu; // The pausemenu to quit the selector (and load and save later)
@@ -32,9 +34,11 @@ private:
 
 	bool collision;
 	short type;
+	float cameraSpeed;
 
 	//Functions
 	void initVariables();
+	void intitView();
 	void initBackground();
 	void initFonts();
 	void initText();

@@ -63,7 +63,7 @@ public:
 	void pauseState();
 	void unpauseState();
 
-	virtual void updateMousePositions();
+	virtual void updateMousePositions(sf::View* view = nullptr);
 	virtual void updateInputTime(const float& deltaTime);
 	virtual void updateInput(const float& deltaTime) = 0;
 	//pure virtual (door de = 0) daarom moet elke class die inherit hiervan een update en render etc hebben
