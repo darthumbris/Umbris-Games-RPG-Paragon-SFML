@@ -46,13 +46,20 @@ void Entity::createHitboxComponent(sf::Sprite& sprite,
 }
 
 
-//Functions
+//Accessors
+const sf::Vector2f& Entity::getPosition() const
+{
+	return this->sprite.getPosition();
+}
 
+//Modifiers
 void Entity::setPosition(const float x, const float y)
 {
 	this->sprite.setPosition(x, y);
 }
 
+
+//Functions
 void Entity::move(const float dir_x, const float dir_y, const float& deltaTime)
 {
 	if (this->movementComponent)

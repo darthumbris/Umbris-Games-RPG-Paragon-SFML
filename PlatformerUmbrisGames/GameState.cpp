@@ -1,6 +1,41 @@
 #include "stdafx.h"
 #include "GameState.hpp"
 
+void GameState::initDeferredRender()
+{
+	this->renderTexture.create(
+		this->stateData->gfxSettings->resolution.width,
+		this->stateData->gfxSettings->resolution.height
+	);
+
+	this->renderSprite.setTexture(this->renderTexture.getTexture());
+	this->renderSprite.setTextureRect(
+		sf::IntRect(
+		0, 
+		0,
+		this->stateData->gfxSettings->resolution.width,
+		this->stateData->gfxSettings->resolution.height
+	)
+	);
+}
+
+void GameState::initView()
+{
+	this->view.setSize(
+		sf::Vector2f(
+			this->stateData->gfxSettings->resolution.width, 
+			this->stateData->gfxSettings->resolution.height
+		)
+	);
+
+	this->view.setCenter(
+		sf::Vector2f(
+			this->stateData->gfxSettings->resolution.width / 2.f,
+			this->stateData->gfxSettings->resolution.height / 2.f
+		)
+	);
+}
+
 //Initializers
 void GameState::initKeybinds()
 {
@@ -52,7 +87,8 @@ void GameState::initPlayers()
 
 void GameState::initTileMap()
 {
-	this->tileMap = new TileMap(this->stateData->gridSize, 10, 10, "Resources/Images/Tiles/tilesheet1.png");
+	this->tileMap = new TileMap(this->stateData->gridSize, 26, 15, "Resources/Images/Tiles/tilesheet1.png");
+	this->tileMap->loadFromFile("Map_Saves/map_data.map");
 }
 
 
@@ -60,6 +96,8 @@ void GameState::initTileMap()
 GameState::GameState(StateData* state_data)
 	: State(state_data)
 {
+	this->initDeferredRender();
+	this->initView();
 	this->initKeybinds();
 	this->initFonts();
 	this->initTextures();
@@ -75,6 +113,11 @@ GameState::~GameState()
 	delete this->tileMap;
 }
 
+
+void GameState::updateView(const float& deltaTime)
+{
+	this->view.setCenter(this->player->getPosition());
+}
 
 //Functions
 void GameState::updateInput(const float& deltaTime)
@@ -110,14 +153,17 @@ void GameState::updatePauseMenuButtons()
 
 void GameState::update(const float& deltaTime)
 {
-	this->updateMousePositions(); //Needs to work in paused
+	this->updateMousePositions(&this->view); //Needs to work in paused
 	this->updateInput(deltaTime);
 	this->updateInputTime(deltaTime);
 
 
 	if (!this->paused) //Unpaused Update
 	{
+		this->updateView(deltaTime);
+		
 		this->updatePlayerInput(deltaTime); //Needs to work in paused
+
 		this->player->update(deltaTime);
 	}
 	else //Paused Update
@@ -132,14 +178,23 @@ void GameState::render(sf::RenderTarget* target)
 	if (!target)
 		target = this->window;
 
+	this->renderTexture.clear();
+
 	//Map rendering (needs to be optimized so that it only renders the viewscreen and
 	// not the whole map
-	//this->tileMap->render(*target);
+	this->renderTexture.setView(this->view);
+	this->tileMap->render(this->renderTexture);
 
-	this->player->render(*target);
+	this->player->render(this->renderTexture);
 	
 	if (this->paused) // Pause Menu render
 	{
-		this->pmenu->render(*target);
+		this->renderTexture.setView(this->renderTexture.getDefaultView());
+		this->pmenu->render(this->renderTexture);
 	}
+
+	//Final Render!
+	this->renderTexture.display();
+	this->renderSprite.setTexture(this->renderTexture.getTexture());
+	target->draw(this->renderSprite);
 }
