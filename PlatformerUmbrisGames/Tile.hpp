@@ -1,6 +1,6 @@
 #pragma once
 
-enum TileTypes {DEFAULT = 0, DAMAGING};
+enum TileTypes {DEFAULT = 0, DAMAGING, SLOWING};
 
 class Tile
 {

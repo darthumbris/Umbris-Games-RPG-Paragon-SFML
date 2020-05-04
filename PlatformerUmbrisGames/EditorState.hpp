@@ -30,6 +30,9 @@ private:
 
 	gui::TextureSelector* textureSelector; //The gui element to display and handle the selection of textures
 
+	bool collision;
+	short type;
+
 	//Functions
 	void initVariables();
 	void initBackground();

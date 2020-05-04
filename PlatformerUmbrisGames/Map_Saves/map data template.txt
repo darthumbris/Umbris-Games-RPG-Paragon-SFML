@@ -1,0 +1,12 @@
+//basic:
+maximum size of the map: x y
+gridSize of the tile: gridszie
+amount of layers: layers
+filename of the tilesheet: filename
+//Tiles (no new line just spaces between the different things)
+gridlocation: x y
+layer location: z
+the specific texture location in the tilesheet: trX trY
+if there is collision or not: collision
+the type of the tile: type
+

@@ -8,6 +8,9 @@ void EditorState::initVariables()
 		0, 0, 
 		static_cast<int>(this->stateData->gridSize),
 		static_cast<int>(this->stateData->gridSize));
+
+	this->collision = false;
+	this->type = TileTypes::DEFAULT;
 }
 
 void EditorState::initBackground()
@@ -147,7 +150,8 @@ void EditorState::updateEditorInput(const float& deltaTime)
 		{
 			if (!this->textureSelector->getActive()) // if not in the selection for textures add a tile
 			{
-				this->tileMap->addTile(this->mousePosGrid.x, this->mousePosGrid.y, 0, this->textureRect);
+				this->tileMap->addTile(this->mousePosGrid.x, this->mousePosGrid.y, 0, 
+					this->textureRect, this->collision, this->type);
 			}
 			else // else select the texture selected
 			{
@@ -163,6 +167,25 @@ void EditorState::updateEditorInput(const float& deltaTime)
 				this->tileMap->removeTile(this->mousePosGrid.x, this->mousePosGrid.y, 0);
 			}
 		}
+	}
+
+	//Toggle Collision
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->keybinds.at("TOGGLE_COLLISION"))) && this->getInputTime())
+	{
+		this->collision = !this->collision;
+	}
+
+	//Toggle Type
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->keybinds.at("TYPE_INC"))) && this->getInputTime())
+	{
+		//Make a limit here
+		++this->type;
+	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->keybinds.at("TYPE_DEC"))) && this->getInputTime())
+	{
+		if(this->type > 0)
+			--this->type;
 	}
 }
 
@@ -190,7 +213,10 @@ void EditorState::updateGui(const float& deltaTime)
 	std::stringstream ss;
 	ss << " mouseposview:  " <<this->mousePosView.x << "  ,  " << this->mousePosView.y << "\n" <<
 		" mouseposgrid:  " << this->mousePosGrid.x << "  ,  " << this->mousePosGrid.y << "\n" <<
-		" Texture sheet loc:  " << this->textureRect.left << "  ,  " << this->textureRect.top << "\n";
+		" Sheet loc:  " << this->textureRect.left << "  ,  " << this->textureRect.top << "\n" <<
+		"Collision: " << this->collision << "\n" <<
+		"type: " << this->type;
+	
 	this->cursorText.setString(ss.str());
 }
 
