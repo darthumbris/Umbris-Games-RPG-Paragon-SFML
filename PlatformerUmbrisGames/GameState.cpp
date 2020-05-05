@@ -170,9 +170,9 @@ void GameState::update(const float& deltaTime)
 		
 		this->updatePlayerInput(deltaTime); //Needs to work in paused
 
-		this->player->update(deltaTime);
-
 		this->updateTileMap(deltaTime);
+
+		this->player->update(deltaTime);
 	}
 	else //Paused Update
 	{

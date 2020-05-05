@@ -14,10 +14,10 @@ private:
 
 	//Variables
 	float gridSizeF;
-	sf::Vector2u maxSizeWorldGrid;
+	sf::Vector2i maxSizeWorldGrid;
 	sf::Vector2f maxSizeWorldF;
-	unsigned gridSizeU;
-	unsigned layers;
+	int gridSizeI;
+	int layers;
 	std::vector<std::vector<std::vector<Tile*>>> map; // x, y and z (z voor layer)
 	std::string textureFile;
 	sf::Texture tileSheet;
@@ -32,16 +32,16 @@ private:
 
 public:
 	//Constructor/Destructor
-	TileMap(float gridSize, unsigned width, unsigned height, std::string texture_file);
+	TileMap(float gridSize, int width, int height, std::string texture_file);
 	virtual ~TileMap();
 
 	//Accessors
 	const sf::Texture* getTileSheet() const;
 
 	//Functions
-	void addTile(const unsigned x, const unsigned y, const unsigned z, 
+	void addTile(const int x, const int y, const int z,
 		const sf::IntRect& texture_rect, const bool& collision, const short& type);
-	void removeTile(const unsigned x, const unsigned y, const unsigned z);
+	void removeTile(const int x, const int y, const int z);
 	void saveToFile(const std::string file_name);
 	void loadFromFile(const std::string file_name);
 

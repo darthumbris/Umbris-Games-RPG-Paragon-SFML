@@ -155,7 +155,7 @@ DropDownList::DropDownList(float x, float y, float width, float height,
 		sf::Color(20, 20, 20, 200), sf::Color(100, 100, 100, 200), sf::Color(120, 120, 120, 200)
 		);
 
-	for (size_t i = 0; i < nrOfElements; i++)
+	for (unsigned i = 0; i < nrOfElements; i++)
 	{
 		short unsigned id_temp = static_cast<short unsigned>(i);
 		this->list.push_back(
