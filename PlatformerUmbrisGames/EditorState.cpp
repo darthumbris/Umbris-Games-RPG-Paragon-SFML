@@ -13,6 +13,7 @@ void EditorState::initVariables()
 	this->type = TileTypes::DEFAULT;
 
 	this->cameraSpeed = 100.f;
+	this->layer = 0;
 }
 
 void EditorState::intitView()
@@ -163,19 +164,19 @@ void EditorState::updateEditorInput(const float& deltaTime)
 	//Move view
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->keybinds.at("MOVE_CAMERA_LEFT"))))
 	{
-		this->view.move(this->cameraSpeed * deltaTime, 0.f);
+		this->view.move(-this->cameraSpeed * deltaTime, 0.f);
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->keybinds.at("MOVE_CAMERA_RIGHT"))))
 	{
-		this->view.move(-this->cameraSpeed * deltaTime, 0.f);
+		this->view.move(this->cameraSpeed * deltaTime, 0.f);
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->keybinds.at("MOVE_CAMERA_DOWN"))))
 	{
-		this->view.move(0.f, -this->cameraSpeed * deltaTime);
+		this->view.move(0.f, this->cameraSpeed * deltaTime);
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->keybinds.at("MOVE_CAMERA_UP"))))
 	{
-		this->view.move(0.f, this->cameraSpeed * deltaTime);
+		this->view.move(0.f, -this->cameraSpeed * deltaTime);
 	}
 	
 	//Adding and removing tiles
@@ -251,7 +252,8 @@ void EditorState::updateGui(const float& deltaTime)
 		" mouseposgrid:  " << this->mousePosGrid.x << "  ,  " << this->mousePosGrid.y << "\n" <<
 		" Sheet loc:  " << this->textureRect.left << "  ,  " << this->textureRect.top << "\n" <<
 		"Collision: " << this->collision << "\n" <<
-		"type: " << this->type;
+		"type: " << this->type << "\n" <<
+		"# Tiles: " << this->tileMap->getLayerSize(this->mousePosGrid.x, this->mousePosGrid.y, this->layer);
 	
 	this->cursorText.setString(ss.str());
 }
@@ -320,7 +322,7 @@ void EditorState::render(sf::RenderTarget* target)
 		target = this->window;
 	
 	target->setView(this->view);
-	this->tileMap->render(*target);
+	this->tileMap->render(*target, this->mousePosGrid);
 
 	target->setView(this->window->getDefaultView());
 
