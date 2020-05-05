@@ -18,7 +18,7 @@ private:
 	sf::Vector2f maxSizeWorldF;
 	int gridSizeI;
 	int layers;
-	std::vector<std::vector<std::vector<Tile*>>> map; // x, y and z (z voor layer)
+	std::vector< std::vector< std::vector< std::vector< Tile*> > > > map; // x, y and z (z voor layer)
 	std::string textureFile;
 	sf::Texture tileSheet;
 	sf::RectangleShape collisionBox; // To display the collision box of an entity
