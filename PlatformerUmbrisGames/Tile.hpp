@@ -19,7 +19,13 @@ public:
 		bool collision = false, short type = TileTypes::DEFAULT);
 	virtual ~Tile();
 
+	//Accessors
+	const bool getCollision() const;
+	const sf::Vector2f& getPosition() const;
+	const sf::FloatRect getGlobalBounds() const;
+
 	//Functions
+	const bool intersects(const sf::FloatRect bounds) const;
 	const std::string getAsString() const;
 
 	void update();

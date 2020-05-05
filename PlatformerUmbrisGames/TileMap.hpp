@@ -1,6 +1,10 @@
 #pragma once
 
 #include "Tile.hpp"
+#include "Entity.hpp"
+
+class Tile;
+class Entity;
 
 class TileMap
 {
@@ -10,12 +14,21 @@ private:
 
 	//Variables
 	float gridSizeF;
-	sf::Vector2u mapMaxSize;
+	sf::Vector2u maxSizeWorldGrid;
+	sf::Vector2f maxSizeWorldF;
 	unsigned gridSizeU;
 	unsigned layers;
 	std::vector<std::vector<std::vector<Tile*>>> map; // x, y and z (z voor layer)
 	std::string textureFile;
 	sf::Texture tileSheet;
+	sf::RectangleShape collisionBox; // To display the collision box of an entity
+
+	//Culling
+	int fromX;
+	int toX;
+	int fromY;
+	int toY;
+	unsigned layer;
 
 public:
 	//Constructor/Destructor
@@ -29,11 +42,12 @@ public:
 	void addTile(const unsigned x, const unsigned y, const unsigned z, 
 		const sf::IntRect& texture_rect, const bool& collision, const short& type);
 	void removeTile(const unsigned x, const unsigned y, const unsigned z);
-	
 	void saveToFile(const std::string file_name);
 	void loadFromFile(const std::string file_name);
 
+	void updateCollision(Entity* entity, const float& delatTime);
+
 	void update();
-	void render(sf::RenderTarget& target);
+	void render(sf::RenderTarget& target, Entity* entity = nullptr);
 };
 

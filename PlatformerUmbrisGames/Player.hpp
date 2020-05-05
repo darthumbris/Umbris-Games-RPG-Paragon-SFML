@@ -20,7 +20,9 @@ public:
 	//Functions
 	void updateAttack();
 	void updateAnimation(const float& deltaTime);
-	virtual void update(const float& deltaTime);
+	void update(const float& deltaTime);
+
+	void render(sf::RenderTarget& target);
 
 };
 

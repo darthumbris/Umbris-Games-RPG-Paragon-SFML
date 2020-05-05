@@ -82,7 +82,7 @@ void GameState::initPauseMenu()
 
 void GameState::initPlayers()
 {
-	this->player = new Player(0, 0, this->textures["PLAYER_SHEET"]);
+	this->player = new Player(400, 200, this->textures["PLAYER_SHEET"]);
 }
 
 void GameState::initTileMap()
@@ -116,7 +116,7 @@ GameState::~GameState()
 
 void GameState::updateView(const float& deltaTime)
 {
-	this->view.setCenter(this->player->getPosition());
+	this->view.setCenter(std::floor(this->player->getPosition().x), std::floor(this->player->getPosition().y));
 }
 
 //Functions
@@ -151,6 +151,12 @@ void GameState::updatePauseMenuButtons()
 		this->endState();
 }
 
+void GameState::updateTileMap(const float& deltaTime)
+{
+	this->tileMap->update();
+	this->tileMap->updateCollision(this->player, deltaTime);
+}
+
 void GameState::update(const float& deltaTime)
 {
 	this->updateMousePositions(&this->view); //Needs to work in paused
@@ -165,6 +171,8 @@ void GameState::update(const float& deltaTime)
 		this->updatePlayerInput(deltaTime); //Needs to work in paused
 
 		this->player->update(deltaTime);
+
+		this->updateTileMap(deltaTime);
 	}
 	else //Paused Update
 	{
@@ -183,7 +191,7 @@ void GameState::render(sf::RenderTarget* target)
 	//Map rendering (needs to be optimized so that it only renders the viewscreen and
 	// not the whole map
 	this->renderTexture.setView(this->view);
-	this->tileMap->render(this->renderTexture);
+	this->tileMap->render(this->renderTexture, this->player);
 
 	this->player->render(this->renderTexture);
 	

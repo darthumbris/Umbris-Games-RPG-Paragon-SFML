@@ -46,6 +46,7 @@ public:
 	void updateInput(const float& deltaTime);
 	void updatePlayerInput(const float& deltaTime);
 	void updatePauseMenuButtons();
+	void updateTileMap(const float& deltaTime);
 	void update(const float& deltaTime);
 	void render(sf::RenderTarget* target = nullptr);
 };

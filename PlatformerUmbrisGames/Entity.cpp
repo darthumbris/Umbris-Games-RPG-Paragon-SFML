@@ -49,13 +49,49 @@ void Entity::createHitboxComponent(sf::Sprite& sprite,
 //Accessors
 const sf::Vector2f& Entity::getPosition() const
 {
+	if (this->hitboxComponent)
+		return this->hitboxComponent->getPosition();
+	
 	return this->sprite.getPosition();
+}
+
+const sf::Vector2u Entity::getGridPosition(const unsigned gridSizeU) const
+{
+	if (this->hitboxComponent)
+		return sf::Vector2u(
+			static_cast<unsigned>(this->hitboxComponent->getPosition().x) / gridSizeU, 
+			static_cast<unsigned>(this->hitboxComponent->getPosition().y) / gridSizeU
+		);
+
+	return sf::Vector2u(
+		static_cast<unsigned>(this->sprite.getPosition().x) / gridSizeU,
+		static_cast<unsigned>(this->sprite.getPosition().y) / gridSizeU
+	);
+}
+
+const sf::FloatRect Entity::getGlobalBounds() const
+{
+	if (this->hitboxComponent)
+		return this->hitboxComponent->getGlobalBounds();
+	return this->sprite.getGlobalBounds();
+}
+
+const sf::FloatRect& Entity::getNextPositionBounds(const float& delatTime) const
+{
+	if (this->hitboxComponent && this->movementComponent)
+	{
+		return this->hitboxComponent->getNextPosition(this->movementComponent->getVelocity() * delatTime);
+	}
+	return sf::FloatRect();
 }
 
 //Modifiers
 void Entity::setPosition(const float x, const float y)
 {
-	this->sprite.setPosition(x, y);
+	if (this->hitboxComponent)
+		this->hitboxComponent->setPosition(x, y);
+	else
+		this->sprite.setPosition(x, y);
 }
 
 
@@ -66,7 +102,24 @@ void Entity::move(const float dir_x, const float dir_y, const float& deltaTime)
 	{
 		this->movementComponent->move(dir_x, dir_y, deltaTime); //sets velocity
 	}
+}
 
+void Entity::stopVelocity()
+{
+	if (this->movementComponent)
+		this->movementComponent->stopVelocity();
+}
+
+void Entity::stopVelocityX()
+{
+	if (this->movementComponent)
+		this->movementComponent->stopVelocityX();
+}
+
+void Entity::stopVelocityY()
+{
+	if (this->movementComponent)
+		this->movementComponent->stopVelocityY();
 }
 
 void Entity::update(const float& deltaTime)
@@ -76,8 +129,5 @@ void Entity::update(const float& deltaTime)
 
 void Entity::render(sf::RenderTarget& target)
 {
-	target.draw(this->sprite);
 
-	if (this->hitboxComponent)
-		this->hitboxComponent->render(target);
 }
