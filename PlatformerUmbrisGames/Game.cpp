@@ -127,16 +127,19 @@ void Game::update()
 {
     this->handleEvents();
 
-    if (!this->states.empty() && this->window->hasFocus())
+    if (!this->states.empty())
     {
-        this->states.top()->update(this->deltaTime);
-
-        //Hier checkt ie of je wil quitten, zo ja dan gaat ie uit die state
-        if (this->states.top()->getQuit())
+        if (this->window->hasFocus())
         {
-            this->states.top()->endState();
-            delete this->states.top();
-            this->states.pop();
+            this->states.top()->update(this->deltaTime);
+
+            //Hier checkt ie of je wil quitten, zo ja dan gaat ie uit die state
+            if (this->states.top()->getQuit())
+            {
+                this->states.top()->endState();
+                delete this->states.top();
+                this->states.pop();
+            }
         }
     }
     //Application end

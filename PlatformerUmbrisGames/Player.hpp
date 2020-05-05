@@ -2,6 +2,8 @@
 
 #include "Entity.hpp"
 
+class Entity;
+
 class Player :
 	public Entity
 {

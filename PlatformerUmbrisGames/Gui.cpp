@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Gui.hpp"
+
 using namespace gui;
 
 Button::Button(float x, float y, float width, float height, 
@@ -24,9 +25,14 @@ Button::Button(float x, float y, float width, float height,
 	this->text.setFillColor(text_idle_color);
 	this->text.setCharacterSize(character_size);
 	//int (x) en int(y) voorkomt blurry text
-	this->text.setPosition(
+	/*this->text.setPosition(
 		static_cast<int>(this->shape.getPosition().x + (this->shape.getGlobalBounds().width / 2.f) - this->text.getGlobalBounds().width / 2.f),
 		static_cast<int>(this->shape.getPosition().y )
+	);*/
+
+	this->text.setPosition(
+		this->shape.getPosition().x + (this->shape.getGlobalBounds().width / 2.f) - this->text.getGlobalBounds().width / 2.f,
+		this->shape.getPosition().y
 	);
 
 	this->textIdleColor = text_idle_color;
@@ -275,12 +281,12 @@ TextureSelector::TextureSelector(float x, float y, float width, float height, fl
 	if (this->sheet.getGlobalBounds().width > this->bounds.getGlobalBounds().width)
 	{
 		this->sheet.setTextureRect(sf::IntRect(0, 0,
-			this->bounds.getGlobalBounds().width, this->sheet.getGlobalBounds().height));
+			static_cast<int>(this->bounds.getGlobalBounds().width), static_cast<int>(this->sheet.getGlobalBounds().height)));
 	}
 	if (this->sheet.getGlobalBounds().height > this->bounds.getGlobalBounds().height)
 	{
 		this->sheet.setTextureRect(sf::IntRect(0, 0,
-			this->sheet.getGlobalBounds().width, this->bounds.getGlobalBounds().height));
+			static_cast<int>(this->sheet.getGlobalBounds().width), static_cast<int>(this->bounds.getGlobalBounds().height)));
 	}
 
 	this->selector.setPosition(x + offset, y);

@@ -2,6 +2,8 @@
 
 #include "Gui.hpp"
 
+class Gui;
+
 class PauseMenu
 {
 private:

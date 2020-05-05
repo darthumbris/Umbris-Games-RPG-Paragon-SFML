@@ -345,25 +345,25 @@ void TileMap::render(sf::RenderTarget& target, Entity* entity)
 	{
 		this->layer = 0;
 
-		this->fromX = entity->getGridPosition(this->gridSizeI).x - 5;
+		this->fromX = entity->getGridPosition(this->gridSizeI).x - 3;
 		if (this->fromX < 0)
 			this->fromX = 0;
 		else if (this->fromX > this->maxSizeWorldGrid.x)
 			this->fromX = maxSizeWorldGrid.x;
 
-		this->toX = entity->getGridPosition(this->gridSizeI).x + 8;
+		this->toX = entity->getGridPosition(this->gridSizeI).x + 5;
 		if (this->toX < 0)
 			this->toX = 0;
 		else if (this->toX > this->maxSizeWorldGrid.x)
 			this->toX = maxSizeWorldGrid.x;
 
-		this->fromY = entity->getGridPosition(this->gridSizeI).y - 5;
+		this->fromY = entity->getGridPosition(this->gridSizeI).y - 3;
 		if (this->fromY < 0)
 			this->fromY = 0;
 		else if (this->fromY > this->maxSizeWorldGrid.y)
 			this->fromY = maxSizeWorldGrid.y;
 
-		this->toY = entity->getGridPosition(this->gridSizeI).y + 8;
+		this->toY = entity->getGridPosition(this->gridSizeI).y + 5;
 		if (this->toY < 0)
 			this->toY = 0;
 		else if (this->toY > this->maxSizeWorldGrid.y)
