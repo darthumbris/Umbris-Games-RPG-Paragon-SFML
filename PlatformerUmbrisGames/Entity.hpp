@@ -3,10 +3,12 @@
 #include "MovementComponent.hpp"
 #include "AnimationComponent.hpp"
 #include "HitboxComponent.hpp"
+#include "AttributeComponent.hpp"
 
 class HitboxComponent;
 class MovementComponent;
 class AnimationComponent;
+class AttributeComponent;
 
 class Entity
 {
@@ -19,6 +21,7 @@ protected:
 	MovementComponent* movementComponent;
 	AnimationComponent* animationComponent;
 	HitboxComponent* hitboxComponent;
+	AttributeComponent* attributeComponent;
 
 public:
 	//Constructor/Destructor
@@ -32,6 +35,7 @@ public:
 	void createAnimationComponent(sf::Texture& texture_sheet);
 	void createHitboxComponent(sf::Sprite& sprite,
 		float offset_x, float offset_y, float width, float height);
+	void createAttributeComponent();
 
 	//Accessors
 	virtual const sf::Vector2f& getPosition() const;
