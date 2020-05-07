@@ -19,6 +19,7 @@ private:
 	int gridSizeI;
 	int layers;
 	std::vector< std::vector< std::vector< std::vector< Tile*> > > > map; // x, y and z (z voor layer)
+	std::stack<Tile*> deferredRenderStack;
 	std::string textureFile;
 	sf::Texture tileSheet;
 	sf::RectangleShape collisionBox; // To display the collision box of an entity
@@ -28,7 +29,7 @@ private:
 	int toX;
 	int fromY;
 	int toY;
-	unsigned layer;
+	int layer;
 
 public:
 	//Constructor/Destructor
@@ -50,5 +51,6 @@ public:
 
 	void update();
 	void render(sf::RenderTarget& target, const sf::Vector2i& gridPosition);
+	void renderDeferred(sf::RenderTarget& target);
 };
 

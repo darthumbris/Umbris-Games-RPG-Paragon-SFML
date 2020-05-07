@@ -34,6 +34,8 @@ TileMap::TileMap(float gridSize, int width, int height, std::string texture_file
 	this->maxSizeWorldF.y = static_cast<float>(height) * gridSize;
 	this->layers = 1;
 	this->textureFile = texture_file;
+	//this->deferredRenderStack = nullptr;
+	
 
 	//culling variables initializen
 	this->fromX = 0;
@@ -372,25 +374,25 @@ void TileMap::render(sf::RenderTarget& target, const sf::Vector2i& gridPosition)
 {
 	this->layer = 0;
 
-	this->fromX = gridPosition.x - 3;
+	this->fromX = gridPosition.x - 10;
 	if (this->fromX < 0)
 		this->fromX = 0;
 	else if (this->fromX > this->maxSizeWorldGrid.x)
 		this->fromX = maxSizeWorldGrid.x;
 
-	this->toX = gridPosition.x + 5;
+	this->toX = gridPosition.x + 13;
 	if (this->toX < 0)
 		this->toX = 0;
 	else if (this->toX > this->maxSizeWorldGrid.x)
 		this->toX = maxSizeWorldGrid.x;
 
-	this->fromY = gridPosition.y - 3;
+	this->fromY = gridPosition.y - 10;
 	if (this->fromY < 0)
 		this->fromY = 0;
 	else if (this->fromY > this->maxSizeWorldGrid.y)
 		this->fromY = maxSizeWorldGrid.y;
 
-	this->toY = gridPosition.y + 5;
+	this->toY = gridPosition.y + 13;
 	if (this->toY < 0)
 		this->toY = 0;
 	else if (this->toY > this->maxSizeWorldGrid.y)
@@ -403,7 +405,16 @@ void TileMap::render(sf::RenderTarget& target, const sf::Vector2i& gridPosition)
 		{
 			for (size_t k = 0; k < this->map[x][y][this->layer].size(); k++)
 			{
-				this->map[x][y][this->layer][k]->render(target);
+				//If the tile should be on top (for example a tree or something)
+				if (this->map[x][y][this->layer][k]->getType() == TileTypes::ONTOP) 
+				{
+					this->deferredRenderStack.push(this->map[x][y][this->layer][k]);
+				}
+				else 
+				{
+					this->map[x][y][this->layer][k]->render(target);
+				}
+				
 				if (this->map[x][y][this->layer][k]->getCollision())
 				{
 					this->collisionBox.setPosition(this->map[x][y][this->layer][k]->getPosition());
@@ -412,6 +423,15 @@ void TileMap::render(sf::RenderTarget& target, const sf::Vector2i& gridPosition)
 			}
 				
 		}
+	}
+}
+
+void TileMap::renderDeferred(sf::RenderTarget& target)
+{
+	while (!this->deferredRenderStack.empty())
+	{
+		deferredRenderStack.top()->render(target);
+		deferredRenderStack.pop();
 	}
 }
 
