@@ -163,6 +163,7 @@
     <ClCompile Include="MovementComponent.cpp" />
     <ClCompile Include="PauseMenu.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerGUI.cpp" />
     <ClCompile Include="SettingsState.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -188,6 +189,7 @@
     <ClInclude Include="MovementComponent.hpp" />
     <ClInclude Include="PauseMenu.hpp" />
     <ClInclude Include="Player.hpp" />
+    <ClInclude Include="PlayerGUI.hpp" />
     <ClInclude Include="SettingsState.hpp" />
     <ClInclude Include="State.hpp" />
     <ClInclude Include="stdafx.h" />

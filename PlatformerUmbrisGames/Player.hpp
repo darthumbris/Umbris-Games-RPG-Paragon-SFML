@@ -19,6 +19,9 @@ public:
 	Player(float x, float y, sf::Texture& texture_sheet);
 	virtual ~Player();
 
+	//Accessors
+	AttributeComponent* getAttributeComponent();
+
 	//Functions
 	void updateAttack();
 	void updateAnimation(const float& deltaTime);

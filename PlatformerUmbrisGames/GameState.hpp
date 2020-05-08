@@ -3,9 +3,11 @@
 #include "State.hpp"
 #include "PauseMenu.hpp"
 #include "TileMap.hpp"
+#include "PlayerGUI.hpp"
 
 class PauseMenu;
 class Player;
+class PlayerGUI;
 class TileMap;
 class sf::View;
 class sf::Font;
@@ -23,6 +25,7 @@ private:
 	sf::Font font;
 	
 	Player* player;
+	PlayerGUI* playerGUI;
 
 	TileMap* tileMap;
 
@@ -34,6 +37,7 @@ private:
 	void initTextures();
 	void initPauseMenu();
 	void initPlayers();
+	void initPlayerGUI();
 	void initTileMap();
 
 public:
@@ -45,6 +49,7 @@ public:
 	void updateView(const float& deltaTime);
 	void updateInput(const float& deltaTime);
 	void updatePlayerInput(const float& deltaTime);
+	void updatePlayerGUI(const float& deltaTime);
 	void updatePauseMenuButtons();
 	void updateTileMap(const float& deltaTime);
 	void update(const float& deltaTime);
