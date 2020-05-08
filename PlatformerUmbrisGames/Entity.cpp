@@ -7,6 +7,7 @@ void Entity::initVariables()
 	this->movementComponent = nullptr;
 	this->animationComponent = nullptr;
 	this->hitboxComponent = nullptr;
+	this->attributeComponent = nullptr;
 }
 
 //Constructor/Destructor
@@ -46,9 +47,9 @@ void Entity::createHitboxComponent(sf::Sprite& sprite,
 	this->hitboxComponent = new HitboxComponent(sprite, offset_x ,offset_y, width, height);
 }
 
-void Entity::createAttributeComponent()
+void Entity::createAttributeComponent(const unsigned level)
 {
-	this->attributeComponent = new AttributeComponent();
+	this->attributeComponent = new AttributeComponent(level);
 }
 
 

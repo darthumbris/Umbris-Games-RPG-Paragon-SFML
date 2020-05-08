@@ -23,6 +23,7 @@ Player::Player(float x, float y, sf::Texture& texture_sheet)
 	this->createMovementComponent(350.f, 1500.f, 600.f);
 	this->createAnimationComponent(texture_sheet);
 	this->createHitboxComponent(this->sprite, 32.f, 10.f, 35.f, 90.f);
+	this->createAttributeComponent(0);
 
 	this->animationComponent->addAnimation("IDLE_DOWN", 8.f, 0, 0, 0, 0, 100, 100);
 	this->animationComponent->addAnimation("IDLE_LEFT", 8.f, 0, 3, 0, 3, 100, 100);
@@ -144,7 +145,7 @@ void Player::updateAnimation(const float& deltaTime)
 }
 
 void Player::update(const float& deltaTime)
-{
+{	
 	this->movementComponent->update(deltaTime);
 
 	this->updateAttack();

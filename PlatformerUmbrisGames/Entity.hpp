@@ -35,7 +35,7 @@ public:
 	void createAnimationComponent(sf::Texture& texture_sheet);
 	void createHitboxComponent(sf::Sprite& sprite,
 		float offset_x, float offset_y, float width, float height);
-	void createAttributeComponent();
+	void createAttributeComponent(const unsigned level);
 
 	//Accessors
 	virtual const sf::Vector2f& getPosition() const;
