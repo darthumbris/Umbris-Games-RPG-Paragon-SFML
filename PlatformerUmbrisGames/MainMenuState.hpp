@@ -22,7 +22,8 @@ private:
 	void initBackground();
 	void initFonts();
 	void initKeybinds();
-	void initButtons();
+	void initGui();
+	void resetGui();
 
 public:
 	//Constructor/Destructor

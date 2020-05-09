@@ -6,7 +6,7 @@ namespace gui
 {
 	const float p2pX(const float percentage, const sf::VideoMode& vm);
 	const float p2pY(const float percentage, const sf::VideoMode& vm);
-	const unsigned calcCharSize(const sf::VideoMode& vm);
+	const unsigned calcCharSize(const sf::VideoMode& vm, const unsigned modifier);
 
 	class Button
 	{
@@ -67,7 +67,7 @@ namespace gui
 
 	public:
 		//Constructor destructor
-		DropDownList(float x, float y, float width, float height, sf::Font& font, std::string list[], unsigned nrOfElements, unsigned default_index);
+		DropDownList(float x, float y, float width, float height, unsigned char_size, sf::Font& font, std::string list[], unsigned nrOfElements, unsigned default_index);
 		~DropDownList();
 
 		//Accessor

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Player.hpp"
+#include "Gui.hpp"
 
 class Player;
 class sf::RectangleShape;

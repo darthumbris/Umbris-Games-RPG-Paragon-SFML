@@ -29,7 +29,7 @@ PauseMenu::PauseMenu(sf::VideoMode& vm, sf::Font& font)
 	//Init text
 	this->menuText.setFont(font);
 	this->menuText.setFillColor(sf::Color(255, 255, 255, 200));
-	this->menuText.setCharacterSize(gui::calcCharSize(vm));
+	this->menuText.setCharacterSize(gui::calcCharSize(vm, 50));
 	this->menuText.setString("PAUSED");
 	this->menuText.setPosition(
 		this->container.getPosition().x + (this->container.getSize().x / 2.f ) - 

@@ -50,37 +50,44 @@ void MainMenuState::initKeybinds()
 	ifs.close();
 }
 
-void MainMenuState::initButtons()
+void MainMenuState::initGui()
 {
 	const sf::VideoMode& vm = this->stateData->gfxSettings->resolution;
 
 	this->buttons["GAME_STATE"] = new Button(
 		gui::p2pX(7.8f, vm), gui::p2pY(13.9f, vm),
 		gui::p2pX(12.9f, vm), gui::p2pY(6.3f, vm),
-		&this->mainMenuFont, "New Game", gui::calcCharSize(vm),
+		&this->mainMenuFont, "New Game", gui::calcCharSize(vm, 50),
 		sf::Color(170, 170, 170, 200), sf::Color(250, 250, 250, 250), sf::Color(120, 120, 120, 50),
 		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0));
 
 	this->buttons["SETTINGS_STATE"] = new Button(
 		gui::p2pX(7.8f, vm), gui::p2pY(27.8f, vm),
 		gui::p2pX(12.9f, vm), gui::p2pY(6.3f, vm),
-		&this->mainMenuFont, "Settings", gui::calcCharSize(vm),
+		&this->mainMenuFont, "Settings", gui::calcCharSize(vm, 50),
 		sf::Color(170, 170, 170, 200), sf::Color(250, 250, 250, 250), sf::Color(120, 120, 120, 50),
 		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0));
 
 	this->buttons["EDITOR_STATE"] = new Button(
 		gui::p2pX(7.8f, vm), gui::p2pY(41.7f, vm),
 		gui::p2pX(12.9f, vm), gui::p2pY(6.3f, vm),
-		&this->mainMenuFont, "Editor", gui::calcCharSize(vm),
+		&this->mainMenuFont, "Editor", gui::calcCharSize(vm, 50),
 		sf::Color(170, 170, 170, 200), sf::Color(250, 250, 250, 250), sf::Color(120, 120, 120, 50),
 		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0));
 
 	this->buttons["EXIT_STATE"] = new Button(
 		gui::p2pX(7.8f, vm), gui::p2pY(55.5f, vm),
 		gui::p2pX(12.9f, vm), gui::p2pY(6.3f, vm),
-		&this->mainMenuFont, "Exit Game", gui::calcCharSize(vm),
+		&this->mainMenuFont, "Exit Game", gui::calcCharSize(vm, 50),
 		sf::Color(170, 170, 170, 200), sf::Color(250, 250, 250, 250), sf::Color(120, 120, 120, 50),
 		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0));
+}
+
+void MainMenuState::resetGui()
+{
+	//clears the gui elements and reinitializes the gui
+	this->buttons.clear();
+	this->initGui();
 }
 
 //Constructor/destructors
@@ -91,7 +98,8 @@ MainMenuState::MainMenuState(StateData* state_data)
 	this->initBackground();
 	this->initFonts();
 	this->initKeybinds();
-	this->initButtons();
+	this->initGui();
+	this->resetGui();
 }
 
 MainMenuState::~MainMenuState()

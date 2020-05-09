@@ -15,10 +15,10 @@ const float gui::p2pY(const float percentage, const sf::VideoMode& vm)
 	return std::floor(static_cast<float>(vm.height) * (percentage / 100.f));
 }
 
-const unsigned gui::calcCharSize(const sf::VideoMode& vm)
+const unsigned gui::calcCharSize(const sf::VideoMode& vm, const unsigned modifier)
 {
 	//Calculates the charactersize of text using the current resolution and a constant
-	return static_cast<unsigned>((vm.width + vm.height) / 50);
+	return static_cast<unsigned>((vm.width + vm.height) / modifier);
 }
 
 Button::Button(float x, float y, float width, float height, 
@@ -165,7 +165,7 @@ void Button::render(sf::RenderTarget& target)
 //DropDownList===========================================================================================
 
 //Constructor/Destructor
-DropDownList::DropDownList(float x, float y, float width, float height, 
+DropDownList::DropDownList(float x, float y, float width, float height , unsigned char_size, 
 	sf::Font& font, std::string list[], 
 	unsigned nrOfElements, unsigned default_index)
 	: font(font) , showList(false) , inputTimeMax(1.f), inputTime(0.f)
@@ -173,7 +173,7 @@ DropDownList::DropDownList(float x, float y, float width, float height,
 	//Unsigned nrOfElements = sizeof(list) / sizeof(std::string);
 
 	this->activeElement = new Button(x, y, width, height,
-		&this->font, list[default_index], 24,
+		&this->font, list[default_index], char_size,
 		sf::Color(255, 255, 255, 200), sf::Color(255, 255, 255, 255), sf::Color(120, 120, 120, 50),
 		sf::Color(70, 70, 70, 200), sf::Color(150, 150, 150, 200), sf::Color(20, 20, 20, 200),
 		sf::Color(20, 20, 20, 200), sf::Color(100, 100, 100, 200), sf::Color(120, 120, 120, 200)
@@ -185,7 +185,7 @@ DropDownList::DropDownList(float x, float y, float width, float height,
 		this->list.push_back(
 			new Button(
 				x, y + ((i+1) * height), width, height,
-				&this->font, list[i], 24,
+				&this->font, list[i], char_size,
 				sf::Color(255, 255, 255, 150), sf::Color(255, 255, 255, 255), sf::Color(120, 120, 120, 50),
 				sf::Color(70, 70, 70, 200), sf::Color(150, 150, 150, 200), sf::Color(20, 20, 20, 200),
 				sf::Color(20, 20, 20, 0), sf::Color(100, 100, 100, 200), sf::Color(120, 120, 120, 0),

@@ -9,6 +9,7 @@ void PlayerGUI::initFont()
 
 void PlayerGUI::initHpBar()
 {
+	
 	float width = 300.f;
 	float height = 25.f;
 	float x = 20.f;
