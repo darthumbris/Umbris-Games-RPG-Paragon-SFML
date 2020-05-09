@@ -52,17 +52,19 @@ void SettingsState::initKeybinds()
 
 void SettingsState::initGui()
 {
-	float x_button = this->background.getSize().x / 2.f - 250 / 2.f;
-	float x_dropdown = this->background.getSize().x / 2.f - 200 / 2.f;
+	sf::VideoMode vm = this->stateData->gfxSettings->resolution;
+
 	this->buttons["EXIT_STATE_SETTINGS"] = new Button(
-		x_button - 250, 600.f, 250.f, 45.f,
-		&this->font, "Return to Title", 40,
+		gui::p2pX(20.7f, vm), gui::p2pY(83.3f, vm),
+		gui::p2pX(19.5f, vm), gui::p2pY(6.3f, vm),
+		&this->font, "Return to Title", gui::calcCharSize(vm),
 		sf::Color(200, 200, 200, 200), sf::Color(250, 250, 250, 250), sf::Color(120, 120, 120, 50),
 		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 170), sf::Color(20, 20, 20, 0));
 
 	this->buttons["APPLY"] = new Button(
-		x_button + 250, 600.f, 250.f, 45.f,
-		&this->font, "Apply settings", 40,
+		gui::p2pX(62.1f, vm), gui::p2pY(83.3f, vm),
+		gui::p2pX(19.5f, vm), gui::p2pY(6.3f, vm),
+		&this->font, "Apply settings", gui::calcCharSize(vm),
 		sf::Color(200, 200, 200, 200), sf::Color(250, 250, 250, 250), sf::Color(120, 120, 120, 50),
 		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 170), sf::Color(20, 20, 20, 0));
 
@@ -73,15 +75,19 @@ void SettingsState::initGui()
 		modes_str.push_back(std::to_string(i.width) + 'x' + std::to_string(i.height));
 	}
 
-	this->dropDownLists["RESOLUTION"] = new gui::DropDownList(x_dropdown, 200, 200, 50, 
+	this->dropDownLists["RESOLUTION"] = new gui::DropDownList(
+		gui::p2pX(42.2f, vm), gui::p2pY(27.8f, vm),
+		gui::p2pX(15.6f, vm), gui::p2pY(6.9f, vm),
 		font, modes_str.data(), modes_str.size(), 0);
 }
 
 void SettingsState::initText()
 {
+	sf::VideoMode vm = this->stateData->gfxSettings->resolution;
+
 	this->settingsText.setFont(font);
-	this->settingsText.setPosition(sf::Vector2f(100.f, 200.f));
-	this->settingsText.setCharacterSize(30);
+	this->settingsText.setPosition(sf::Vector2f(gui::p2pX(7.8f, vm), gui::p2pY(27.8f, vm)));
+	this->settingsText.setCharacterSize(gui::calcCharSize(vm));
 	this->settingsText.setFillColor(sf::Color(255, 255, 255, 200));
 	
 	this->settingsText.setString(

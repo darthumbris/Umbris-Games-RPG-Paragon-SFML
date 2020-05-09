@@ -75,11 +75,13 @@ void EditorState::initKeybinds()
 
 void EditorState::initPauseMenu()
 {
-	this->pmenu = new PauseMenu(*this->window, this->font);
+	const sf::VideoMode& vm = this->stateData->gfxSettings->resolution;
 
-	this->pmenu->addButton("EXIT_STATE", 600.f, "Quit");
-	this->pmenu->addButton("SAVE", 300.f, "Save map");
-	this->pmenu->addButton("LOAD", 400.f, "Load map");
+	this->pmenu = new PauseMenu(this->stateData->gfxSettings->resolution, this->font);
+
+	this->pmenu->addButton("EXIT_STATE", gui::p2pY(83.3f, vm), gui::p2pX(12.9f, vm), gui::p2pY(6.3f, vm), gui::calcCharSize(vm), "Quit");
+	this->pmenu->addButton("SAVE", gui::p2pY(41.7f, vm), gui::p2pX(12.9f, vm), gui::p2pY(6.3f, vm), gui::calcCharSize(vm), "Save map");
+	this->pmenu->addButton("LOAD", gui::p2pY(55.6f, vm), gui::p2pX(12.9f, vm), gui::p2pY(6.3f, vm), gui::calcCharSize(vm), "Load map");
 }
 
 void EditorState::initButtons()

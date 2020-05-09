@@ -36,6 +36,7 @@ const bool State::getInputTime()
 	return false;
 }
 
+
 //Functions
 void State::endState()
 {

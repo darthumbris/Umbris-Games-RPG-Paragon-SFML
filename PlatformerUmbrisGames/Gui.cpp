@@ -3,6 +3,24 @@
 
 using namespace gui;
 
+const float gui::p2pX(const float percentage, const sf::VideoMode& vm)
+{
+	// percentage to pixel conversion for the x coordinate relative to current resolution
+	return std::floor(static_cast<float>(vm.width) * (percentage / 100.f));
+}
+
+const float gui::p2pY(const float percentage, const sf::VideoMode& vm)
+{
+	// percentage to pixel conversion for the y coordinate relative to current resolution
+	return std::floor(static_cast<float>(vm.height) * (percentage / 100.f));
+}
+
+const unsigned gui::calcCharSize(const sf::VideoMode& vm)
+{
+	//Calculates the charactersize of text using the current resolution and a constant
+	return static_cast<unsigned>((vm.width + vm.height) / 50);
+}
+
 Button::Button(float x, float y, float width, float height, 
 	sf::Font* font,	std::string text, unsigned character_size,
 	sf::Color text_idle_color, sf::Color text_hover_color, sf::Color text_active_color, 
@@ -205,6 +223,8 @@ const unsigned short& gui::DropDownList::getActiveElementId() const
 }
 
 //Functions
+
+
 void gui::DropDownList::updateInputTime(const float& deltaTime)
 {
 	if (this->inputTime < this->inputTimeMax)

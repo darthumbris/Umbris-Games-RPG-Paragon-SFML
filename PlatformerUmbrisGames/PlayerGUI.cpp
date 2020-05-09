@@ -67,7 +67,7 @@ void PlayerGUI::initLevelDisplay()
 
 	this->levelDisplayText.setFont(this->font);
 	this->levelDisplayText.setPosition(this->levelDisplayBack.getPosition().x + 10.f, this->levelDisplayBack.getPosition().y + 10.f);
-	this->levelDisplayText.setCharacterSize(14);
+	this->levelDisplayText.setCharacterSize(16);
 }
 
 //Constructor/Destructor
