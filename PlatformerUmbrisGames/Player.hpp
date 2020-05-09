@@ -24,9 +24,9 @@ public:
 
 	//Functions
 	void loseHp(const int hp);
-	void loseExp(const unsigned exp);
+	void loseExp(const int exp);
 	void gainHp(const int hp);
-	void gainExp(const unsigned exp);
+	void gainExp(const int exp);
 	void updateAttack();
 	void updateAnimation(const float& deltaTime);
 	void update(const float& deltaTime);
