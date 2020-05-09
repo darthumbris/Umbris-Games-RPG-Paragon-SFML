@@ -23,6 +23,10 @@ public:
 	AttributeComponent* getAttributeComponent();
 
 	//Functions
+	void loseHp(const int hp);
+	void loseExp(const unsigned exp);
+	void gainHp(const int hp);
+	void gainExp(const unsigned exp);
 	void updateAttack();
 	void updateAnimation(const float& deltaTime);
 	void update(const float& deltaTime);

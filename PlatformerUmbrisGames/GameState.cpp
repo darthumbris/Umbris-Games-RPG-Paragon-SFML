@@ -143,13 +143,34 @@ void GameState::updatePlayerInput(const float& deltaTime)
 {
 	//update player input
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->keybinds.at("MOVE_LEFT"))))
+	{
 		this->player->move(-1.f, 0.f, deltaTime);
+		//Debug test for exp
+		if (this->getInputTime())
+			this->player->loseExp(10);
+	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->keybinds.at("MOVE_RIGHT"))))
+	{
 		this->player->move(1.f, 0.f, deltaTime);
+		//Debug test for exp
+		if (this->getInputTime())
+			this->player->gainExp(10);
+	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->keybinds.at("MOVE_UP"))))
+	{
 		this->player->move(0.f, -1.f, deltaTime);
+		//Debug test for health
+		if (this->getInputTime())
+			this->player->gainHp(1);
+	}
+	
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->keybinds.at("MOVE_DOWN"))))
-		this->player->move(0.f, 1.f, deltaTime);	
+	{
+		this->player->move(0.f, 1.f, deltaTime);
+		//Debug test for health
+		if(this->getInputTime())
+			this->player->loseHp(1);
+	}
 }
 
 void GameState::updatePlayerGUI(const float& deltaTime)

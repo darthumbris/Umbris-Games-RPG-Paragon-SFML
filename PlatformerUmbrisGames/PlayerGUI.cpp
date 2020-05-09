@@ -22,6 +22,10 @@ void PlayerGUI::initHpBar()
 	this->hpBarInside.setSize(sf::Vector2f(width, height));
 	this->hpBarInside.setFillColor(sf::Color(250, 20, 20, 200));
 	this->hpBarInside.setPosition(this->hpBarBack.getPosition());
+
+	this->hpBarText.setFont(this->font);
+	this->hpBarText.setPosition(this->hpBarInside.getPosition().x + 10.f, this->hpBarInside.getPosition().y + 5.f);
+	this->hpBarText.setCharacterSize(12);
 }
 
 //Constructor/Destructor
@@ -49,6 +53,9 @@ void PlayerGUI::updateHpBar()
 			this->hpBarInside.getSize().y
 		)
 	);
+
+	this->hpBarString = std::to_string(this->player->getAttributeComponent()->hp) + "/" + std::to_string(this->player->getAttributeComponent()->hpMax);
+	this->hpBarText.setString(this->hpBarString);
 }
 
 void PlayerGUI::update(const float& deltaTime)
@@ -60,6 +67,7 @@ void PlayerGUI::renderHpBar(sf::RenderTarget& target)
 {
 	target.draw(this->hpBarBack);
 	target.draw(this->hpBarInside);
+	target.draw(this->hpBarText);
 }
 
 void PlayerGUI::render(sf::RenderTarget& target)
