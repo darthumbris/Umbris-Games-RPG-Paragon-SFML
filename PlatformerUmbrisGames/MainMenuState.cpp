@@ -8,20 +8,6 @@ void MainMenuState::initVariables()
 
 }
 
-void MainMenuState::initBackground()
-{
-	this->background.setSize(sf::Vector2f(
-		static_cast<float>(this->window->getSize().x), 
-		static_cast<float>(this->window->getSize().y)));
-
-	if (!this->backgroundTexture.loadFromFile("Resources/Images/Backgrounds/bg2.png"))
-	{
-		throw"ERROR::MAINMENUSTATE::FAILED_TO_LOAD_BACKGROUND_TEXTURE";
-	}
-
-	this->background.setTexture(&this->backgroundTexture);
-}
-
 void MainMenuState::initFonts()
 {
 	if (!this->mainMenuFont.loadFromFile("Fonts/Dosis-Light.ttf"))
@@ -54,6 +40,19 @@ void MainMenuState::initGui()
 {
 	const sf::VideoMode& vm = this->stateData->gfxSettings->resolution;
 
+	//Init background
+	this->background.setSize(sf::Vector2f(
+		static_cast<float>(vm.width),
+		static_cast<float>(vm.height)));
+
+	if (!this->backgroundTexture.loadFromFile("Resources/Images/Backgrounds/bg2.png"))
+	{
+		throw"ERROR::MAINMENUSTATE::FAILED_TO_LOAD_BACKGROUND_TEXTURE";
+	}
+
+	this->background.setTexture(&this->backgroundTexture);
+
+	//init buttons
 	this->buttons["GAME_STATE"] = new Button(
 		gui::p2pX(7.8f, vm), gui::p2pY(13.9f, vm),
 		gui::p2pX(12.9f, vm), gui::p2pY(6.3f, vm),
@@ -86,6 +85,11 @@ void MainMenuState::initGui()
 void MainMenuState::resetGui()
 {
 	//clears the gui elements and reinitializes the gui
+	auto it = this->buttons.begin();
+	for (it = this->buttons.begin(); it != this->buttons.end(); ++it)
+	{
+		delete it->second;
+	}
 	this->buttons.clear();
 	this->initGui();
 }
@@ -95,7 +99,6 @@ MainMenuState::MainMenuState(StateData* state_data)
 	: State(state_data)
 {
 	this->initVariables();
-	this->initBackground();
 	this->initFonts();
 	this->initKeybinds();
 	this->initGui();

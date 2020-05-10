@@ -10,10 +10,10 @@ void PlayerGUI::initFont()
 void PlayerGUI::initHpBar()
 {
 	
-	float width = 300.f;
-	float height = 25.f;
-	float x = 20.f;
-	float y = 70.f;
+	float width = gui::p2pX(23.4f, this->vm);
+	float height = gui::p2pY(3.5f, this->vm);
+	float x = gui::p2pX(1.56f, this->vm);
+	float y = gui::p2pY(9.72f, this->vm);
 	this->hpBarMaxWidth = width;
 
 	this->hpBarBack.setSize(sf::Vector2f(width, height));
@@ -25,16 +25,19 @@ void PlayerGUI::initHpBar()
 	this->hpBarInside.setPosition(this->hpBarBack.getPosition());
 
 	this->hpBarText.setFont(this->font);
-	this->hpBarText.setPosition(this->hpBarInside.getPosition().x + 10.f, this->hpBarInside.getPosition().y + 5.f);
-	this->hpBarText.setCharacterSize(12);
+	this->hpBarText.setPosition(
+		this->hpBarInside.getPosition().x + gui::p2pX(0.8f, this->vm), 
+		this->hpBarInside.getPosition().y + gui::p2pY(0.7f, this->vm)
+	);
+	this->hpBarText.setCharacterSize(gui::calcCharSize(vm, 160));
 }
 
 void PlayerGUI::initExpBar()
 {
-	float width = 200.f;
-	float height = 20.f;
-	float x = 20.f;
-	float y = 100.f;
+	float width = gui::p2pX(15.6f, this->vm);
+	float height = gui::p2pY(2.8f, this->vm);
+	float x = gui::p2pX(1.56f, this->vm);
+	float y = gui::p2pY(13.92f, this->vm);
 	this->expBarMaxWidth = width;
 
 	this->expBarBack.setSize(sf::Vector2f(width, height));
@@ -46,16 +49,19 @@ void PlayerGUI::initExpBar()
 	this->expBarInside.setPosition(this->expBarBack.getPosition());
 
 	this->expBarText.setFont(this->font);
-	this->expBarText.setPosition(this->expBarInside.getPosition().x + 10.f, this->expBarInside.getPosition().y + 5.f);
-	this->expBarText.setCharacterSize(12);
+	this->expBarText.setPosition(
+		this->expBarInside.getPosition().x + gui::p2pX(0.8f, this->vm), 
+		this->expBarInside.getPosition().y + gui::p2pY(0.7f, this->vm)
+	);
+	this->expBarText.setCharacterSize(gui::calcCharSize(vm, 160));
 }
 
 void PlayerGUI::initLevelDisplay()
 {
-	float width = 60.f;
-	float height = 50.f;
-	float x = 20.f;
-	float y = 20.f;
+	float width = gui::p2pX(4.7f, this->vm);
+	float height = gui::p2pY(6.9f, this->vm);
+	float x = gui::p2pX(1.56f, this->vm);
+	float y = gui::p2pY(2.8f, this->vm);
 	//this->levelDisplayMaxWidth = width;
 
 	this->levelDisplayBack.setSize(sf::Vector2f(width, height));
@@ -67,12 +73,16 @@ void PlayerGUI::initLevelDisplay()
 	this->levelDisplayInside.setPosition(this->levelDisplayBack.getPosition());*/
 
 	this->levelDisplayText.setFont(this->font);
-	this->levelDisplayText.setPosition(this->levelDisplayBack.getPosition().x + 10.f, this->levelDisplayBack.getPosition().y + 10.f);
-	this->levelDisplayText.setCharacterSize(16);
+	this->levelDisplayText.setPosition(
+		this->levelDisplayBack.getPosition().x + gui::p2pX(0.8f, this->vm),
+		this->levelDisplayBack.getPosition().y + gui::p2pY(0.7f, this->vm)
+	);
+	this->levelDisplayText.setCharacterSize(gui::calcCharSize(vm, 120));
 }
 
 //Constructor/Destructor
-PlayerGUI::PlayerGUI(Player* player)
+PlayerGUI::PlayerGUI(Player* player, sf::VideoMode& vm)
+	: vm(vm)
 {
 	this->player = player;
 

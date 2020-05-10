@@ -11,6 +11,7 @@ class PlayerGUI
 private:
 	Player* player;
 
+	sf::VideoMode& vm;
 	sf::Font font;
 
 	//level display
@@ -42,7 +43,7 @@ private:
 
 public:
 	//Constructor/Destructor
-	PlayerGUI(Player* player);
+	PlayerGUI(Player* player, sf::VideoMode& vm);
 	virtual ~PlayerGUI();
 
 	//Functions
