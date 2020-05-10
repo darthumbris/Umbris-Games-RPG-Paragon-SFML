@@ -7,7 +7,7 @@ class Tile
 private:
 
 protected:
-	sf::RectangleShape shape;
+	sf::Sprite shape;
 	short type; //dissapearin/ slowing / damaging etc
 	bool collision; // if a tile is pass through or not (ie air you can go through walls not)
 
@@ -30,6 +30,9 @@ public:
 	const std::string getAsString() const;
 
 	void update();
-	void render(sf::RenderTarget& target);
+	void render(
+		sf::RenderTarget& target, 
+		sf::Shader* shader = nullptr, 
+		const sf::Vector2f playerPos = sf::Vector2f());
 };
 
