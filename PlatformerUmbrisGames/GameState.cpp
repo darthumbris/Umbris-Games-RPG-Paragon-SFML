@@ -117,6 +117,8 @@ GameState::GameState(StateData* state_data)
 	this->initFonts();
 	this->initTextures();
 	this->initPauseMenu();
+	this->initShaders();
+
 	this->initPlayers();
 	this->initPlayerGUI();
 	this->initTileMap();
