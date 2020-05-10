@@ -84,14 +84,14 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
-    <ClCompile Include="GraphicsSettings.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="AttributeComponent.cpp">
       <Filter>Components</Filter>
     </ClCompile>
     <ClCompile Include="PlayerGUI.cpp">
       <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsSettings.cpp">
+      <Filter>Resource Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -143,14 +143,22 @@
     <ClInclude Include="stdafx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="GraphicsSettings.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="AttributeComponent.hpp">
       <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="PlayerGUI.hpp">
       <Filter>GUI</Filter>
     </ClInclude>
+    <ClInclude Include="GraphicsSettings.hpp">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="vertex_shader.vert">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="fragment_shader.frag">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

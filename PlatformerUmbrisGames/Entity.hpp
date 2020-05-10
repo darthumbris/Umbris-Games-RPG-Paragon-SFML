@@ -53,6 +53,6 @@ public:
 	virtual void stopVelocityY();
 
 	virtual void update(const float& deltaTime) = 0;
-	virtual void render(sf::RenderTarget& target, const bool show_hitbox) = 0;
+	virtual void render(sf::RenderTarget& target, sf::Shader* shader, const bool show_hitbox) = 0;
 };
 

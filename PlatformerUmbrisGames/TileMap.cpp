@@ -374,25 +374,25 @@ void TileMap::render(sf::RenderTarget& target, const sf::Vector2i& gridPosition,
 {
 	this->layer = 0;
 
-	this->fromX = gridPosition.x - 10;
+	this->fromX = gridPosition.x - 20;
 	if (this->fromX < 0)
 		this->fromX = 0;
 	else if (this->fromX > this->maxSizeWorldGrid.x)
 		this->fromX = maxSizeWorldGrid.x;
 
-	this->toX = gridPosition.x + 13;
+	this->toX = gridPosition.x + 20;
 	if (this->toX < 0)
 		this->toX = 0;
 	else if (this->toX > this->maxSizeWorldGrid.x)
 		this->toX = maxSizeWorldGrid.x;
 
-	this->fromY = gridPosition.y - 10;
+	this->fromY = gridPosition.y - 12;
 	if (this->fromY < 0)
 		this->fromY = 0;
 	else if (this->fromY > this->maxSizeWorldGrid.y)
 		this->fromY = maxSizeWorldGrid.y;
 
-	this->toY = gridPosition.y + 13;
+	this->toY = gridPosition.y + 11;
 	if (this->toY < 0)
 		this->toY = 0;
 	else if (this->toY > this->maxSizeWorldGrid.y)

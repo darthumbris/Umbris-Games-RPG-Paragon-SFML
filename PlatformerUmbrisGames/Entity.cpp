@@ -128,13 +128,3 @@ void Entity::stopVelocityY()
 	if (this->movementComponent)
 		this->movementComponent->stopVelocityY();
 }
-
-void Entity::update(const float& deltaTime)
-{
-	
-}
-
-void Entity::render(sf::RenderTarget& target, const bool show_hitbox)
-{
-
-}

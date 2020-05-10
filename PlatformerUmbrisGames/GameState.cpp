@@ -82,6 +82,14 @@ void GameState::initPauseMenu()
 	this->pmenu->addButton("EXIT_STATE", gui::p2pY(83.3f, vm), gui::p2pX(12.9f, vm), gui::p2pY(6.3f, vm), gui::calcCharSize(vm, 50), "Quit" );
 }
 
+void GameState::initShaders()
+{
+	if (!this->coreShader.loadFromFile("vertex_shader.vert", "fragment_shader.frag"))
+	{
+		std::cout << "ERROR::GAMESTATE::COULD NOT LOAD SHADER." << "\n";
+	}
+}
+
 void GameState::initPlayers()
 {
 	this->player = new Player(400, 200, this->textures["PLAYER_SHEET"]);
@@ -231,7 +239,7 @@ void GameState::render(sf::RenderTarget* target)
 	this->renderTexture.setView(this->view);
 	this->tileMap->render(this->renderTexture, this->player->getGridPosition(static_cast<int>(this->stateData->gridSize)), false);
 
-	this->player->render(this->renderTexture, false);
+	this->player->render(this->renderTexture, &this->coreShader, false);
 
 	this->tileMap->renderDeferred(this->renderTexture);
 	
