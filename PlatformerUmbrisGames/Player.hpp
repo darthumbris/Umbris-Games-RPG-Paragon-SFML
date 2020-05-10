@@ -31,7 +31,7 @@ public:
 	void updateAnimation(const float& deltaTime);
 	void update(const float& deltaTime);
 
-	void render(sf::RenderTarget& target);
+	void render(sf::RenderTarget& target, const bool show_hitbox = false);
 
 };
 

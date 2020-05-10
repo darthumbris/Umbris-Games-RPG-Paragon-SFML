@@ -189,10 +189,11 @@ void Player::update(const float& deltaTime)
 	this->hitboxComponent->update();
 }
 
-void Player::render(sf::RenderTarget& target)
+void Player::render(sf::RenderTarget& target, const bool show_hitbox)
 {
 	target.draw(this->sprite);
 
-	this->hitboxComponent->render(target);
+	if(show_hitbox)
+		this->hitboxComponent->render(target);
 }
 

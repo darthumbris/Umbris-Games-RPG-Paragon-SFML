@@ -370,7 +370,7 @@ void TileMap::update()
 	 
 }
 
-void TileMap::render(sf::RenderTarget& target, const sf::Vector2i& gridPosition)
+void TileMap::render(sf::RenderTarget& target, const sf::Vector2i& gridPosition, const bool show_hitbox)
 {
 	this->layer = 0;
 
@@ -418,7 +418,8 @@ void TileMap::render(sf::RenderTarget& target, const sf::Vector2i& gridPosition)
 				if (this->map[x][y][this->layer][k]->getCollision())
 				{
 					this->collisionBox.setPosition(this->map[x][y][this->layer][k]->getPosition());
-					target.draw(this->collisionBox);
+					if(show_hitbox)
+						target.draw(this->collisionBox);
 				}
 			}
 				

@@ -229,9 +229,9 @@ void GameState::render(sf::RenderTarget* target)
 	//Map rendering (needs to be optimized so that it only renders the viewscreen and
 	// not the whole map
 	this->renderTexture.setView(this->view);
-	this->tileMap->render(this->renderTexture, this->player->getGridPosition(static_cast<int>(this->stateData->gridSize)));
+	this->tileMap->render(this->renderTexture, this->player->getGridPosition(static_cast<int>(this->stateData->gridSize)), false);
 
-	this->player->render(this->renderTexture);
+	this->player->render(this->renderTexture, false);
 
 	this->tileMap->renderDeferred(this->renderTexture);
 	
