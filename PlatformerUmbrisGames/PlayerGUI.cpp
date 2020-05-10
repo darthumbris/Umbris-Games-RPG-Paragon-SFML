@@ -29,7 +29,7 @@ void PlayerGUI::initHpBar()
 		this->hpBarInside.getPosition().x + gui::p2pX(0.8f, this->vm), 
 		this->hpBarInside.getPosition().y + gui::p2pY(0.7f, this->vm)
 	);
-	this->hpBarText.setCharacterSize(gui::calcCharSize(vm, 160));
+	this->hpBarText.setCharacterSize(gui::calcCharSize(this->vm, 160));
 }
 
 void PlayerGUI::initExpBar()
@@ -53,7 +53,7 @@ void PlayerGUI::initExpBar()
 		this->expBarInside.getPosition().x + gui::p2pX(0.8f, this->vm), 
 		this->expBarInside.getPosition().y + gui::p2pY(0.7f, this->vm)
 	);
-	this->expBarText.setCharacterSize(gui::calcCharSize(vm, 160));
+	this->expBarText.setCharacterSize(gui::calcCharSize(this->vm, 160));
 }
 
 void PlayerGUI::initLevelDisplay()
@@ -77,12 +77,12 @@ void PlayerGUI::initLevelDisplay()
 		this->levelDisplayBack.getPosition().x + gui::p2pX(0.8f, this->vm),
 		this->levelDisplayBack.getPosition().y + gui::p2pY(0.7f, this->vm)
 	);
-	this->levelDisplayText.setCharacterSize(gui::calcCharSize(vm, 120));
+	this->levelDisplayText.setCharacterSize(gui::calcCharSize(this->vm, 120));
 }
 
 //Constructor/Destructor
 PlayerGUI::PlayerGUI(Player* player, sf::VideoMode& vm)
-	: vm(vm)
+	: vm (vm)
 {
 	this->player = player;
 

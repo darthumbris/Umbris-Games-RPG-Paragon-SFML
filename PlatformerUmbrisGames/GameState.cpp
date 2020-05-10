@@ -122,13 +122,14 @@ GameState::~GameState()
 	delete this->tileMap;
 }
 
-
+//Functions
 void GameState::updateView(const float& deltaTime)
 {
-	this->view.setCenter(std::floor(this->player->getPosition().x), std::floor(this->player->getPosition().y));
+	this->view.setCenter(
+		std::floor(this->player->getPosition().x + (static_cast<float>(this->mousePosWindow.x) - static_cast<float>(this->stateData->gfxSettings->resolution.width /2)) / 5.f),
+		std::floor(this->player->getPosition().y + (static_cast<float>(this->mousePosWindow.y) - static_cast<float>(this->stateData->gfxSettings->resolution.height / 2)) / 5.f));
 }
 
-//Functions
 void GameState::updateInput(const float& deltaTime)
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->keybinds.at("CLOSE"))) && this->getInputTime())
