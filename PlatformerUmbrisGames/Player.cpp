@@ -35,6 +35,9 @@ Player::Player(float x, float y, sf::Texture& texture_sheet)
 	this->animationComponent->addAnimation("RUN_RIGHT", 8.f, 0, 2, 6, 2, 100, 100);
 	//Voor nu is de attack animatie de run_right animatie, puur voor testen
 	this->animationComponent->addAnimation("ATTACK", 8.f, 0, 2, 6, 2, 100, 100);
+
+	this->weapon_texture.loadFromFile("Resources/Images/Sprites/Player/sword.png");
+	this->weaponSprite.setTexture(weapon_texture);
 }
 
 Player::~Player()
@@ -187,6 +190,8 @@ void Player::update(const float& deltaTime)
 	this->updateAnimation(deltaTime);	
 
 	this->hitboxComponent->update();
+
+	this->weaponSprite.setPosition(this->getCenter());
 }
 
 void Player::render(sf::RenderTarget& target, sf::Shader* shader, const bool show_hitbox)
@@ -197,9 +202,16 @@ void Player::render(sf::RenderTarget& target, sf::Shader* shader, const bool sho
 		shader->setUniform("light", this->getCenter());
 
 		target.draw(this->sprite, shader);
+
+		shader->setUniform("hasTexture", true);
+		shader->setUniform("light", this->getCenter());
+		target.draw(this->weaponSprite, shader);
 	}
 	else
+	{
 		target.draw(this->sprite);
+		target.draw(this->weaponSprite);
+	}
 
 	if(show_hitbox)
 		this->hitboxComponent->render(target);

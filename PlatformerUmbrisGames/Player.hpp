@@ -10,6 +10,8 @@ class Player :
 private:
 	//Variables
 	bool attacking;
+	sf::Sprite weaponSprite;
+	sf::Texture weapon_texture;
 
 	//Initializer functions
 	void initVariables();
