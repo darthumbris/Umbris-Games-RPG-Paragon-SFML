@@ -71,6 +71,18 @@ TileMap::~TileMap()
 	this->clear();
 }
 
+const bool TileMap::tileEmpty(const int x, const int y, const int z) const
+{
+	if (x >= 0 && x < this->maxSizeWorldGrid.x &&
+		y >= 0 && y < this->maxSizeWorldGrid.y &&
+		z >= 0 && z < this->layers)
+	{
+		return this->map[x][y][z].empty();
+	}
+	
+	throw("ERROR::TILEMAP::TILE_EMPTY::TRYING TO ACCESS OUT OF BOUNDS TILE");
+}
+
 //Accessors
 const sf::Texture* TileMap::getTileSheet() const
 {
@@ -117,7 +129,7 @@ void TileMap::addTile(const int x, const int y, const int z,
 		z <= this->layers && z >= 0)
 	{
 		// If the Currently Selected Element is not empty:
-		if (!map[x][y][z].empty())
+		if (!tileEmpty(x, y, z))
 		{
 			// Only add if it's NOT the Same Texture (checks the passed in rect):
 			if (this->map[x][y][z][map[x][y][z].size() - 1]->getRect() != texture_rect)
@@ -126,16 +138,12 @@ void TileMap::addTile(const int x, const int y, const int z,
 				std::cout << "debug: Added a Tile in filled location" << "\n";
 			}
 		}
-
 		// Or if empty -> just Add a Tile:
 		else
 		{
 			this->map[x][y][z].push_back(new Tile(x, y, this->gridSizeF, this->tileSheet, texture_rect, collision, type));
 			std::cout << "debug: Added a Tile in empty location" << "\n";
 		}
-		
-		
-			
 	}
 }
 
@@ -211,6 +219,7 @@ void TileMap::saveToFile(const std::string file_name)
 	}
 
 	out_file.close();
+	std::cout << "saved the map" << "\n";
 }
 
 void TileMap::loadFromFile(const std::string file_name)
@@ -281,6 +290,8 @@ void TileMap::loadFromFile(const std::string file_name)
 	}
 
 	in_file.close();
+
+	std::cout << "loaded the map" << "\n";
 }
 
 void TileMap::updateCollision(Entity* entity, const float& delatTime)

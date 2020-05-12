@@ -185,7 +185,7 @@ void EditorState::updateEditorInput(const float& deltaTime)
 	if (!this->sideBar.getGlobalBounds().contains(sf::Vector2f(this->mousePosWindow)))
 	{
 		//Add a Tile to the Tilemap
-		if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && this->getInputTime())
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 		{
 			if (!this->textureSelector->getActive()) // if not in the selection for textures add a tile
 			{
