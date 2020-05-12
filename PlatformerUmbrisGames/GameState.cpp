@@ -139,7 +139,7 @@ void GameState::updateView(const float& deltaTime)
 		std::floor(this->player->getPosition().x + (static_cast<float>(this->mousePosWindow.x) - static_cast<float>(this->stateData->gfxSettings->resolution.width /2)) / 10.f),
 		std::floor(this->player->getPosition().y + (static_cast<float>(this->mousePosWindow.y) - static_cast<float>(this->stateData->gfxSettings->resolution.height / 2)) / 10.f));
 
-	if (this->view.getSize().x >= this->tileMap->getMaxSizeGridF().x)
+	if (this->tileMap->getMaxSizeGridF().x >= this->view.getSize().x)
 	{
 		if (this->view.getCenter().x - this->view.getSize().x / 2.f < 0.f)
 		{
@@ -150,7 +150,7 @@ void GameState::updateView(const float& deltaTime)
 			this->view.setCenter(this->tileMap->getMaxSizeGridF().x - this->view.getSize().x / 2.f, this->view.getCenter().y);
 		}
 	}
-	if (this->view.getSize().y >= this->tileMap->getMaxSizeGridF().y)
+	if (this->tileMap->getMaxSizeGridF().y >= this->view.getSize().y)
 	{
 		if (this->view.getCenter().y - this->view.getSize().y / 2.f < 0.f)
 		{
