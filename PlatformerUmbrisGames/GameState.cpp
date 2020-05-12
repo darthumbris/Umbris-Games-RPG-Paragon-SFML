@@ -235,7 +235,7 @@ void GameState::update(const float& deltaTime)
 
 		this->updateTileMap(deltaTime);
 
-		this->player->update(deltaTime);
+		this->player->update(deltaTime, this->mousePosView);
 		
 		this->updatePlayerGUI(deltaTime);
 	}

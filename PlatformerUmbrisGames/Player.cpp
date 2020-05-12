@@ -36,8 +36,15 @@ Player::Player(float x, float y, sf::Texture& texture_sheet)
 	//Voor nu is de attack animatie de run_right animatie, puur voor testen
 	this->animationComponent->addAnimation("ATTACK", 8.f, 0, 2, 6, 2, 100, 100);
 
+	//Visual weapon
 	this->weapon_texture.loadFromFile("Resources/Images/Sprites/Player/sword.png");
 	this->weaponSprite.setTexture(weapon_texture);
+
+	this->weaponSprite.setOrigin
+	(
+		this->weaponSprite.getGlobalBounds().width / 2.f,
+		this->weaponSprite.getGlobalBounds().height
+	);
 }
 
 Player::~Player()
@@ -84,31 +91,7 @@ void Player::updateAnimation(const float& deltaTime)
 {
 	if (this->attacking)
 	{
-		//Voor Attack
-		//Set origin depending on direction
-		if (this->sprite.getScale().x > 0.f) // Facing left
-		{
-			this->sprite.setOrigin(0.f, 0.f);
-		}
-		else // Facing right
-		{
-			this->sprite.setOrigin(0.f, 0.f);
-		}
 		
-		//Animate and check for animation end
-		if (this->animationComponent->play("ATTACK", deltaTime, true))
-		{
-			this->attacking = false;
-
-			if (this->sprite.getScale().x > 0.f) // Facing left
-			{
-				this->sprite.setOrigin(0.f, 0.f);
-			}
-			else // Facing right
-			{
-				this->sprite.setOrigin(0.f, 0.f);
-			}
-		}
 	}
 
 	if (this->movementComponent->getState(IDLE))
@@ -172,7 +155,7 @@ void Player::updateAnimation(const float& deltaTime)
 
 }
 
-void Player::update(const float& deltaTime)
+void Player::update(const float& deltaTime, sf::Vector2f& mouse_pos_view)
 {	
 	this->movementComponent->update(deltaTime);
 
@@ -182,7 +165,16 @@ void Player::update(const float& deltaTime)
 
 	this->hitboxComponent->update();
 
-	this->weaponSprite.setPosition(this->getCenter());
+	//Update visual weapon
+	this->weaponSprite.setPosition(this->getCenter().x , this->getPosition().y + this->getGlobalBounds().height);
+
+	float dx = mouse_pos_view.x - this->weaponSprite.getPosition().x;
+	float dy = mouse_pos_view.y - this->weaponSprite.getPosition().y;
+
+	const float PI = 3.14159265;
+	float deg = atan2(dy, dx) * 180 / PI;
+
+	this->weaponSprite.setRotation(deg + 90.f);
 }
 
 void Player::render(sf::RenderTarget& target, sf::Shader* shader, const bool show_hitbox)

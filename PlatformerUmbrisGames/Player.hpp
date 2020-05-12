@@ -31,7 +31,7 @@ public:
 	void gainExp(const int exp);
 	void updateAttack();
 	void updateAnimation(const float& deltaTime);
-	void update(const float& deltaTime);
+	void update(const float& deltaTime, sf::Vector2f& mouse_pos_view);
 
 	void render(sf::RenderTarget& target, sf::Shader* shader = nullptr, const bool show_hitbox = false);
 
