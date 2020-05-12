@@ -18,6 +18,8 @@ class GameState :
 {
 private:
 	sf::View view;
+	sf::Vector2i viewGridPosition;
+
 	sf::RenderTexture renderTexture; //Canvas that gets rendered to the screen
 	sf::Sprite renderSprite;
 	

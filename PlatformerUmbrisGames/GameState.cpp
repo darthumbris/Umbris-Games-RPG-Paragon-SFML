@@ -155,6 +155,9 @@ void GameState::updateView(const float& deltaTime)
 	{
 		this->view.setCenter(this->view.getCenter().x, 3000.f - this->view.getSize().y / 2.f);
 	}
+
+	this->viewGridPosition.x = static_cast<int>(this->view.getCenter().x) / static_cast<int>(this->stateData->gridSize);
+	this->viewGridPosition.y = static_cast<int>(this->view.getCenter().y) / static_cast<int>(this->stateData->gridSize);
 }
 
 void GameState::updateInput(const float& deltaTime)
@@ -258,7 +261,7 @@ void GameState::render(sf::RenderTarget* target)
 	this->renderTexture.setView(this->view);
 	this->tileMap->render(
 		this->renderTexture, 
-		this->player->getGridPosition(static_cast<int>(this->stateData->gridSize)), 
+		this->viewGridPosition, 
 		&this->coreShader, 
 		this->player->getCenter(),
 		false);

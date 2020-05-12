@@ -94,6 +94,16 @@ const int TileMap::getLayerSize(const int x, const int y, const int layer) const
 	
 }
 
+const sf::Vector2i& TileMap::getMaxSizeGrid() const
+{
+	return this->maxSizeWorldGrid;
+}
+
+const sf::Vector2f& TileMap::getMaxSizeGridF() const
+{
+	return this->maxSizeWorldF;
+}
+
 //Functions
 void TileMap::addTile(const int x, const int y, const int z,
 	const sf::IntRect& texture_rect, const bool& collision, const short& type)
@@ -106,9 +116,26 @@ void TileMap::addTile(const int x, const int y, const int z,
 		y < this->maxSizeWorldGrid.y && y >= 0 &&
 		z <= this->layers && z >= 0)
 	{
-			// Ok to add a tile
+		// If the Currently Selected Element is not empty:
+		if (!map[x][y][z].empty())
+		{
+			// Only add if it's NOT the Same Texture (checks the passed in rect):
+			if (this->map[x][y][z][map[x][y][z].size() - 1]->getRect() != texture_rect)
+			{
+				this->map[x][y][z].push_back(new Tile(x, y, this->gridSizeF, this->tileSheet, texture_rect, collision, type));
+				std::cout << "debug: Added a Tile in filled location" << "\n";
+			}
+		}
+
+		// Or if empty -> just Add a Tile:
+		else
+		{
 			this->map[x][y][z].push_back(new Tile(x, y, this->gridSizeF, this->tileSheet, texture_rect, collision, type));
-			std::cout << "debug: Added a Tile" << "\n";
+			std::cout << "debug: Added a Tile in empty location" << "\n";
+		}
+		
+		
+			
 	}
 }
 
@@ -375,7 +402,7 @@ void TileMap::render(sf::RenderTarget& target, const sf::Vector2i& gridPosition,
 {
 	this->layer = 0;
 
-	this->fromX = gridPosition.x - 20;
+	this->fromX = gridPosition.x - 19;
 	if (this->fromX < 0)
 		this->fromX = 0;
 	else if (this->fromX > this->maxSizeWorldGrid.x)
@@ -387,13 +414,13 @@ void TileMap::render(sf::RenderTarget& target, const sf::Vector2i& gridPosition,
 	else if (this->toX > this->maxSizeWorldGrid.x)
 		this->toX = maxSizeWorldGrid.x;
 
-	this->fromY = gridPosition.y - 12;
+	this->fromY = gridPosition.y - 11;
 	if (this->fromY < 0)
 		this->fromY = 0;
 	else if (this->fromY > this->maxSizeWorldGrid.y)
 		this->fromY = maxSizeWorldGrid.y;
 
-	this->toY = gridPosition.y + 11;
+	this->toY = gridPosition.y + 12;
 	if (this->toY < 0)
 		this->toY = 0;
 	else if (this->toY > this->maxSizeWorldGrid.y)

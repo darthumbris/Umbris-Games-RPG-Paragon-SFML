@@ -21,6 +21,8 @@ Tile::Tile(int grid_x, int grid_y, float gridSizeF,
 
 	this->collision = collision;
 	this->type = type;
+
+	this->texRect = texture_rect;
 }
 
 Tile::~Tile()
@@ -48,6 +50,11 @@ const sf::FloatRect Tile::getGlobalBounds() const
 const short& Tile::getType() const
 {
 	return this->type;
+}
+
+const sf::IntRect& Tile::getRect() const
+{
+	return this->texRect;
 }
 
 //Functions

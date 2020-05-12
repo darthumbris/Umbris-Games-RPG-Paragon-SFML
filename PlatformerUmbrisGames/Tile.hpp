@@ -8,6 +8,7 @@ private:
 
 protected:
 	sf::Sprite shape;
+	sf::IntRect texRect;
 	short type; //dissapearin/ slowing / damaging etc
 	bool collision; // if a tile is pass through or not (ie air you can go through walls not)
 
@@ -24,6 +25,7 @@ public:
 	const sf::Vector2f& getPosition() const;
 	const sf::FloatRect getGlobalBounds() const;
 	const short& getType() const;
+	const sf::IntRect& getRect() const;
 
 	//Functions
 	const bool intersects(const sf::FloatRect bounds) const;
