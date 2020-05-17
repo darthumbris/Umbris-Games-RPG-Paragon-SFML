@@ -151,6 +151,7 @@
   <ItemGroup>
     <ClCompile Include="AnimationComponent.cpp" />
     <ClCompile Include="AttributeComponent.cpp" />
+    <ClCompile Include="Bow.cpp" />
     <ClCompile Include="GraphicsSettings.cpp" />
     <ClCompile Include="Gui.cpp" />
     <ClCompile Include="EditorState.cpp" />
@@ -161,10 +162,12 @@
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainMenuState.cpp" />
+    <ClCompile Include="MeleeWeapon.cpp" />
     <ClCompile Include="MovementComponent.cpp" />
     <ClCompile Include="PauseMenu.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerGUI.cpp" />
+    <ClCompile Include="RangedWeapon.cpp" />
     <ClCompile Include="SettingsState.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -173,12 +176,14 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">stdafx.h</PrecompiledHeaderFile>
     </ClCompile>
+    <ClCompile Include="Sword.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="TileMap.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnimationComponent.hpp" />
     <ClInclude Include="AttributeComponent.hpp" />
+    <ClInclude Include="Bow.hpp" />
     <ClInclude Include="GraphicsSettings.hpp" />
     <ClInclude Include="Gui.hpp" />
     <ClInclude Include="EditorState.hpp" />
@@ -188,13 +193,16 @@
     <ClInclude Include="HitboxComponent.hpp" />
     <ClInclude Include="Item.hpp" />
     <ClInclude Include="MainMenuState.hpp" />
+    <ClInclude Include="MeleeWeapon.hpp" />
     <ClInclude Include="MovementComponent.hpp" />
     <ClInclude Include="PauseMenu.hpp" />
     <ClInclude Include="Player.hpp" />
     <ClInclude Include="PlayerGUI.hpp" />
+    <ClInclude Include="RangedWeapon.hpp" />
     <ClInclude Include="SettingsState.hpp" />
     <ClInclude Include="State.hpp" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="Sword.hpp" />
     <ClInclude Include="Tile.hpp" />
     <ClInclude Include="TileMap.hpp" />
   </ItemGroup>

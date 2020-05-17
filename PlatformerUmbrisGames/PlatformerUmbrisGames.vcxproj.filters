@@ -108,6 +108,18 @@
     <ClCompile Include="Item.cpp">
       <Filter>Item</Filter>
     </ClCompile>
+    <ClCompile Include="MeleeWeapon.cpp">
+      <Filter>Item\Melee Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="RangedWeapon.cpp">
+      <Filter>Item\Ranged Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="Sword.cpp">
+      <Filter>Item\Melee Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="Bow.cpp">
+      <Filter>Item\Ranged Weapon</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.hpp">
@@ -169,6 +181,18 @@
     </ClInclude>
     <ClInclude Include="Item.hpp">
       <Filter>Item</Filter>
+    </ClInclude>
+    <ClInclude Include="MeleeWeapon.hpp">
+      <Filter>Item\Melee Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="RangedWeapon.hpp">
+      <Filter>Item\Ranged Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="Sword.hpp">
+      <Filter>Item\Melee Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="Bow.hpp">
+      <Filter>Item\Ranged Weapon</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
