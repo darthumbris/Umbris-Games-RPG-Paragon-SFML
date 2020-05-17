@@ -2,6 +2,8 @@
 
 #include "Entity.hpp"
 
+#include "Sword.hpp"
+
 class Entity;
 
 class Player :
@@ -10,8 +12,7 @@ class Player :
 private:
 	//Variables
 	bool attacking;
-	sf::Sprite weaponSprite;
-	sf::Texture weapon_texture;
+	Sword sword;
 
 	//Initializer functions
 	void initVariables();

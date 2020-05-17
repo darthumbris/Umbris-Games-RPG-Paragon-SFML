@@ -3,6 +3,7 @@
 
 RangedWeapon::RangedWeapon()
 {
+
 }
 
 RangedWeapon::~RangedWeapon()

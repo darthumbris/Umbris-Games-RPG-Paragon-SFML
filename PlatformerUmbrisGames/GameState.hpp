@@ -5,6 +5,7 @@
 #include "TileMap.hpp"
 #include "PlayerGUI.hpp"
 #include "Sword.hpp"
+#include "Bow.hpp"
 
 class PauseMenu;
 class Player;

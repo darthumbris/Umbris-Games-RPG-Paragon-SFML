@@ -3,7 +3,8 @@
 
 MeleeWeapon::MeleeWeapon()
 {
-	std::cout << "melee weapon test message" << "\n";
+
+	
 }
 
 MeleeWeapon::~MeleeWeapon()
