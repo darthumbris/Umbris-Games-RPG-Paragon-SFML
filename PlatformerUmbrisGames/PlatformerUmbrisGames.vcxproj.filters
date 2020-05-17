@@ -31,6 +31,18 @@
     <Filter Include="Map">
       <UniqueIdentifier>{532200c9-3496-41b8-a5f4-6dc86665fab7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Item">
+      <UniqueIdentifier>{a3d822c2-8b46-4f2f-8fb5-e5c2af260082}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Item\Melee Weapon">
+      <UniqueIdentifier>{1af1e13a-09d2-4669-b1d3-84bad3e60016}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Item\Ranged Weapon">
+      <UniqueIdentifier>{2c5062db-b69c-471a-9ed7-124bd6c154b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Item\Magical Weapon">
+      <UniqueIdentifier>{13517c9a-64e2-4428-820c-341da938f023}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -93,6 +105,9 @@
     <ClCompile Include="GraphicsSettings.cpp">
       <Filter>Resource Files</Filter>
     </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>Item</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.hpp">
@@ -151,6 +166,9 @@
     </ClInclude>
     <ClInclude Include="GraphicsSettings.hpp">
       <Filter>Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.hpp">
+      <Filter>Item</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -158,6 +158,7 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="HitboxComponent.cpp" />
+    <ClCompile Include="Item.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainMenuState.cpp" />
     <ClCompile Include="MovementComponent.cpp" />
@@ -185,6 +186,7 @@
     <ClInclude Include="Game.hpp" />
     <ClInclude Include="GameState.hpp" />
     <ClInclude Include="HitboxComponent.hpp" />
+    <ClInclude Include="Item.hpp" />
     <ClInclude Include="MainMenuState.hpp" />
     <ClInclude Include="MovementComponent.hpp" />
     <ClInclude Include="PauseMenu.hpp" />
