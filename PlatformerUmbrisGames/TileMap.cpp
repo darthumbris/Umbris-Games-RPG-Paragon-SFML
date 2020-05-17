@@ -3,24 +3,27 @@
 
 void TileMap::clear()
 {
-	for (int x = 0; x < this->maxSizeWorldGrid.x; x++)
+	if (!this->map.empty())
 	{
-		for (int y = 0; y < this->maxSizeWorldGrid.y; y++)
+		for (int x = 0; x < this->maxSizeWorldGrid.x; x++)
 		{
-			for (int z = 0; z < this->layers; z++)
+			for (int y = 0; y < this->maxSizeWorldGrid.y; y++)
 			{
-				for (size_t k = 0; k < this->map[x][y][z].size(); k++)
+				for (int z = 0; z < this->layers; z++)
 				{
-					delete this->map[x][y][z][k];
-					this->map[x][y][z][k] = nullptr;
+					for (size_t k = 0; k < this->map[x][y][z].size(); k++)
+					{
+						delete this->map[x][y][z][k];
+						this->map[x][y][z][k] = nullptr;
+					}
+					this->map[x][y][z].clear();
 				}
-				this->map[x][y][z].clear();
+				this->map[x][y].clear();
 			}
-			this->map[x][y].clear();
+			this->map[x].clear();
 		}
-		this->map[x].clear();
+		this->map.clear();
 	}
-	this->map.clear();
 }
 
 //Constructor/Destructor
@@ -61,6 +64,23 @@ TileMap::TileMap(float gridSize, int width, int height, std::string texture_file
 		std::cout << "ERROR::TILEMAP::FAILED TO LOAD TILE TEXTURESHEET FILENAME: " << texture_file << "\n";
 
 	this->collisionBox.setSize(sf::Vector2f(gridSize, gridSize));
+	this->collisionBox.setFillColor(sf::Color(255, 0, 0, 20));
+	this->collisionBox.setOutlineColor(sf::Color::Red);
+	this->collisionBox.setOutlineThickness(1.f);
+}
+
+TileMap::TileMap(const std::string file_name)
+{
+	//culling variables initializen
+	this->fromX = 0;
+	this->toX = 0;
+	this->fromY = 0;
+	this->toY = 0;
+	this->layer = 0;
+
+	this->loadFromFile(file_name);
+
+	this->collisionBox.setSize(sf::Vector2f(this->gridSizeF, this->gridSizeF));
 	this->collisionBox.setFillColor(sf::Color(255, 0, 0, 20));
 	this->collisionBox.setOutlineColor(sf::Color::Red);
 	this->collisionBox.setOutlineThickness(1.f);

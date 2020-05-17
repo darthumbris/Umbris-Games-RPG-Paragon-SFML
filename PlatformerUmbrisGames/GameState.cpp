@@ -102,8 +102,7 @@ void GameState::initPlayerGUI()
 
 void GameState::initTileMap()
 {
-	this->tileMap = new TileMap(this->stateData->gridSize, 780, 450, "Resources/Images/Tiles/tilesheet1.png");
-	this->tileMap->loadFromFile("Map_Saves/map_data.map");
+	this->tileMap = new TileMap("Map_Saves/map_data.map");
 }
 
 
