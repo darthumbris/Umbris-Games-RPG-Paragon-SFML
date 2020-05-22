@@ -120,6 +120,9 @@
     <ClCompile Include="Bow.cpp">
       <Filter>Item\Ranged Weapon</Filter>
     </ClCompile>
+    <ClCompile Include="SkillComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.hpp">
@@ -193,6 +196,9 @@
     </ClInclude>
     <ClInclude Include="Bow.hpp">
       <Filter>Item\Ranged Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="SkillComponent.hpp">
+      <Filter>Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

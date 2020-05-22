@@ -4,11 +4,13 @@
 #include "AnimationComponent.hpp"
 #include "HitboxComponent.hpp"
 #include "AttributeComponent.hpp"
+#include "SkillComponent.hpp"
 
 class HitboxComponent;
 class MovementComponent;
 class AnimationComponent;
 class AttributeComponent;
+class SkillComponent;
 
 class Entity
 {
@@ -22,6 +24,7 @@ protected:
 	AnimationComponent* animationComponent;
 	HitboxComponent* hitboxComponent;
 	AttributeComponent* attributeComponent;
+	SkillComponent* skillComponent;
 
 public:
 	//Constructor/Destructor
@@ -36,6 +39,7 @@ public:
 	void createHitboxComponent(sf::Sprite& sprite,
 		float offset_x, float offset_y, float width, float height);
 	void createAttributeComponent(const unsigned level);
+	void createSkillComponent();
 
 	//Accessors
 	virtual const sf::Vector2f& getPosition() const;

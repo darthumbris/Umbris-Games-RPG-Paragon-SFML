@@ -8,6 +8,7 @@ void Entity::initVariables()
 	this->animationComponent = nullptr;
 	this->hitboxComponent = nullptr;
 	this->attributeComponent = nullptr;
+	this->skillComponent = nullptr;
 }
 
 //Constructor/Destructor
@@ -22,6 +23,7 @@ Entity::~Entity()
 	delete this->animationComponent;
 	delete this->hitboxComponent;
 	delete this->attributeComponent;
+	delete this->skillComponent;
 }
 
 //Component functions
@@ -50,6 +52,11 @@ void Entity::createHitboxComponent(sf::Sprite& sprite,
 void Entity::createAttributeComponent(const unsigned level)
 {
 	this->attributeComponent = new AttributeComponent(level);
+}
+
+void Entity::createSkillComponent()
+{
+	this->skillComponent = new SkillComponent();
 }
 
 
