@@ -113,6 +113,7 @@ BattlePlayerGUI::BattlePlayerGUI(Player* player, sf::VideoMode& vm)
 	this->initFont();
 	this->initHpBar();
 	this->initExpBar();
+	this->initManaBar();
 	this->initLevelDisplay();
 }
 

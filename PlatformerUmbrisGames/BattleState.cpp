@@ -94,7 +94,7 @@ void BattleState::initBattleGUI()
 		sf::Color(170, 170, 170, 200), sf::Color(250, 250, 250, 250), sf::Color(120, 120, 120, 50),
 		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0));
 
-	this->buttons["ATTACK"] = new Button(
+	this->buttons["FIGHT"] = new Button(
 		gui::p2pX(8.3f, vm), gui::p2pY(83.3f, vm),
 		gui::p2pX(12.9f, vm), gui::p2pY(6.3f, vm),
 		&this->font, "Fight", gui::calcCharSize(vm, 50),
@@ -121,6 +121,13 @@ void BattleState::initBattleGUI()
 		&this->font, "Magic", gui::calcCharSize(vm, 50),
 		sf::Color(170, 170, 170, 200), sf::Color(250, 250, 250, 250), sf::Color(120, 120, 120, 50),
 		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0));
+
+
+	//init Player and enemy position for battlestate
+	this->playerTempX = gui::p2pX(90.f, vm);
+	this->playerTempY = gui::p2pY(50.f, vm);
+
+	this->player->setPosition(this->playerTempX, this->playerTempY);
 }
 
 void BattleState::initBattlePlayerGUI()
@@ -132,7 +139,12 @@ BattleState::BattleState(Player* player, StateData* state_data)
 	:	State (state_data)
 {
 	this->player = player;
-	
+	this->worldX = player->getPosition().x;
+	this->worldY = player->getPosition().y;
+	this->fightButtonStatus = false;
+	this->itemButtonStatus = false;
+	this->magicButtonStatus = false;
+
 	this->initBackground();
 	this->initKeybinds();
 	this->initFonts();
@@ -142,6 +154,8 @@ BattleState::BattleState(Player* player, StateData* state_data)
 	this->initShaders();
 	this->initBattleGUI();
 	this->initBattlePlayerGUI();
+
+	
 }
 
 BattleState::~BattleState()
@@ -153,11 +167,86 @@ BattleState::~BattleState()
 	}
 
 	delete this->battlePlayerGUI;
+
+	player->setPosition(worldX, worldY);
+}
+
+//Accessors
+const bool BattleState::checkRunPossibility()
+{
+	/*
+	check for the possibilit of running from the battle
+	determined by maybe certain attributes of player and enemies
+	if boss, running impossible
+	*/
+	return true;
+}
+
+const bool BattleState::checkFightActive()
+{
+	if (this->buttons["FIGHT"]->isPressed())
+	{
+		return true;
+	}
+	else
+		return false;
+}
+
+const bool BattleState::checkItemActive()
+{
+	if (this->buttons["ITEM"]->isPressed())
+	{
+		return true;
+	}
+	else
+		return false;
+}
+
+const bool BattleState::checkMagicActive()
+{
+	if (this->buttons["MAGIC"]->isPressed())
+	{
+		return true;
+	}
+	else
+		return false;
+}
+
+const int BattleState::checkEnemySelected()
+{
+	/*if ()
+	{
+		return 1;
+	}
+	else 
+		return 0;
+	*/
+	return 0;
 }
 
 //Functions
 void BattleState::updateInput(const float& deltaTime)
 {
+	if (this->checkFightActive())
+	{
+		this->fightButtonStatus = true;
+		this->itemButtonStatus = false;
+		this->magicButtonStatus = false;
+	}
+
+	if (this->checkItemActive())
+	{
+		this->fightButtonStatus = false;
+		this->itemButtonStatus = true;
+		this->magicButtonStatus = false;
+	}
+
+	if (this->checkMagicActive())
+	{
+		this->fightButtonStatus = false;
+		this->itemButtonStatus = false;
+		this->magicButtonStatus = true;
+	}
 }
 
 void BattleState::updateBattleGUI(const float& deltaTime)
@@ -170,8 +259,21 @@ void BattleState::updateBattleGUI(const float& deltaTime)
 	//quit the battlestate
 	if (this->buttons["RUN"]->isPressed())
 	{
+		this->checkRunPossibility();
 		this->endState();
 	}
+
+	if (this->fightButtonStatus)
+	{
+		std::cout << "Fight pressed" << "\n";
+		std::cout << "Showing possible targets" << "\n";
+
+		//if target pressed ->
+		this->fightButtonStatus = false;
+	}
+	
+
+	this->player->setPosition(this->playerTempX, this->playerTempY);
 }
 
 void BattleState::updateBattlePlayerGUI(const float& deltaTime)
@@ -189,14 +291,6 @@ void BattleState::calculateBattle()
 	*/
 }
 
-void BattleState::chechRunPossibility()
-{
-	/*
-	check for the possibilit of running from the battle
-	determined by maybe certain attributes
-	if boss, running impossible
-	*/
-}
 
 void BattleState::update(const float& deltaTime)
 {
@@ -221,6 +315,7 @@ void BattleState::render(sf::RenderTarget* target)
 
 	target->draw(this->background);
 	target->draw(this->battleGUI);
+	this->player->render(*target);
 	this->battlePlayerGUI->render(*target);
 	this->renderBattleGUI(*target);
 }

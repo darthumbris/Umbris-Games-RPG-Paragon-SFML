@@ -1,0 +1,11 @@
+Enemy 1
+name goblin
+hp 20
+mana 5
+strength 10
+
+Enemy 2
+name wolf
+hp 30
+mana 0
+strength 15
