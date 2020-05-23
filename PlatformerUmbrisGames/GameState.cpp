@@ -213,7 +213,7 @@ void GameState::updatePlayerInput(const float& deltaTime)
 	//Enter Battle debug key
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->keybinds.at("BATTLE"))))
 	{
-		this->states->push(new BattleState(this->stateData));
+		this->states->push(new BattleState(this->player, this->stateData));
 		std::cout << "Entering Battle" << "\n";
 	}
 }

@@ -65,6 +65,22 @@ void AttributeComponent::gainXp(const int exp)
 	this->UpdateLevel();
 }
 
+void AttributeComponent::gainMana(const int mana)
+{
+	this->mana += mana;
+
+	if (this->mana > this->manaMax)
+		this->mana = this->manaMax;
+}
+
+void AttributeComponent::loseMana(const int mana)
+{
+	this->mana -= mana;
+
+	if (this->mana < 0)
+		this->mana = 0;
+}
+
 //Functions
 void AttributeComponent::updateStats(const bool reset)
 {
@@ -76,10 +92,12 @@ void AttributeComponent::updateStats(const bool reset)
 	this->accuracy			= this->dexterity * 4 + this->dexterity / 2;
 	this->defence			= this->agility * 2 + this->agility / 4 + this->strength;
 	this->luck				= this->intelligence * 2 + this->intelligence / 5;
+	this->manaMax			= this->intelligence * 4 + this->intelligence / 3;
 
 	if (reset)
 	{
 		this->hp = this->hpMax;
+		this->mana = this->manaMax;
 	}
 	
 }

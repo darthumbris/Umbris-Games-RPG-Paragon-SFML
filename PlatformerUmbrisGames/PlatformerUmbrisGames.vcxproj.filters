@@ -124,7 +124,10 @@
       <Filter>Components</Filter>
     </ClCompile>
     <ClCompile Include="BattleState.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>States</Filter>
+    </ClCompile>
+    <ClCompile Include="BattlePlayerGUI.cpp">
+      <Filter>GUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -204,7 +207,10 @@
       <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="BattleState.hpp">
-      <Filter>Header Files</Filter>
+      <Filter>States</Filter>
+    </ClInclude>
+    <ClInclude Include="BattlePlayerGUI.hpp">
+      <Filter>GUI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

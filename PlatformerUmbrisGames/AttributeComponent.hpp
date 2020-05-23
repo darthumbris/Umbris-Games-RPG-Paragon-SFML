@@ -26,6 +26,8 @@ public:
 	int accuracy;
 	int defence;
 	int luck; //magic accuracy basically
+	int mana;
+	int manaMax;
 
 	//Constructor/Destructor
 	AttributeComponent(int level);
@@ -38,6 +40,8 @@ public:
 	void loseExp(const int exp);
 	void gainHp(const int hp);
 	void gainXp(const int exp);
+	void gainMana(const int mana);
+	void loseMana(const int mana);
 
 	void updateStats(const bool reset);
 	void UpdateLevel();
