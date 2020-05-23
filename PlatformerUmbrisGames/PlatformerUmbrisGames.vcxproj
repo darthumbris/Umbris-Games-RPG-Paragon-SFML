@@ -151,6 +151,7 @@
   <ItemGroup>
     <ClCompile Include="AnimationComponent.cpp" />
     <ClCompile Include="AttributeComponent.cpp" />
+    <ClCompile Include="BattleState.cpp" />
     <ClCompile Include="Bow.cpp" />
     <ClCompile Include="GraphicsSettings.cpp" />
     <ClCompile Include="Gui.cpp" />
@@ -184,6 +185,7 @@
   <ItemGroup>
     <ClInclude Include="AnimationComponent.hpp" />
     <ClInclude Include="AttributeComponent.hpp" />
+    <ClInclude Include="BattleState.hpp" />
     <ClInclude Include="Bow.hpp" />
     <ClInclude Include="GraphicsSettings.hpp" />
     <ClInclude Include="Gui.hpp" />

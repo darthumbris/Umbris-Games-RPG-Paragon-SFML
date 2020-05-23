@@ -123,6 +123,9 @@
     <ClCompile Include="SkillComponent.cpp">
       <Filter>Components</Filter>
     </ClCompile>
+    <ClCompile Include="BattleState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.hpp">
@@ -199,6 +202,9 @@
     </ClInclude>
     <ClInclude Include="SkillComponent.hpp">
       <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="BattleState.hpp">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

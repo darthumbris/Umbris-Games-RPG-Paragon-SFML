@@ -6,6 +6,7 @@
 #include "PlayerGUI.hpp"
 #include "Sword.hpp"
 #include "Bow.hpp"
+#include "BattleState.hpp"
 
 class PauseMenu;
 class Player;
