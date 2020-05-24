@@ -32,6 +32,8 @@ private:
 
 	gui::TextureSelector* textureSelector; //The gui element to display and handle the selection of textures
 
+	std::map<std::string, gui::DropDownList*> dropDownLists;
+
 	bool collision;
 	short type;
 	float cameraSpeed;

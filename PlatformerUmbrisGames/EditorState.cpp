@@ -96,6 +96,7 @@ void EditorState::initTileMap()
 
 void EditorState::initGui()
 {
+	//Sidebar
 	this->sideBar.setSize(sf::Vector2f(
 		50.f,
 		static_cast<float>(this->stateData->gfxSettings->resolution.height)
@@ -104,6 +105,7 @@ void EditorState::initGui()
 	this->sideBar.setOutlineColor(sf::Color(200, 200, 200, 150));
 	this->sideBar.setOutlineThickness(1.f);
 	
+	//Selector rectangle
 	this->selectorRect.setSize(sf::Vector2f(this->stateData->gridSize, this->stateData->gridSize));
 
 	this->selectorRect.setFillColor(sf::Color(255,255,255,150));
@@ -113,9 +115,33 @@ void EditorState::initGui()
 	this->selectorRect.setTexture(this->tileMap->getTileSheet());
 	this->selectorRect.setTextureRect(this->textureRect);
 
+	//Texture selector button in the sidebar
 	this->textureSelector = new gui::TextureSelector(
 		20.f, 20.f, 400.f, 450.f, this->stateData->gridSize, 
 		this->tileMap->getTileSheet(), this->font, "TS");
+
+	//MapType dropdownlist selector in the sidebar======================================
+	sf::VideoMode vm = this->stateData->gfxSettings->resolution;
+
+	//init modes
+	std::vector<std::string> map_types;
+	
+	map_types.push_back(this->tileMap->getMapTypes(MapTypes::Types::OVERWORLD));
+	map_types.push_back(this->tileMap->getMapTypes(MapTypes::Types::FOREST));
+	map_types.push_back(this->tileMap->getMapTypes(MapTypes::Types::MOUNTAIN));
+	map_types.push_back(this->tileMap->getMapTypes(MapTypes::Types::PLAINS));
+	map_types.push_back(this->tileMap->getMapTypes(MapTypes::Types::RIVER));
+	map_types.push_back(this->tileMap->getMapTypes(MapTypes::Types::SEA));
+	map_types.push_back(this->tileMap->getMapTypes(MapTypes::Types::DESERT));
+	
+
+	//init dropdownlist
+	this->dropDownLists["MAPTYPES"] = new gui::DropDownList(
+		gui::p2pX(1.56f, vm), gui::p2pY(6.94f, vm),
+		gui::p2pX(15.6f, vm), gui::p2pY(6.9f, vm),
+		gui::calcCharSize(vm, 50),
+		font, map_types.data(), map_types.size(), 0);
+	//=================================================================================
 }
 
 //Constructor/destructors
@@ -146,6 +172,12 @@ EditorState::~EditorState()
 	delete this->tileMap;
 
 	delete this->textureSelector;
+
+	auto it2 = this->dropDownLists.begin();
+	for (it2 = this->dropDownLists.begin(); it2 != this->dropDownLists.end(); ++it2)
+	{
+		delete it2->second;
+	}
 }
 
 //Functions
@@ -258,6 +290,14 @@ void EditorState::updateGui(const float& deltaTime)
 		"# Tiles: " << this->tileMap->getLayerSize(this->mousePosGrid.x, this->mousePosGrid.y, this->layer);
 	
 	this->cursorText.setString(ss.str());
+
+	//Dropdownlists======
+	for (auto& it2 : this->dropDownLists)
+	{
+		it2.second->update(this->mousePosWindow, deltaTime);
+	}
+
+	//Still to add that the maptype gets altered
 }
 
 void EditorState::updatePauseMenuButtons()
@@ -305,6 +345,12 @@ void EditorState::renderGui(sf::RenderTarget& target)
 	{
 		target.setView(this->view);
 		target.draw(this->selectorRect);
+	}
+
+	//Render DropDownLists
+	for (auto& it2 : this->dropDownLists)
+	{
+		it2.second->render(target);
 	}
 
 	target.setView(this->window->getDefaultView());

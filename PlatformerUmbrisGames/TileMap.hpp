@@ -6,6 +6,19 @@
 class Tile;
 class Entity;
 
+struct MapTypes
+{
+	enum class Types : char {
+		OVERWORLD = 0,
+		FOREST = 1,
+		MOUNTAIN = 2,
+		PLAINS = 3,
+		RIVER = 4,
+		SEA = 5,
+		DESERT = 6
+	};
+};
+
 class TileMap
 {
 private:
@@ -43,6 +56,7 @@ public:
 	const int getLayerSize(const int x, const int y, const int layer) const; 
 	const sf::Vector2i& getMaxSizeGrid() const;
 	const sf::Vector2f& getMaxSizeGridF() const;
+	const char* getMapTypes(MapTypes::Types e);
 
 	//Functions
 	void addTile(const int x, const int y, const int z,

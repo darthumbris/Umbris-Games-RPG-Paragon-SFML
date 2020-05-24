@@ -136,6 +136,21 @@ const sf::Vector2f& TileMap::getMaxSizeGridF() const
 	return this->maxSizeWorldF;
 }
 
+const char* TileMap::getMapTypes(MapTypes::Types e)
+{
+	const std::map<MapTypes::Types, const char*> TypeStrings{
+		{MapTypes::Types::FOREST, "Forest"},
+		{MapTypes::Types::OVERWORLD, "Overworld"},
+		{MapTypes::Types::MOUNTAIN, "Mountain"},
+		{MapTypes::Types::PLAINS, "Plains"},
+		{MapTypes::Types::RIVER, "River"},
+		{MapTypes::Types::SEA, "Sea"},
+		{MapTypes::Types::DESERT, "Desert"},
+	};
+	auto it = TypeStrings.find(e);
+	return it == TypeStrings.end() ? "Out of range" : it->second;
+}
+
 //Functions
 void TileMap::addTile(const int x, const int y, const int z,
 	const sf::IntRect& texture_rect, const bool& collision, const short& type)
