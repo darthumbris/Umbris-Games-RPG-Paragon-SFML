@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "EditorState.hpp"
+using namespace gui;
 
 //Initializers
 void EditorState::initVariables()
@@ -86,7 +87,15 @@ void EditorState::initPauseMenu()
 
 void EditorState::initButtons()
 {
+	sf::VideoMode vm = this->stateData->gfxSettings->resolution;
 
+	this->buttons["SET"] = new Button(
+		gui::p2pX(0.56f, vm), gui::p2pY(83.3f, vm),
+		gui::p2pX(3.125f, vm), gui::p2pY(5.55f, vm),
+		&this->font, "Set", gui::calcCharSize(vm, 70),
+		sf::Color(255, 255, 255, 200), sf::Color(255, 255, 255, 255), sf::Color(120, 120, 120, 50),
+		sf::Color(70, 70, 70, 200), sf::Color(250, 250, 250, 200), sf::Color(20, 20, 20, 50),
+		sf::Color(170, 170, 170, 200), sf::Color(200, 200, 200, 200), sf::Color(20, 20, 20, 50));
 }
 
 void EditorState::initTileMap()
@@ -96,6 +105,8 @@ void EditorState::initTileMap()
 
 void EditorState::initGui()
 {
+	sf::VideoMode vm = this->stateData->gfxSettings->resolution;
+
 	//Sidebar
 	this->sideBar.setSize(sf::Vector2f(
 		50.f,
@@ -117,11 +128,11 @@ void EditorState::initGui()
 
 	//Texture selector button in the sidebar
 	this->textureSelector = new gui::TextureSelector(
-		20.f, 20.f, 400.f, 450.f, this->stateData->gridSize, 
+		gui::p2pX(1.56f, vm), gui::p2pY(2.78f, vm), 400.f, 450.f, this->stateData->gridSize, 
 		this->tileMap->getTileSheet(), this->font, "TS");
 
 	//MapType dropdownlist selector in the sidebar======================================
-	sf::VideoMode vm = this->stateData->gfxSettings->resolution;
+	
 
 	//init modes
 	std::vector<std::string> map_types;
