@@ -340,6 +340,54 @@ void TileMap::setMapType(const std::string map_type)
 	this->mapType = map_type;
 }
 
+void TileMap::resetTileSheet()
+{
+	if (this->mapType == "OVERWORLD")
+	{
+		this->textureFile = "Resources/Images/Tiles/tilesheet1.png";
+		this->tileSheet.loadFromFile(this->textureFile);
+		std::cout << "Set texture sheet to overworld" << "\n";
+	}
+	else if (this->mapType == "FOREST")
+	{
+		this->textureFile = "Resources/Images/Tiles/tilesheet2.png";
+		this->tileSheet.loadFromFile(this->textureFile);
+		std::cout << "Set texture sheet to forest" << "\n";
+	}
+	else if (this->mapType == "MOUNTAIN")
+	{
+		this->textureFile = "Resources/Images/Tiles/tilesheet1.png";
+		this->tileSheet.loadFromFile(this->textureFile);
+		std::cout << "Set texture sheet to mountain" << "\n";
+	}
+	else if (this->mapType == "PLAINS")
+	{
+		this->textureFile = "Resources/Images/Tiles/tilesheet1.png";
+		this->tileSheet.loadFromFile(this->textureFile);
+		std::cout << "Set texture sheet to plains" << "\n";
+	}
+	else if (this->mapType == "RIVER")
+	{
+		this->textureFile = "Resources/Images/Tiles/tilesheet1.png";
+		this->tileSheet.loadFromFile(this->textureFile);
+		std::cout << "Set texture sheet to river" << "\n";
+	}
+	else if (this->mapType == "SEA")
+	{
+		this->textureFile = "Resources/Images/Tiles/tilesheet1.png";
+		this->tileSheet.loadFromFile(this->textureFile);
+		std::cout << "Set texture sheet to sea" << "\n";
+	}
+	else if (this->mapType == "DESERT")
+	{
+		this->textureFile = "Resources/Images/Tiles/tilesheet1.png";
+		this->tileSheet.loadFromFile(this->textureFile);
+		std::cout << "Set texture sheet to desert" << "\n";
+	}
+	else
+		std::cout << "no such map type exists ERROR" << "\n";
+}
+
 void TileMap::updateCollision(Entity* entity, const float& delatTime)
 {
 	//Checking collision of world bounds

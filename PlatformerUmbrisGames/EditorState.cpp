@@ -353,9 +353,8 @@ void EditorState::updateGui(const float& deltaTime)
 		default:
 			break;
 		}
-		//Still to add that the texturesheet changes to the map type.
-		//this->resettexturesheettilemap();
-		//resetTextureSelector(); ?
+		
+		this->tileMap->resetTileSheet();
 	}
 
 	if (!hide) //only update if not hidden

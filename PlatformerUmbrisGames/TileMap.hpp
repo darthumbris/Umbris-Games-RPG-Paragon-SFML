@@ -66,6 +66,7 @@ public:
 	void saveToFile(const std::string file_name);
 	void loadFromFile(const std::string file_name);
 	void setMapType(const std::string map_type);
+	void resetTileSheet();
 
 	void updateCollision(Entity* entity, const float& delatTime);
 
