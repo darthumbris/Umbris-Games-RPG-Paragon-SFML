@@ -34,10 +34,14 @@ private:
 
 	std::map<std::string, gui::DropDownList*> dropDownLists;
 
+	std::vector<std::string> mapTypes;
+
 	bool collision;
 	short type;
 	float cameraSpeed;
 	int layer;
+
+	bool hide; // a boolean to determine if the maptype list should be shown or not.
 
 	//Functions
 	void initVariables();

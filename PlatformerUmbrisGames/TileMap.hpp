@@ -36,6 +36,7 @@ private:
 	std::string textureFile;
 	sf::Texture tileSheet;
 	sf::RectangleShape collisionBox; // To display the collision box of an entity
+	std::string mapType;
 
 	//Culling
 	int fromX;
@@ -64,6 +65,7 @@ public:
 	void removeTile(const int x, const int y, const int z);
 	void saveToFile(const std::string file_name);
 	void loadFromFile(const std::string file_name);
+	void setMapType(const std::string map_type);
 
 	void updateCollision(Entity* entity, const float& delatTime);
 

@@ -280,7 +280,7 @@ void DropDownList::render(sf::RenderTarget& target)
 
 //Constructor/Destructor
 TextureSelector::TextureSelector(float x, float y, float width, float height, float gridSize, 
-	const sf::Texture* texture_sheet, sf::Font& font, std::string text)
+	const sf::Texture* texture_sheet, sf::Font& font, std::string text, sf::VideoMode vm)
 	: inputTimeMax(2.f), inputTime(0.f)
 {
 	this->active = false;
@@ -318,9 +318,11 @@ TextureSelector::TextureSelector(float x, float y, float width, float height, fl
 	this->textureRect.width = static_cast<int>(gridSize);
 	this->textureRect.height = static_cast<int>(gridSize);
 
+	
+
 	this->hide_btn = new gui::Button(
-		10.f, y, 40.f, 40.f,
-		&font, text, 30,
+		gui::p2pX(.78f, vm), y, gui::p2pX(3.125f, vm), gui::p2pY(5.56f, vm),
+		&font, text, gui::calcCharSize(vm, 80),
 		sf::Color(255, 255, 255, 200), sf::Color(255, 255, 255, 255), sf::Color(120, 120, 120, 50),
 		sf::Color(70, 70, 70, 200), sf::Color(250, 250, 250, 200), sf::Color(20, 20, 20, 50),
 		sf::Color(170, 170, 170, 200), sf::Color(200, 200, 200, 200), sf::Color(20, 20, 20, 50));

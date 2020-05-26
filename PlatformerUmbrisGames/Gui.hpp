@@ -99,8 +99,10 @@ namespace gui
 		sf::IntRect textureRect; // For determining what part of the texture gets selected
 
 	public:
-		TextureSelector(float x, float y, float width, float height, float gridSize, 
-			const sf::Texture* texture_sheet, sf::Font& font, std::string text);
+		TextureSelector(
+			float x, float y, float width, float height, float gridSize, 
+			const sf::Texture* texture_sheet, sf::Font& font, std::string text,
+			sf::VideoMode vm);
 		~TextureSelector();
 
 		//Accessors

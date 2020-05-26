@@ -331,6 +331,11 @@ void TileMap::loadFromFile(const std::string file_name)
 	std::cout << "loaded the map" << "\n";
 }
 
+void TileMap::setMapType(const std::string map_type)
+{
+	this->mapType = map_type;
+}
+
 void TileMap::updateCollision(Entity* entity, const float& delatTime)
 {
 	//Checking collision of world bounds

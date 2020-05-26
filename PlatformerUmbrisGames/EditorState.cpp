@@ -15,6 +15,7 @@ void EditorState::initVariables()
 
 	this->cameraSpeed = 100.f;
 	this->layer = 0;
+	this->hide = false;
 }
 
 void EditorState::intitView()
@@ -92,7 +93,15 @@ void EditorState::initButtons()
 	this->buttons["SET"] = new Button(
 		gui::p2pX(0.56f, vm), gui::p2pY(83.3f, vm),
 		gui::p2pX(3.125f, vm), gui::p2pY(5.55f, vm),
-		&this->font, "Set", gui::calcCharSize(vm, 70),
+		&this->font, "Set", gui::calcCharSize(vm, 80),
+		sf::Color(255, 255, 255, 200), sf::Color(255, 255, 255, 255), sf::Color(120, 120, 120, 50),
+		sf::Color(70, 70, 70, 200), sf::Color(250, 250, 250, 200), sf::Color(20, 20, 20, 50),
+		sf::Color(170, 170, 170, 200), sf::Color(200, 200, 200, 200), sf::Color(20, 20, 20, 50));
+
+	this->buttons["HIDE"] = new Button(
+		gui::p2pX(0.56f, vm), gui::p2pY(50.f, vm),
+		gui::p2pX(3.125f, vm), gui::p2pY(5.55f, vm),
+		&this->font, "MT", gui::calcCharSize(vm, 80),
 		sf::Color(255, 255, 255, 200), sf::Color(255, 255, 255, 255), sf::Color(120, 120, 120, 50),
 		sf::Color(70, 70, 70, 200), sf::Color(250, 250, 250, 200), sf::Color(20, 20, 20, 50),
 		sf::Color(170, 170, 170, 200), sf::Color(200, 200, 200, 200), sf::Color(20, 20, 20, 50));
@@ -109,7 +118,7 @@ void EditorState::initGui()
 
 	//Sidebar
 	this->sideBar.setSize(sf::Vector2f(
-		50.f,
+		gui::p2pX(3.9f, vm),
 		static_cast<float>(this->stateData->gfxSettings->resolution.height)
 		));
 	this->sideBar.setFillColor(sf::Color(50,50,50,100));
@@ -129,7 +138,7 @@ void EditorState::initGui()
 	//Texture selector button in the sidebar
 	this->textureSelector = new gui::TextureSelector(
 		gui::p2pX(1.56f, vm), gui::p2pY(2.78f, vm), 400.f, 450.f, this->stateData->gridSize, 
-		this->tileMap->getTileSheet(), this->font, "TS");
+		this->tileMap->getTileSheet(), this->font, "TS", this->stateData->gfxSettings->resolution);
 
 	//MapType dropdownlist selector in the sidebar======================================
 	
@@ -137,20 +146,20 @@ void EditorState::initGui()
 	//init modes
 	std::vector<std::string> map_types;
 	
-	map_types.push_back(this->tileMap->getMapTypes(MapTypes::Types::OVERWORLD));
-	map_types.push_back(this->tileMap->getMapTypes(MapTypes::Types::FOREST));
-	map_types.push_back(this->tileMap->getMapTypes(MapTypes::Types::MOUNTAIN));
-	map_types.push_back(this->tileMap->getMapTypes(MapTypes::Types::PLAINS));
-	map_types.push_back(this->tileMap->getMapTypes(MapTypes::Types::RIVER));
-	map_types.push_back(this->tileMap->getMapTypes(MapTypes::Types::SEA));
-	map_types.push_back(this->tileMap->getMapTypes(MapTypes::Types::DESERT));
+	map_types.push_back("OVERWORLD");
+	map_types.push_back("FOREST");
+	map_types.push_back("MOUNTAIN");
+	map_types.push_back("PLAINS");
+	map_types.push_back("RIVER");
+	map_types.push_back("SEA");
+	map_types.push_back("DESERT");
 	
 
 	//init dropdownlist
 	this->dropDownLists["MAPTYPES"] = new gui::DropDownList(
-		gui::p2pX(1.56f, vm), gui::p2pY(6.94f, vm),
-		gui::p2pX(15.6f, vm), gui::p2pY(6.9f, vm),
-		gui::calcCharSize(vm, 50),
+		gui::p2pX(3.8f, vm), gui::p2pY(50.f, vm),
+		gui::p2pX(12.f, vm), gui::p2pY(5.55f, vm),
+		gui::calcCharSize(vm, 70),
 		font, map_types.data(), map_types.size(), 0);
 	//=================================================================================
 }
@@ -302,12 +311,61 @@ void EditorState::updateGui(const float& deltaTime)
 	
 	this->cursorText.setString(ss.str());
 
-	//Dropdownlists======
-	for (auto& it2 : this->dropDownLists)
+	//Hide maptype selector button
+	if (this->buttons["HIDE"]->isPressed() && this->getInputTime())
 	{
-		it2.second->update(this->mousePosWindow, deltaTime);
+		this->hide = !this->hide;
 	}
 
+	//Apply maptype
+	if (this->buttons["SET"]->isPressed() && this->getInputTime())
+	{		
+		switch (this->dropDownLists["MAPTYPES"]->getActiveElementId())
+		{
+		case 0:
+			this->tileMap->setMapType("OVERWORLD");
+			std::cout << "Set Map Type to overworld" << "\n";
+			break;
+		case 1:
+			this->tileMap->setMapType("FOREST");
+			std::cout << "Set Map Type to forest" << "\n";
+			break;
+		case 2:
+			this->tileMap->setMapType("MOUNTAIN");
+			std::cout << "Set Map Type to mountain" << "\n";
+			break;
+		case 3:
+			this->tileMap->setMapType("PLAINS");
+			std::cout << "Set Map Type to plains" << "\n";
+			break;
+		case 4:
+			this->tileMap->setMapType("RIVER");
+			std::cout << "Set Map Type to river" << "\n";
+			break;
+		case 5:
+			this->tileMap->setMapType("SEA");
+			std::cout << "Set Map Type to sea" << "\n";
+			break;
+		case 6:
+			this->tileMap->setMapType("DESERT");
+			std::cout << "Set Map Type to desert" << "\n";
+			break;
+		default:
+			break;
+		}
+		//Still to add that the texturesheet changes to the map type.
+		//this->resettexturesheettilemap();
+		//resetTextureSelector();
+	}
+
+	if (!hide) //only update if not hidden
+	{
+		//Dropdownlists======
+		for (auto& it2 : this->dropDownLists)
+		{
+			it2.second->update(this->mousePosWindow, deltaTime);
+		}
+	}
 	//Still to add that the maptype gets altered
 }
 
@@ -358,10 +416,13 @@ void EditorState::renderGui(sf::RenderTarget& target)
 		target.draw(this->selectorRect);
 	}
 
-	//Render DropDownLists
-	for (auto& it2 : this->dropDownLists)
+	if (!hide) //only render if not hidden
 	{
-		it2.second->render(target);
+		//Render DropDownLists
+		for (auto& it2 : this->dropDownLists)
+		{
+			it2.second->render(target);
+		}
 	}
 
 	target.setView(this->window->getDefaultView());
