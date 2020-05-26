@@ -401,6 +401,7 @@ void EditorState::update(const float& deltaTime)
 
 void EditorState::renderButtons(sf::RenderTarget& target)
 {
+	target.setView(this->window->getDefaultView());
 	for (auto& it : this->buttons)
 	{
 		it.second->render(target);
@@ -418,6 +419,7 @@ void EditorState::renderGui(sf::RenderTarget& target)
 	if (!hide) //only render if not hidden
 	{
 		//Render DropDownLists
+		target.setView(this->window->getDefaultView());
 		for (auto& it2 : this->dropDownLists)
 		{
 			it2.second->render(target);
