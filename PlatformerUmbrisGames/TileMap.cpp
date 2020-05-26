@@ -27,7 +27,7 @@ void TileMap::clear()
 }
 
 //Constructor/Destructor
-TileMap::TileMap(float gridSize, int width, int height, std::string texture_file)
+TileMap::TileMap(float gridSize, int width, int height, std::string texture_file, std::string map_type)
 {
 	this->gridSizeF = gridSize;
 	this->gridSizeI = static_cast<int>(this->gridSizeF);
@@ -36,6 +36,7 @@ TileMap::TileMap(float gridSize, int width, int height, std::string texture_file
 	this->maxSizeWorldF.x = static_cast<float>(width) * gridSize;
 	this->maxSizeWorldF.y = static_cast<float>(height) * gridSize;
 	this->layers = 1;
+	this->mapType = map_type;
 	this->textureFile = texture_file;
 	//this->deferredRenderStack = nullptr;
 	
@@ -226,6 +227,7 @@ void TileMap::saveToFile(const std::string file_name)
 		out_file << this->maxSizeWorldGrid.x << " " << this->maxSizeWorldGrid.y << "\n"
 		<< this->gridSizeI << "\n"
 		<< this->layers << "\n"
+		<< this->mapType << "\n"
 		<< this->textureFile << "\n";
 
 		for (int x = 0; x < this->maxSizeWorldGrid.x; x++)
@@ -268,6 +270,7 @@ void TileMap::loadFromFile(const std::string file_name)
 		sf::Vector2u size;
 		int gridSize = 0;
 		int layers = 0;
+		std::string map_type = "";
 		std::string texture_file = "";
 		int x = 0;
 		int y = 0;
@@ -278,7 +281,7 @@ void TileMap::loadFromFile(const std::string file_name)
 		short type = 0;
 
 		//Basics
-		in_file >> size.x >> size.y >> gridSize >> layers >> texture_file;
+		in_file >> size.x >> size.y >> gridSize >> layers >> map_type >> texture_file;
 		
 		//Tiles
 		this->gridSizeF = static_cast<float>(gridSize);
@@ -288,6 +291,7 @@ void TileMap::loadFromFile(const std::string file_name)
 		this->maxSizeWorldF.x = static_cast<float>(size.x * gridSize);
 		this->maxSizeWorldF.y = static_cast<float>(size.y * gridSize);
 		this->layers = layers;
+		this->mapType = map_type;
 		this->textureFile = texture_file;
 
 		this->clear();

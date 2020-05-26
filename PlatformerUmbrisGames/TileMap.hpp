@@ -47,7 +47,7 @@ private:
 
 public:
 	//Constructor/Destructor
-	TileMap(float gridSize, int width, int height, std::string texture_file);
+	TileMap(float gridSize, int width, int height, std::string texture_file, std::string map_type);
 	TileMap(const std::string file_name);
 	virtual ~TileMap();
 

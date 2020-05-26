@@ -109,7 +109,7 @@ void EditorState::initButtons()
 
 void EditorState::initTileMap()
 {
-	this->tileMap = new TileMap(this->stateData->gridSize, 10, 10, "Resources/Images/Tiles/tilesheet1.png");
+	this->tileMap = new TileMap(this->stateData->gridSize, 10, 10, "Resources/Images/Tiles/tilesheet1.png", "OVERWORLD");
 }
 
 void EditorState::initGui()
@@ -355,7 +355,7 @@ void EditorState::updateGui(const float& deltaTime)
 		}
 		//Still to add that the texturesheet changes to the map type.
 		//this->resettexturesheettilemap();
-		//resetTextureSelector();
+		//resetTextureSelector(); ?
 	}
 
 	if (!hide) //only update if not hidden
