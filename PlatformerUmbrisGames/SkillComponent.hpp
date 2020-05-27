@@ -1,19 +1,24 @@
 #pragma once
 
+
+enum SKILLS {HEALTH = 0, ATTACK, ACCURACY};
+
 class SkillComponent
 {
 private:
 	class Skill
 	{
 	private:
+		int type;
 		int level;
 		int levelCap;
 		int exp;
 		int expNext;
 
 	public:
-		Skill()	
+		Skill(int type)	
 		{
+			this->type = type;
 			this->level = 1;
 			this->levelCap = 99;
 			this->exp = 0;
@@ -23,6 +28,7 @@ private:
 		~Skill() {}
 
 		//Accessors
+		inline const int& getType() const { return this->type; }
 		inline const int& getLevel() const { return this->level; }
 		inline const int& getExp() const { return this->exp; }
 		inline const int& getExpNext() const { return this->expNext; }
@@ -59,7 +65,7 @@ private:
 						{
 							this->level++;
 							
-							this->expNext = std::pow(this->level, 2) + this->level * 12;
+							this->expNext = static_cast<int>(std::pow(this->level, 2)) + (12 * this->level);
 						}
 						else this->exp = 0;
 					}
@@ -74,7 +80,7 @@ private:
 						if (this->level > 0)
 						{
 							this->level--;
-							this->expNext = std::pow(this->level, 2) + this->level * 12;
+							this->expNext = static_cast<int>(std::pow(this->level, 2)) + (this->level * 12);
 						}
 						else this->exp = 0;
 					}
@@ -88,8 +94,16 @@ private:
 		}
 	};
 
+	std::vector<Skill> skills;
+
 public:
 	SkillComponent();
 	virtual ~SkillComponent();
+
+	//Accessors
+	const int getSkillLevel(const int index) const;
+
+	//functions
+	const void gainExp(const int skill, const int exp);
 };
 

@@ -24,6 +24,8 @@ Player::Player(float x, float y, sf::Texture& texture_sheet)
 	this->createAnimationComponent(texture_sheet);
 	this->createHitboxComponent(this->sprite, 32.f, 10.f, 35.f, 90.f);
 	this->createAttributeComponent(1);
+	this->createSkillComponent();
+	std::cout << this->skillComponent->getSkillLevel(0) << "\n";
 
 	this->animationComponent->addAnimation("IDLE_DOWN", 8.f, 0, 0, 0, 0, 100, 100);
 	this->animationComponent->addAnimation("IDLE_LEFT", 8.f, 0, 3, 0, 3, 100, 100);
