@@ -173,12 +173,12 @@ void Player::render(sf::RenderTarget& target, sf::Shader* shader, const bool sho
 
 		shader->setUniform("hasTexture", true);
 		shader->setUniform("light", this->getCenter());
-		this->sword.render(target, shader);
+		//this->sword.render(target, shader);
 	}
 	else
 	{
 		target.draw(this->sprite);
-		this->sword.render(target);
+		//this->sword.render(target);
 	}
 
 	if(show_hitbox)

@@ -221,4 +221,7 @@
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="to do list.txt" />
+  </ItemGroup>
 </Project>

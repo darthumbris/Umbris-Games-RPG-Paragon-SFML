@@ -13,9 +13,14 @@ void EditorState::initVariables()
 	this->collision = false;
 	this->type = TileTypes::DEFAULT;
 
-	this->cameraSpeed = 100.f;
+	this->cameraSpeed = 64.f;
 	this->layer = 0;
 	this->hide = false;
+
+	
+	//sets the centre position of the render screen so that not the whole map gets rendered
+	this->centreScreen.x = static_cast<int>(this->view.getCenter().x) / static_cast<int>(this->stateData->gridSize);
+	this->centreScreen.y = static_cast<int>(this->view.getCenter().y) / static_cast<int>(this->stateData->gridSize);
 }
 
 void EditorState::intitView()
@@ -109,7 +114,7 @@ void EditorState::initButtons()
 
 void EditorState::initTileMap()
 {
-	this->tileMap = new TileMap(this->stateData->gridSize, 10, 10, "Resources/Images/Tiles/tilesheet1.png", "OVERWORLD");
+	this->tileMap = new TileMap(this->stateData->gridSize, 100, 100, "Resources/Images/Tiles/tilesheet1.png", "OVERWORLD");
 }
 
 void EditorState::initGui()
@@ -215,7 +220,7 @@ void EditorState::updateInput(const float& deltaTime)
 
 void EditorState::updateEditorInput(const float& deltaTime)
 {
-	//Move view
+	//Move map view
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->keybinds.at("MOVE_CAMERA_LEFT"))))
 	{
 		this->view.move(-this->cameraSpeed * deltaTime, 0.f);
@@ -232,6 +237,10 @@ void EditorState::updateEditorInput(const float& deltaTime)
 	{
 		this->view.move(0.f, -this->cameraSpeed * deltaTime);
 	}
+
+	//move render view
+	this->centreScreen.x = static_cast<int>(this->view.getCenter().x) / static_cast<int>(this->stateData->gridSize);
+	this->centreScreen.y = static_cast<int>(this->view.getCenter().y) / static_cast<int>(this->stateData->gridSize);
 	
 	//Adding and removing tiles
 	if (!this->sideBar.getGlobalBounds().contains(sf::Vector2f(this->mousePosWindow)))
@@ -444,7 +453,7 @@ void EditorState::render(sf::RenderTarget* target)
 	
 	target->setView(this->view);
 
-	this->tileMap->render(*target, this->mousePosGrid, nullptr, sf::Vector2f(), true);
+	this->tileMap->render(*target, this->centreScreen, nullptr, sf::Vector2f(), true);
 	this->tileMap->renderDeferred(*target);
 
 	target->setView(this->window->getDefaultView());

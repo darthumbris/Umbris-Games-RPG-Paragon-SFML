@@ -16,6 +16,7 @@ class EditorState :
 private:
 	//Variables
 	sf::View view;
+	sf::Vector2i centreScreen;
 
 	sf::Font font;
 	sf::Text cursorText;

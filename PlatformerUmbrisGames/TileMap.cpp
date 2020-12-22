@@ -506,26 +506,26 @@ void TileMap::render(sf::RenderTarget& target, const sf::Vector2i& gridPosition,
 	sf::Shader* shader, const sf::Vector2f playerPos, const bool show_hitbox)
 {
 	this->layer = 0;
-
-	this->fromX = gridPosition.x - 19;
+	// 31 and 17 here for a resolution of 1920 x 1080 for rendering the map fullscreen with gridszide of 32
+	this->fromX = gridPosition.x - 31;
 	if (this->fromX < 0)
 		this->fromX = 0;
 	else if (this->fromX > this->maxSizeWorldGrid.x)
 		this->fromX = maxSizeWorldGrid.x;
 
-	this->toX = gridPosition.x + 20;
+	this->toX = gridPosition.x + 31;
 	if (this->toX < 0)
 		this->toX = 0;
 	else if (this->toX > this->maxSizeWorldGrid.x)
 		this->toX = maxSizeWorldGrid.x;
 
-	this->fromY = gridPosition.y - 11;
+	this->fromY = gridPosition.y - 17;
 	if (this->fromY < 0)
 		this->fromY = 0;
 	else if (this->fromY > this->maxSizeWorldGrid.y)
 		this->fromY = maxSizeWorldGrid.y;
 
-	this->toY = gridPosition.y + 12;
+	this->toY = gridPosition.y + 17;
 	if (this->toY < 0)
 		this->toY = 0;
 	else if (this->toY > this->maxSizeWorldGrid.y)
