@@ -37,6 +37,8 @@ private:
 	sf::Texture tileSheet;
 	sf::RectangleShape collisionBox; // To display the collision box of an entity
 	std::string mapType;
+	int resolutionWidth;
+	int resolutionHeight;
 
 	//Culling
 	int fromX;
@@ -47,7 +49,8 @@ private:
 
 public:
 	//Constructor/Destructor
-	TileMap(float gridSize, int width, int height, std::string texture_file, std::string map_type);
+	TileMap(float gridSize, int width, int height, std::string texture_file, 
+			std::string map_type, int resolution_width, int resolution_height);
 	TileMap(const std::string file_name);
 	virtual ~TileMap();
 

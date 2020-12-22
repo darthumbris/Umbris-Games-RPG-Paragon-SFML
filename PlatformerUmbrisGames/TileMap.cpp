@@ -27,7 +27,9 @@ void TileMap::clear()
 }
 
 //Constructor/Destructor
-TileMap::TileMap(float gridSize, int width, int height, std::string texture_file, std::string map_type)
+TileMap::TileMap(
+	float gridSize, int width, int height, std::string texture_file, 
+	std::string map_type, int resolution_width, int resolution_height)
 {
 	this->gridSizeF = gridSize;
 	this->gridSizeI = static_cast<int>(this->gridSizeF);
@@ -38,6 +40,8 @@ TileMap::TileMap(float gridSize, int width, int height, std::string texture_file
 	this->layers = 1;
 	this->mapType = map_type;
 	this->textureFile = texture_file;
+	this->resolutionWidth = resolution_width;
+	this->resolutionHeight = resolution_height;
 	//this->deferredRenderStack = nullptr;
 	
 
@@ -507,25 +511,26 @@ void TileMap::render(sf::RenderTarget& target, const sf::Vector2i& gridPosition,
 {
 	this->layer = 0;
 	// 31 and 17 here for a resolution of 1920 x 1080 for rendering the map fullscreen with gridszide of 32
-	this->fromX = gridPosition.x - 31;
+	
+	this->fromX = gridPosition.x - this->resolutionWidth / this->gridSizeI / 2 - this->gridSizeI;
 	if (this->fromX < 0)
 		this->fromX = 0;
 	else if (this->fromX > this->maxSizeWorldGrid.x)
 		this->fromX = maxSizeWorldGrid.x;
 
-	this->toX = gridPosition.x + 31;
+	this->toX = gridPosition.x + this->resolutionWidth / this->gridSizeI / 2 + this->gridSizeI;
 	if (this->toX < 0)
 		this->toX = 0;
 	else if (this->toX > this->maxSizeWorldGrid.x)
 		this->toX = maxSizeWorldGrid.x;
 
-	this->fromY = gridPosition.y - 17;
+	this->fromY = gridPosition.y - this->resolutionHeight / this->gridSizeI / 2 - this->gridSizeI;
 	if (this->fromY < 0)
 		this->fromY = 0;
 	else if (this->fromY > this->maxSizeWorldGrid.y)
 		this->fromY = maxSizeWorldGrid.y;
 
-	this->toY = gridPosition.y + 17;
+	this->toY = gridPosition.y + this->resolutionHeight / this->gridSizeI / 2 + this->gridSizeI;
 	if (this->toY < 0)
 		this->toY = 0;
 	else if (this->toY > this->maxSizeWorldGrid.y)

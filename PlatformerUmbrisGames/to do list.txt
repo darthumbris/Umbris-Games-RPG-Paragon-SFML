@@ -1,9 +1,10 @@
 //done
 0. make the tilemap etc. follow the gridsize
 1. make the editor view centre on the window not the mouse position and move with the view of the map
+2. make the rendering size of the tilemap depended on the resolution and gridsize not a number
 
 //to do
-1. make the rendering size of the tilemap depended on the resolution and gridsize not a number
+
 2. make pressing the mouse not a continuous event
 3. add the ability to transition to change maps
 4. add the battlestate gui functionality when pressing buttons
@@ -15,4 +16,10 @@
 9. add simple AI so that enemies walk around and target you when you see them
 10. make the editor be able to choose between textures
 
-wtf
+
+
+
+
+xxx. Make a story outline for the game.
+xxx. create enemies and npcs and protagonists and antagonists.
+xxx. create art for the game.

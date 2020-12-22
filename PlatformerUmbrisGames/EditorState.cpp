@@ -114,7 +114,11 @@ void EditorState::initButtons()
 
 void EditorState::initTileMap()
 {
-	this->tileMap = new TileMap(this->stateData->gridSize, 100, 100, "Resources/Images/Tiles/tilesheet1.png", "OVERWORLD");
+	this->tileMap = new TileMap
+	(this->stateData->gridSize, 100, 100, 
+	"Resources/Images/Tiles/tilesheet1.png", "OVERWORLD", 
+	this->stateData->gfxSettings->resolution.width, this->stateData->gfxSettings->resolution.height
+	);
 }
 
 void EditorState::initGui()

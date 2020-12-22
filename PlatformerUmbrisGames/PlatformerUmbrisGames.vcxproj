@@ -218,6 +218,7 @@
     <None Include="vertex_shader.vert" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="story outline.txt" />
     <Text Include="to do list.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
