@@ -14,3 +14,5 @@
 8. add the function of enemy encounter depending on type of area (i.e. forrest has monkeys or something)
 9. add simple AI so that enemies walk around and target you when you see them
 10. make the editor be able to choose between textures
+
+wtf
