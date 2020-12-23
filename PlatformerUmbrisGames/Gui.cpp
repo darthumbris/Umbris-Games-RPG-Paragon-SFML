@@ -48,10 +48,29 @@ Button::Button(float x, float y, float width, float height,
 		static_cast<int>(this->shape.getPosition().y )
 	);*/
 
-	this->text.setPosition(
-		this->shape.getPosition().x + (this->shape.getGlobalBounds().width / 2.f) - this->text.getGlobalBounds().width / 2.f,
-		this->shape.getPosition().y
-	);
+	// centre alignment id = 0
+	if (this->id = 0)
+	{
+		this->text.setPosition(
+			this->shape.getPosition().x + (this->shape.getGlobalBounds().width / 2.f) - this->text.getGlobalBounds().width / 2.f,
+			this->shape.getPosition().y
+		);
+	}
+	else if(this->id = 1)
+	{
+		this->text.setPosition(
+			this->shape.getPosition().x , this->shape.getPosition().y);
+	}
+	else
+	{
+		this->text.setPosition(
+			this->shape.getPosition().x + (this->shape.getGlobalBounds().width / 2.f) - this->text.getGlobalBounds().width / 2.f,
+			this->shape.getPosition().y
+		);
+	}
+	
+
+	
 
 	this->textIdleColor = text_idle_color;
 	this->textHoverColor = text_hover_color;

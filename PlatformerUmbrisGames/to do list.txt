@@ -4,9 +4,10 @@
 2. make the rendering size of the tilemap depended on the resolution and gridsize not a number
 
 //to do
-
-2. make pressing the mouse not a continuous event
-3. add the ability to transition to change maps
+1. make the interface work with keyboard
+2. make clicking the mouse not a continuous event
+3. add the ability for a transition tile to change maps 
+(one that's automatic and one for example cities where you are asked to enter)
 4. add the battlestate gui functionality when pressing buttons
 5. add the ability to load an enemy in the battle state
 6. add the ability to show an enemy in the battle state
@@ -15,6 +16,12 @@
 8. add the function of enemy encounter depending on type of area (i.e. forrest has monkeys or something)
 9. add simple AI so that enemies walk around and target you when you see them
 10. make the editor be able to choose between textures
+11. add a skill system
+12. add a leveling system which gives you skills or something
+13. add a functioning inventory system and equip and other item related stuff
+14. add items like potions, armour and weapons and spell scrolls
+15. add a money system
+16. add a save and load system (not just the editor map)
 
 
 

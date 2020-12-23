@@ -11,6 +11,8 @@ private:
 	sf::VideoMode& vm;
 	sf::Font font;
 
+	unsigned position; //position order of the player gui
+
 	//level display
 	std::string levelDisplayString;
 	sf::Text levelDisplayText;
@@ -48,7 +50,7 @@ private:
 
 public:
 	//Constructor/Destructor
-	BattlePlayerGUI(Player* player, sf::VideoMode& vm);
+	BattlePlayerGUI(Player* player, sf::VideoMode& vm, unsigned position = 0);
 	virtual ~BattlePlayerGUI();
 
 	//Functions

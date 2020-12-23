@@ -15,6 +15,7 @@ void BattleState::initBackground()
 
 	/*Check for what area it is to change which background is loaded
 	!!!!!
+	can be done using either giving the map type to the state or checking it here.
 	!!!!!
 	Check for what area it is to change which background is loaded
 	*/
@@ -47,6 +48,8 @@ void BattleState::initEnemies()
 	Load a file with the enemies of that area
 	then pick an amount of enemies 1-5
 	then pick for that amount enemies out of that list
+	
+	probably using a switch case for where to load the enemy data from
 	*/
 }
 
@@ -80,47 +83,64 @@ void BattleState::initBattleGUI()
 
 	//init background bar for buttons
 	this->battleGUI.setSize(sf::Vector2f(
-		static_cast<float>(vm.width),
-		static_cast<float>(vm.height) / 4));
+		gui::p2pX(35.f, vm),
+		gui::p2pY(25.f, vm)));
 
-	this->battleGUI.setFillColor(sf::Color(100, 100, 100, 250));
-	this->battleGUI.setPosition(sf::Vector2f(0, gui::p2pY(75.f, vm)));
+	this->battleGUI.setFillColor(sf::Color(100, 100, 100, 255));
+	this->battleGUI.setOutlineThickness(gui::p2pX(0.3f, vm));
+	this->battleGUI.setOutlineColor(sf::Color(200,200,200,255));
+	this->battleGUI.setPosition(sf::Vector2f(gui::p2pX(7.5f, vm), gui::p2pY(70.f, vm)));
 
 	//init buttons
-	this->buttons["RUN"] = new Button(
-		gui::p2pX(31.7f, vm), gui::p2pY(90.0f, vm),
-		gui::p2pX(12.9f, vm), gui::p2pY(6.3f, vm),
-		&this->font, "Run", gui::calcCharSize(vm, 50),
-		sf::Color(170, 170, 170, 200), sf::Color(250, 250, 250, 250), sf::Color(120, 120, 120, 50),
-		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0));
+	//id = 0 for centre alignment, 1 for left alignment and 2 for right alignment
 
 	this->buttons["FIGHT"] = new Button(
-		gui::p2pX(8.3f, vm), gui::p2pY(83.3f, vm),
-		gui::p2pX(12.9f, vm), gui::p2pY(6.3f, vm),
+		gui::p2pX(12.f, vm), gui::p2pY(72.f, vm),
+		gui::p2pX(13.f, vm), gui::p2pY(6.5f, vm),
 		&this->font, "Fight", gui::calcCharSize(vm, 50),
 		sf::Color(170, 170, 170, 200), sf::Color(250, 250, 250, 250), sf::Color(120, 120, 120, 50),
-		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0));
-
-	this->buttons["ITEM"] = new Button(
-		gui::p2pX(8.3f, vm), gui::p2pY(90.0f, vm),
-		gui::p2pX(12.9f, vm), gui::p2pY(6.3f, vm),
-		&this->font, "Items", gui::calcCharSize(vm, 50),
-		sf::Color(170, 170, 170, 200), sf::Color(250, 250, 250, 250), sf::Color(120, 120, 120, 50),
-		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0));
-
-	this->buttons["DEFEND"] = new Button(
-		gui::p2pX(20.0f, vm), gui::p2pY(83.3f, vm),
-		gui::p2pX(12.9f, vm), gui::p2pY(6.3f, vm),
-		&this->font, "Defend", gui::calcCharSize(vm, 50),
-		sf::Color(170, 170, 170, 200), sf::Color(250, 250, 250, 250), sf::Color(120, 120, 120, 50),
-		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0));
+		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0),
+		sf::Color::Transparent, sf::Color::Transparent, sf::Color::Transparent, 1);
 
 	this->buttons["MAGIC"] = new Button(
-		gui::p2pX(31.7f, vm), gui::p2pY(83.3f, vm),
-		gui::p2pX(12.9f, vm), gui::p2pY(6.3f, vm),
+		gui::p2pX(12.f, vm), gui::p2pY(79.f, vm),
+		gui::p2pX(13.f, vm), gui::p2pY(6.5f, vm),
 		&this->font, "Magic", gui::calcCharSize(vm, 50),
 		sf::Color(170, 170, 170, 200), sf::Color(250, 250, 250, 250), sf::Color(120, 120, 120, 50),
-		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0));
+		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0),
+		sf::Color::Transparent, sf::Color::Transparent, sf::Color::Transparent, 1);
+
+	this->buttons["MISC"] = new Button(
+		gui::p2pX(12.f, vm), gui::p2pY(86.f, vm),
+		gui::p2pX(13.f, vm), gui::p2pY(6.5f, vm),
+		&this->font, "Miscellany", gui::calcCharSize(vm, 50),
+		sf::Color(170, 170, 170, 200), sf::Color(250, 250, 250, 250), sf::Color(120, 120, 120, 50),
+		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0),
+		sf::Color::Transparent, sf::Color::Transparent, sf::Color::Transparent, 1);
+
+	this->buttons["DEFEND"] = new Button(
+		gui::p2pX(32.0f, vm), gui::p2pY(72.f, vm),
+		gui::p2pX(13.f, vm), gui::p2pY(6.5f, vm),
+		&this->font, "Defend", gui::calcCharSize(vm, 50),
+		sf::Color(170, 170, 170, 200), sf::Color(250, 250, 250, 250), sf::Color(120, 120, 120, 50),
+		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0),
+		sf::Color::Transparent, sf::Color::Transparent, sf::Color::Transparent, 1);
+
+	this->buttons["ITEM"] = new Button(
+		gui::p2pX(32.f, vm), gui::p2pY(79.0f, vm),
+		gui::p2pX(13.f, vm), gui::p2pY(6.5f, vm),
+		&this->font, "Items", gui::calcCharSize(vm, 50),
+		sf::Color(170, 170, 170, 200), sf::Color(250, 250, 250, 250), sf::Color(120, 120, 120, 50),
+		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0),
+		sf::Color::Transparent, sf::Color::Transparent, sf::Color::Transparent, 1);
+
+	this->buttons["RUN"] = new Button(
+		gui::p2pX(32.f, vm), gui::p2pY(86.0f, vm),
+		gui::p2pX(13.f, vm), gui::p2pY(6.5f, vm),
+		&this->font, "Run", gui::calcCharSize(vm, 50),
+		sf::Color(170, 170, 170, 200), sf::Color(250, 250, 250, 250), sf::Color(120, 120, 120, 50),
+		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0),
+		sf::Color::Transparent, sf::Color::Transparent, sf::Color::Transparent, 1);
 
 
 	//init Player and enemy position for battlestate
@@ -132,6 +152,7 @@ void BattleState::initBattleGUI()
 
 void BattleState::initBattlePlayerGUI()
 {
+	//for player 1 for now, need to add functionality to add multiple players
 	this->battlePlayerGUI = new BattlePlayerGUI(this->player, this->stateData->gfxSettings->resolution);
 }
 

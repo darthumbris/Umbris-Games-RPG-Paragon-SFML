@@ -105,10 +105,11 @@ void BattlePlayerGUI::initManaBar()
 }
 
 //Constructor/Destructor
-BattlePlayerGUI::BattlePlayerGUI(Player* player, sf::VideoMode& vm)
+BattlePlayerGUI::BattlePlayerGUI(Player* player, sf::VideoMode& vm, unsigned position)
 	: vm(vm)
 {
 	this->player = player;
+	this->position = position;
 
 	this->initFont();
 	this->initHpBar();
