@@ -13,6 +13,7 @@ private:
 	//Variables
 	bool attacking;
 	Sword sword;
+	std::string name;
 
 	//Initializer functions
 	void initVariables();
@@ -24,6 +25,7 @@ public:
 
 	//Accessors
 	AttributeComponent* getAttributeComponent();
+	const std::string getName() const;
 
 	//Functions
 	void loseHp(const int hp);

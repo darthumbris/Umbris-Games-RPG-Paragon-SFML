@@ -49,14 +49,14 @@ Button::Button(float x, float y, float width, float height,
 	);*/
 
 	// centre alignment id = 0
-	if (this->id = 0)
+	if (this->id == 0)
 	{
 		this->text.setPosition(
 			this->shape.getPosition().x + (this->shape.getGlobalBounds().width / 2.f) - this->text.getGlobalBounds().width / 2.f,
 			this->shape.getPosition().y
 		);
 	}
-	else if(this->id = 1)
+	else if(this->id == 1)
 	{
 		this->text.setPosition(
 			this->shape.getPosition().x , this->shape.getPosition().y);

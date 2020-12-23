@@ -5,6 +5,8 @@
 void Player::initVariables()
 {
 	this->attacking = false;
+	//moet nog ff zorgen dat je de naam zelf kan instellen misschien
+	this->name = "Jacen";
 }
 
 void Player::initComponents()
@@ -49,6 +51,11 @@ Player::~Player()
 AttributeComponent* Player::getAttributeComponent()
 {
 	return this->attributeComponent;
+}
+
+const std::string Player::getName() const
+{
+	return this->name;
 }
 
 void Player::loseHp(const int hp)

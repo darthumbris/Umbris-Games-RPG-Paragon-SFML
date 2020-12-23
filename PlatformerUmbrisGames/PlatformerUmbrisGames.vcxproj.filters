@@ -129,6 +129,15 @@
     <ClCompile Include="BattlePlayerGUI.cpp">
       <Filter>GUI</Filter>
     </ClCompile>
+    <ClCompile Include="Npc.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Companion.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.hpp">
@@ -212,6 +221,15 @@
     <ClInclude Include="BattlePlayerGUI.hpp">
       <Filter>GUI</Filter>
     </ClInclude>
+    <ClInclude Include="Npc.hpp">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.hpp">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Companion.hpp">
+      <Filter>Entities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="vertex_shader.vert">
@@ -222,8 +240,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="to do list.txt" />
     <Text Include="story outline.txt">
+      <Filter>Source Files</Filter>
+    </Text>
+    <Text Include="to do list.txt">
       <Filter>Source Files</Filter>
     </Text>
   </ItemGroup>

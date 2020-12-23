@@ -155,6 +155,8 @@
     <ClCompile Include="BattlePlayerGUI.cpp" />
     <ClCompile Include="BattleState.cpp" />
     <ClCompile Include="Bow.cpp" />
+    <ClCompile Include="Companion.cpp" />
+    <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="GraphicsSettings.cpp" />
     <ClCompile Include="Gui.cpp" />
     <ClCompile Include="EditorState.cpp" />
@@ -167,6 +169,7 @@
     <ClCompile Include="MainMenuState.cpp" />
     <ClCompile Include="MeleeWeapon.cpp" />
     <ClCompile Include="MovementComponent.cpp" />
+    <ClCompile Include="Npc.cpp" />
     <ClCompile Include="PauseMenu.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerGUI.cpp" />
@@ -190,6 +193,8 @@
     <ClInclude Include="BattlePlayerGUI.hpp" />
     <ClInclude Include="BattleState.hpp" />
     <ClInclude Include="Bow.hpp" />
+    <ClInclude Include="Companion.hpp" />
+    <ClInclude Include="Enemy.hpp" />
     <ClInclude Include="GraphicsSettings.hpp" />
     <ClInclude Include="Gui.hpp" />
     <ClInclude Include="EditorState.hpp" />
@@ -201,6 +206,7 @@
     <ClInclude Include="MainMenuState.hpp" />
     <ClInclude Include="MeleeWeapon.hpp" />
     <ClInclude Include="MovementComponent.hpp" />
+    <ClInclude Include="Npc.hpp" />
     <ClInclude Include="PauseMenu.hpp" />
     <ClInclude Include="Player.hpp" />
     <ClInclude Include="PlayerGUI.hpp" />
