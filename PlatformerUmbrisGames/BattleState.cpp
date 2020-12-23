@@ -147,19 +147,19 @@ void BattleState::initBattleGUI()
 	this->playerTempX = gui::p2pX(90.f, vm);
 	this->playerTempY = gui::p2pY(50.f, vm);
 
-	this->player->setPosition(this->playerTempX, this->playerTempY);
+	this->playerProtagonist->setPosition(this->playerTempX, this->playerTempY);
 }
 
 void BattleState::initBattlePlayerGUI()
 {
 	//for player 1 for now, need to add functionality to add multiple players
-	this->battlePlayerGUI = new BattlePlayerGUI(this->player, this->stateData->gfxSettings->resolution);
+	this->battlePlayerGUI = new BattlePlayerGUI(this->playerProtagonist, this->stateData->gfxSettings->resolution);
 }
 
 BattleState::BattleState(Player* player, StateData* state_data)
 	:	State (state_data)
 {
-	this->player = player;
+	this->playerProtagonist = player;
 	this->worldX = player->getPosition().x;
 	this->worldY = player->getPosition().y;
 	this->fightButtonStatus = false;
@@ -189,7 +189,9 @@ BattleState::~BattleState()
 
 	delete this->battlePlayerGUI;
 
-	player->setPosition(worldX, worldY);
+	//Alleen voor de protagonist nodig niet voor de companions (want die hebben geen representatie op
+	//de map alleen in combat en in de interface.
+	this->playerProtagonist->setPosition(worldX, worldY);
 }
 
 //Accessors
@@ -294,7 +296,7 @@ void BattleState::updateBattleGUI(const float& deltaTime)
 	}
 	
 
-	this->player->setPosition(this->playerTempX, this->playerTempY);
+	this->playerProtagonist->setPosition(this->playerTempX, this->playerTempY);
 }
 
 void BattleState::updateBattlePlayerGUI(const float& deltaTime)
@@ -336,7 +338,7 @@ void BattleState::render(sf::RenderTarget* target)
 
 	target->draw(this->background);
 	target->draw(this->battleGUI);
-	this->player->render(*target);
+	this->playerProtagonist->render(*target);
 	this->battlePlayerGUI->render(*target);
 	this->renderBattleGUI(*target);
 }

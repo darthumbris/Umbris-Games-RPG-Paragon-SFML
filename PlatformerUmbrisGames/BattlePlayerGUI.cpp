@@ -39,6 +39,8 @@ void BattlePlayerGUI::initHpBar()
 		this->hpBarInside.getPosition().y - gui::p2pY(0.1f, this->vm)
 	);
 	this->hpText.setCharacterSize(gui::calcCharSize(this->vm, 160));
+	this->hpText.setOutlineColor(sf::Color(0, 0, 0, 255));
+	this->hpText.setOutlineThickness(1.f);
 	this->hpText.setString(sf::String("HP"));
 }
 
@@ -73,6 +75,8 @@ void BattlePlayerGUI::initExpBar()
 		this->expBarInside.getPosition().y - gui::p2pY(0.1f, this->vm)
 	);
 	this->expText.setCharacterSize(gui::calcCharSize(this->vm, 160));
+	this->expText.setOutlineColor(sf::Color(0, 0, 0, 255));
+	this->expText.setOutlineThickness(1.f);
 	this->expText.setString(sf::String("XP"));
 }
 
@@ -131,6 +135,8 @@ void BattlePlayerGUI::initManaBar()
 		this->manaBarInside.getPosition().y - gui::p2pY(0.1f, this->vm)
 	);
 	this->manaText.setCharacterSize(gui::calcCharSize(this->vm, 160));
+	this->manaText.setOutlineColor(sf::Color(0, 0, 0, 255));
+	this->manaText.setOutlineThickness(1.f);
 	this->manaText.setString(sf::String("MP"));
 }
 
@@ -152,6 +158,8 @@ void BattlePlayerGUI::initName()
 								this->nameRect.getPosition().y + gui::p2pY(0.4f, this->vm)
 	);
 	this->nameText.setCharacterSize(gui::calcCharSize(this->vm, 160));
+	this->nameText.setOutlineColor(sf::Color(0, 0, 0, 255));
+	this->nameText.setOutlineThickness(1.f);
 	this->nameText.setString(this->nameString);
 }
 

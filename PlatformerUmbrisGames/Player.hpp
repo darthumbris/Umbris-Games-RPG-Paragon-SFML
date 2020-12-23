@@ -20,7 +20,9 @@ private:
 	void initComponents();
 public:
 	//Constructor/Destructor
-	Player(float x, float y, sf::Texture& texture_sheet);
+	//constructor for the main player with a texture
+	Player(float x, float y, sf::Texture& texture_sheet, std::string name);
+	Player(sf::Texture& texture_sheet, std::string name);
 	virtual ~Player();
 
 	//Accessors

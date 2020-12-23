@@ -4,8 +4,12 @@
 2. make the rendering size of the tilemap depended on the resolution and gridsize not a number
 
 //to do
+0. make the battle gui work for the companions
+0. make the character texture and hitbox be depended on the resolution not a fixed value.
 1. make the interface work with keyboard
 2. make clicking the mouse not a continuous event
+3. make the player and companion info load from file
+
 3. add the ability for a transition tile to change maps 
 (one that's automatic and one for example cities where you are asked to enter)
 4. add the battlestate gui functionality when pressing buttons

@@ -92,11 +92,15 @@ void GameState::initShaders()
 
 void GameState::initPlayers()
 {
-	this->player = new Player(400, 200, this->textures["PLAYER_SHEET"]);
+	//Initialize the main player, initalize companions when certain conditions are met 
+	//and then recall this?
+	this->player = new Player(400, 200, this->textures["PLAYER_SHEET"], "Jacen");
 }
 
 void GameState::initPlayerGUI()
 {
+	//Shows the current level, hp etc just for debug for now, maybe nice to have or 
+	//just put into the menu screen?
 	this->playerGUI = new PlayerGUI(this->player, this->stateData->gfxSettings->resolution);
 }
 

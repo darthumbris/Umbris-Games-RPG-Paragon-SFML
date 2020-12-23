@@ -18,7 +18,11 @@ private:
 
 	sf::Shader coreShader;
 
-	Player* player;
+	Player* playerProtagonist;
+	Player* playerComp1;
+	Player* playerComp2;
+	Player* playerComp3;
+
 	BattlePlayerGUI* battlePlayerGUI;
 
 	float worldX;

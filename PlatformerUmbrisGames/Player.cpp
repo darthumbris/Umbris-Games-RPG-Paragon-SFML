@@ -5,8 +5,6 @@
 void Player::initVariables()
 {
 	this->attacking = false;
-	//moet nog ff zorgen dat je de naam zelf kan instellen misschien
-	this->name = "Jacen";
 }
 
 void Player::initComponents()
@@ -15,10 +13,14 @@ void Player::initComponents()
 }
 
 //Constructor/Destructor
-Player::Player(float x, float y, sf::Texture& texture_sheet)
+Player::Player(float x, float y, sf::Texture& texture_sheet, std::string name)
 {
+	//maybe get the name string from a file and not this way?
+	// en ook andere dingen uit een file laden, dit is niet handig eigenlijk
 	this->initVariables();
-	
+
+	//moet nog ff zorgen dat je de naam zelf kan instellen misschien
+	this->name = name;
 
 	this->setPosition(x, y);
 
@@ -38,9 +40,15 @@ Player::Player(float x, float y, sf::Texture& texture_sheet)
 	this->animationComponent->addAnimation("RUN_UP", 8.f, 0, 1, 6, 1, 100, 100);
 	this->animationComponent->addAnimation("RUN_RIGHT", 8.f, 0, 2, 6, 2, 100, 100);
 	//Voor nu is de attack animatie de run_right animatie, puur voor testen
-	this->animationComponent->addAnimation("ATTACK", 8.f, 0, 2, 6, 2, 100, 100);
+	this->animationComponent->addAnimation("ATTACK", 8.f, 0, 2, 6, 2, 100, 100);	
+}
 
-	
+Player::Player(sf::Texture& texture_sheet, std::string name)
+{
+	//Dit is de constructor voor de companions
+	this->createAnimationComponent(texture_sheet);
+	this->createAttributeComponent(1);
+	this->createSkillComponent();
 }
 
 Player::~Player()
