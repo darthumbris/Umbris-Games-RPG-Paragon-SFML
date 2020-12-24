@@ -79,6 +79,7 @@ void BattleState::initShaders()
 
 void BattleState::initBattleGUI()
 {
+	//maybe move this function to the battleplayer gui?
 	const sf::VideoMode& vm = this->stateData->gfxSettings->resolution;
 
 	//init background bar for buttons
@@ -153,7 +154,11 @@ void BattleState::initBattleGUI()
 void BattleState::initBattlePlayerGUI()
 {
 	//for player 1 for now, need to add functionality to add multiple players
-	this->battlePlayerGUI = new BattlePlayerGUI(this->playerProtagonist, this->stateData->gfxSettings->resolution);
+	//this->battlePlayerGUI = new BattlePlayerGUI(this->playerProtagonist, this->stateData->gfxSettings->resolution);
+	this->battlePlayerGUI = new BattlePlayerGUI(this->playerProtagonist, this->stateData->gfxSettings->resolution, 0);
+	this->battlePlayerGUI1 = new BattlePlayerGUI(this->playerProtagonist, this->stateData->gfxSettings->resolution, 1);
+	this->battlePlayerGUI2 = new BattlePlayerGUI(this->playerProtagonist, this->stateData->gfxSettings->resolution, 2);
+	this->battlePlayerGUI3 = new BattlePlayerGUI(this->playerProtagonist, this->stateData->gfxSettings->resolution, 3);
 }
 
 BattleState::BattleState(Player* player, StateData* state_data)
@@ -165,6 +170,7 @@ BattleState::BattleState(Player* player, StateData* state_data)
 	this->fightButtonStatus = false;
 	this->itemButtonStatus = false;
 	this->magicButtonStatus = false;
+	this->activePlayer = 0;
 
 	this->initBackground();
 	this->initKeybinds();
@@ -188,6 +194,9 @@ BattleState::~BattleState()
 	}
 
 	delete this->battlePlayerGUI;
+	delete this->battlePlayerGUI1;
+	delete this->battlePlayerGUI2;
+	delete this->battlePlayerGUI3;
 
 	//Alleen voor de protagonist nodig niet voor de companions (want die hebben geen representatie op
 	//de map alleen in combat en in de interface.
@@ -247,6 +256,11 @@ const int BattleState::checkEnemySelected()
 	return 0;
 }
 
+const unsigned BattleState::checkActivePlayer()
+{
+	return this->activePlayer;
+}
+
 //Functions
 void BattleState::updateInput(const float& deltaTime)
 {
@@ -302,6 +316,9 @@ void BattleState::updateBattleGUI(const float& deltaTime)
 void BattleState::updateBattlePlayerGUI(const float& deltaTime)
 {
 	this->battlePlayerGUI->update(deltaTime);
+	this->battlePlayerGUI1->update(deltaTime);
+	this->battlePlayerGUI2->update(deltaTime);
+	this->battlePlayerGUI3->update(deltaTime);
 }
 
 void BattleState::calculateBattle()
@@ -340,6 +357,9 @@ void BattleState::render(sf::RenderTarget* target)
 	target->draw(this->battleGUI);
 	this->playerProtagonist->render(*target);
 	this->battlePlayerGUI->render(*target);
+	this->battlePlayerGUI1->render(*target);
+	this->battlePlayerGUI2->render(*target);
+	this->battlePlayerGUI3->render(*target);
 	this->renderBattleGUI(*target);
 }
 

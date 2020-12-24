@@ -3,8 +3,11 @@
 1. make the editor view centre on the window not the mouse position and move with the view of the map
 2. make the rendering size of the tilemap depended on the resolution and gridsize not a number
 
+//not fully fixed, need to do a better workaround
+0. make the battle gui work for the companions 
+
 //to do
-0. make the battle gui work for the companions
+
 0. make the character texture and hitbox be depended on the resolution not a fixed value.
 1. make the interface work with keyboard
 2. make clicking the mouse not a continuous event

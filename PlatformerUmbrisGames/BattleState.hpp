@@ -19,11 +19,14 @@ private:
 	sf::Shader coreShader;
 
 	Player* playerProtagonist;
-	Player* playerComp1;
-	Player* playerComp2;
-	Player* playerComp3;
+	Companion* playerComp1;
+	Companion* playerComp2;
+	Companion* playerComp3;
 
 	BattlePlayerGUI* battlePlayerGUI;
+	BattlePlayerGUI* battlePlayerGUI1;
+	BattlePlayerGUI* battlePlayerGUI2;
+	BattlePlayerGUI* battlePlayerGUI3;
 
 	float worldX;
 	float worldY;
@@ -33,6 +36,9 @@ private:
 	bool fightButtonStatus;
 	bool itemButtonStatus;
 	bool magicButtonStatus;
+
+	//to set who is the active player at the moment (0 for player, 1 for comp 1 etc)
+	unsigned activePlayer;
 
 	//Functions
 	
@@ -58,6 +64,7 @@ public:
 	const bool checkItemActive();
 	const bool checkMagicActive();
 	const int checkEnemySelected();
+	const unsigned checkActivePlayer();
 
 	//Functions
 	void updateInput(const float& deltaTime);

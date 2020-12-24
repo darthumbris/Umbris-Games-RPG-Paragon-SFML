@@ -2,6 +2,7 @@
 
 #include "Gui.hpp"
 #include "Player.hpp"
+#include "Companion.hpp"
 
 class BattlePlayerGUI
 {
@@ -29,25 +30,22 @@ private:
 	std::string expBarString;
 	sf::Text expBarText;
 	sf::Text expText;
-	float expBarMaxWidth;
-	sf::RectangleShape expBarBack;
-	sf::RectangleShape expBarInside;
+	sf::ConvexShape expBarConvex;
+	sf::ConvexShape expBarBackConvex;
 
 	//Hp Bar
 	std::string hpBarString;
 	sf::Text hpBarText;
 	sf::Text hpText;
-	float hpBarMaxWidth;
-	sf::RectangleShape hpBarBack;
-	sf::RectangleShape hpBarInside;
+	sf::ConvexShape hpBarConvex;
+	sf::ConvexShape hpBarBackConvex;
 
 	//Mana bar
 	std::string manaBarString;
 	sf::Text manaBarText;
 	sf::Text manaText;
-	float manaBarMaxWidth;
-	sf::RectangleShape manaBarBack;
-	sf::RectangleShape manaBarInside;
+	sf::ConvexShape manaBarConvex;
+	sf::ConvexShape manaBarBackConvex;
 
 	//initializers
 	void initFont();
